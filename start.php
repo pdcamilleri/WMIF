@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="container" hidden>
-    <p class="emphasize">Instructions</p>
+    <p class="title">Instructions</p>
     <p>
      Welcome to this decision-making game! 
      In this task you will be presented with 5 different "choice problems". 
@@ -36,7 +36,7 @@
   </p>
   <form action="demographics.php" method="get">
       <div >
-          <button class="myButton" id="myButton" type="submit">Play</button>
+          <button class="button" type="submit">Play</button>
       </div>
   </form>
 </div>
