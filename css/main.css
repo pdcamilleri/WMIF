@@ -12,6 +12,15 @@ body {
 
 .title {
   font-size: xx-large;
+  font-weight: bold;
+}
+
+.question {
+  margin-bottom: 5px;
+}
+
+.answer {
+  margin-top: 5px;
 }
 
 /* with help from http://www.bestcssbuttongenerator.com/ */

@@ -12,17 +12,16 @@
 <body>
   <div id="container">
     <form id="DemographicsForm" method="post" action="WMIF.php" onsubmit="return checkAnswers()">
-      <p class="emphasize">Demographics</p>
+      <p class="title">Demographics</p>
 
       <p>Please fill in your demographic details below.</p>
 
-      <table class="center">
-        <tr>
-          <td><label for="Residence">In what country do you live?</label>
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Residence" name="Residence" class="controlledWidth">
+      <p class="question"> 
+        <label for="Residence">In what country do you live?</label>
+      </p>
+
+      <p class="answer">
+        <select id="Residence" name="Residence" class="controlledWidth">
             <option value="">
               
             </option>
@@ -1054,17 +1053,15 @@
             <option value="Zimbabwe">
               Zimbabwe
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Gender">Which of the following best describes your gender?</label> 
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Gender" name="Gender" class="controlledWidth">
+        <p class="question">
+          <label for="Gender">Which of the following best describes your gender?</label> 
+        </p>
+        <p class="answer">  
+          <select id="Gender" name="Gender" class="controlledWidth">
             <option value="">
-              
             </option>
             
             <option value="0">
@@ -1074,17 +1071,15 @@
             <option value="1">
               Man
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Age">Which of the following best describes your age?</label> 
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Age" name="Age" class="controlledWidth">
+        <p class="question">
+          <label for="Age">Which of the following best describes your age?</label> 
+        </p>
+        <p class="answer">  
+          <select id="Age" name="Age" class="controlledWidth">
             <option value="">
-              
             </option>
             
             <option value="18">
@@ -1342,15 +1337,14 @@
             <option value="81">
               80+
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Education">Which best describes your level of education?</label> 
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Education" name="Education" class="controlledWidth">
+        <p class="question">
+          <label for="Education">Which best describes your level of education?</label> 
+        </p>
+        <p class="answer">  
+          <select id="Education" name="Education" class="controlledWidth">
             <option value="">
               
             </option>
@@ -1382,15 +1376,14 @@
             <option value="7">
               Graduate or professional degree
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Employment">Which best describes your employment status?</label> 
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Employment" name="Employment" class="controlledWidth">
+        <p class="question">
+          <label for="Employment">Which best describes your employment status?</label> 
+        </p>
+        <p class="answer">  
+          <select id="Employment" name="Employment" class="controlledWidth">
             <option value="">
               
             </option>
@@ -1422,15 +1415,14 @@
             <option value="7">
               Homemaker
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Marital">Which best describes your marital status?</label>
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Marital" name="Marital" class="controlledWidth">
+        <p class="question">
+          <label for="Marital">Which best describes your marital status?</label>
+        </p>
+        <p class="answer">  
+          <select id="Marital" name="Marital" class="controlledWidth">
             <option value="">
               
             </option>
@@ -1458,15 +1450,14 @@
             <option value="6">
               Widowed
             </option>
-          </select></td>
-        </tr>
+          </select>
+        </p>
 
-        <tr>
-          <td><label for="Income">Which includes your total yearly income (before taxes, in US$)?</label> 
-          </td>
-        </tr>
-        <tr>  
-          <td><select id="Income" name="Income" class="controlledWidth">
+        <p class="question">
+          <label for="Income">Which includes your total yearly income (before taxes, in US$)?</label> 
+        </p>
+        <p class="answer">  
+          <select id="Income" name="Income" class="controlledWidth">
             <option value="">
               
             </option>
@@ -1498,9 +1489,9 @@
             <option value="7">
               $100000 or more
             </option>
-          </select></td>
-        </tr>
-      </table><button type="submit" class="button">Continue</button>
+          </select>
+        </p>
+      <button type="submit" class="button">Continue</button>
     </form>
   </div>
 </body>
