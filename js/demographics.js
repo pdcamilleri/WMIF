@@ -2,7 +2,6 @@
 function checkAnswers() {
   //var DemographicsForm = document.getElementById("DemographicsForm");
   var questionIds = [
-    'Residence', 
     'Gender', 
     'Age', 
     'Education', 
@@ -11,7 +10,6 @@ function checkAnswers() {
     'Income'
   ];
   var errorMessage = [
-    'Please indicate the country where you live.', 
     'Please indicate your gender.', 
     'Please indicate your age.', 
     'Please indicate your level of education.', 
