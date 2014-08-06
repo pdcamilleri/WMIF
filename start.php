@@ -1,6 +1,6 @@
 <?php
-//session_start();
-//$_SESSION['homepage_visit'] = true;
+session_start();
+$_SESSION['MID'] = $_GET['MID'];
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -34,8 +34,8 @@
      At the end of the task you will receive a code that should be copied back into the Mechanical Turk HIT that will trigger payment. 
      If you are happy to proceed and are 18 years or older, then click on the 'Play' button below.
   </p>
-  <form action="demographics.php" method="get">
-      <div >
+  <form action="demographics.php" method="GET">
+      <div>
           <button class="button" type="submit">Play</button>
       </div>
   </form>
