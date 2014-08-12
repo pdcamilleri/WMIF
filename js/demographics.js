@@ -43,10 +43,10 @@ function checkAnswers() {
     url: url,
     data: data,
     dataType: 'json',
-    success: function() {
-      alert("posted!");
-    }
+    //success: function() {
+    //  alert("posted!");
+    //}
   });
 
-  return false;
+  return true;
 }
