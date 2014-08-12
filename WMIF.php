@@ -1,14 +1,7 @@
 <?php>
 	//Collect all the form data
 	$ip = $_SERVER["REMOTE_ADDR"];
-	$country = $_POST['Residence'];
-	$gender = $_POST['Gender'];
-	$age = $_POST['Age'];
-	$education = $_POST['Education'];
-	$employment = $_POST['Employment'];
-	$maritalStatus = $_POST['Marital'];
-	$income = $_POST['Income'];
-	$demographics = array($ip, $country, $gender, $age, $education, $employment, $maritalStatus, $income); 
+   $mid = $_SESSION['mid'];
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
    <head>
@@ -23,14 +16,19 @@
       <link rel="stylesheet" type="text/css" href="css/main.css" />
       <script type="text/javascript" src="js/WMIF.js"></script>
       <script type="text/javascript">
-      	var demographics = <?php echo json_encode($demographics); ?>;
+      	var mid = <?php echo json_encode($mid); ?>;
       </script>
    </head>
    <body>
       <div id="container">
       <?php
-        print_r($demographics);
+        print_r($mid);
       ?>
+
+      <button id="testButton" onclick="testdb()">
+        Test Database Button
+      </button>
+
       </div>
    </body>
 </html>

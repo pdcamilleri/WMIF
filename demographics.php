@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start()
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -14,12 +14,16 @@ session_start();
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script type="text/javascript">
-      var mid = <?php echo json_encode($_SESSION['MID']); ?>;
+      var mid = <?php echo json_encode($_SESSION['mid']); ?>;
     </script>
 </head>
 <body>
   <div id="container">
     <form id="DemographicsForm" method="post" action="WMIF.php" onsubmit="return checkAnswers()">
+
+      <p> 
+        MTurk ID: <?php echo json_encode($_SESSION['mid']);    ?>
+      </p>
       <p class="title">Demographics</p>
 
       <p>Please fill in your demographic details below.</p>
