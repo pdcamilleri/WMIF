@@ -12,9 +12,10 @@
       <meta http-equiv="Pragma" content="no-cache" />
 
       <!-- JQuery -->
-      <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.css" />
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+      <!--script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script-->
+
 
       <!-- My own stuff -->
       <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -28,28 +29,33 @@
    </head>
    <body>
       <div id="container">
-      <p> MID is
-        <?php
-          print_r($mid);
-        ?>
-      </p>
+        <div id="noticeboard">
+          <p> MID is
+            <?php
+              print_r($mid);
+            ?>
+          </p>
+        </div>
 
-      <!-- Just have all 3 columns present, and change things using JS -->
-      <div id="content-left" class="column col-md-4">
-        <p> left</p>
-      </div>
+        <!-- Just have all 3 columns present, and change things using JS -->
+        <div id="content-left" class="column col-md-4">
+          <p> left</p>
+          <button class="button" onclick="createDescription(data)"> Create Description</button>
+        </div>
 
-      <div id="content-center" class="column col-md-4">
-        <p> center</p>
-      </div>
+        <div id="content-center" class="column col-md-4">
+          <p> center</p>
+          <button class="button" onclick="createDistribution(data)"> Create Distribution</button>
+        </div>
 
-      <div id="content-right" class="column col-md-4">
-        <p> right</p>
-      </div>
+        <div id="content-right" class="column col-md-4">
+          <p> right</p>
+          <button class="button" onclick="createWordCloud(data)"> Create Word Cloud</button>
+        </div>
 
-      <p>
-        Some text afterwards
-      </p>
+        <p>
+          Some text afterwards
+        </p>
 
       </div>
    </body>
