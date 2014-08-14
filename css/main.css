@@ -72,3 +72,9 @@ body {
 
 
 
+#rect1 { fill: url(#Gradient1); }
+.stop1 { stop-color: #EEE; }
+.stop2 { stop-color: #FFFfFf;}
+.stop3 { stop-color: rgba(150, 150, 150, 0.6); }
+
+

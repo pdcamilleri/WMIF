@@ -44,7 +44,9 @@
         <!-- Just have all 3 columns present, and change things using JS -->
         <div id="content-left" class="column col-md-4">
           <p> left</p>
+
           <button class="button" onclick="createDescription(data)"> Create Description</button>
+
         </div>
 
         <div id="content-center" class="column col-md-4">
@@ -60,6 +62,22 @@
         <p>
           Some text afterwards
         </p>
+        <svg class="chart">
+          <defs>
+            <linearGradient id="greygradient" x1="0" x2="0" y1="0" y2="1">
+              <stop class="stop1" offset="0%"/>
+              <stop class="stop2" offset="100%"/>
+            </linearGradient>
+
+            <linearGradient id="colorgradient" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#F7DFA5"/>
+              <stop offset="100%" stop-color="#F0C14B"/>
+            </linearGradient>
+          </defs>
+              
+        </svg>
+        <svg class="labels"> </svg>
+          
 
       </div>
    </body>

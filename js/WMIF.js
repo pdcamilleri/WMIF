@@ -38,7 +38,77 @@ function createDescription(values) {
 }
 
 function createDistribution(values) {
-  console.log(values[0]);
+
+  d("creating distribution");
+  var data = [ 
+    {name: "Locke", value: 4},
+    {name: "Reyes", value: 8},
+    {name: "sdf", value: 15},
+    {name: "sdf", value: 16},
+    {name: "Lvfv", value: 23},
+    {name: "asdf", value: 42}
+  ];
+
+
+  var SVGwidth = 420,
+      barWidth = 400,
+      barHeight = 20;
+
+  var x = d3.scale.linear()
+      .range([0, barWidth]);
+
+  var chart = d3.select(".chart")
+      .attr("width", SVGwidth);
+
+  x.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  chart.attr("height", barHeight * data.length);
+
+  var bar = chart.selectAll("g")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d.value); })
+      .attr("height", barHeight - 1)
+      .attr("fill", "url(#colorgradient)");
+
+  bar.append("rect")
+      .attr("width", function(d) { return barWidth - x(d.value); })
+      .attr("transform", function(d) { return "translate(" + x(d.value) + ", 0)"; })
+      .attr("height", barHeight - 1)
+      .attr("fill", "url(#greygradient)");
+      
+  bar.append("text")
+      .attr("y", barHeight / 2)
+      .attr("transform", function(d) { return "translate(" + (barWidth + 15) + ", 0)"; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.value; });
+
+  // do the exact same thing but in a different svg to align the labels for each bar, dont really need this tho
+  var labels = d3.select(".labels")
+      .attr("width", barWidth);
+
+  var labelbar = labels.selectAll("g")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+  labelbar.append("text")
+      .attr("y", barHeight / 2)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.value; });
+
+  labels.attr("height", barHeight * data.length);
+
+  function type(d) {
+    d.value = +d.value; // coerce to number
+    return d;
+}
+
+
+
 
 }
 
