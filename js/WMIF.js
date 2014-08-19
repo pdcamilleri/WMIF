@@ -37,6 +37,38 @@ function createDescription(values) {
 
 }
 
+
+// creates a table that displays all the values to the participant
+// at the same time, i.e. simultaneously.
+function createSimultaneous(values) {
+
+  // create a div and table to hold our values
+  var div = document.createElement("div");
+  var table = document.createElement("table");
+  div.appendChild(table);
+  var tbody = table.createTBody();
+
+  // find an element to place this table inside of
+  document.getElementById("simultaneous").appendChild(div);
+
+  // create the table
+  var width = Math.ceil(Math.sqrt(valuesClone.length));
+  var valuesClone = values.slice(0);
+
+  for (var i = 0; i < width; ++i) {
+    var row = tbody.insertRow();
+    var j = 0;
+    while (valuesClone.length != 0 && j < width) {
+      row.insertCell().innerHTML = valuesClone.shift();
+      ++j;
+    }
+    
+  }
+
+
+
+}
+
 function createDistribution(values) {
 
   d("creating distribution");
