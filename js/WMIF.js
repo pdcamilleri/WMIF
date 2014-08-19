@@ -40,6 +40,10 @@ function createDescription(values) {
 // displays the next value to the participant when in the experience condition
 function getNextExperienceValue(values) {
 
+  // disable the button, until the end of the animation
+  document.getElementById("experienceButton").disabled = true;
+  $("#experienceButton").css({ "color" : "red" });
+  
   // only define these variables if not already defined
   if (typeof experienceValues === 'undefined') {
     experienceValues = values.slice(0);
@@ -52,13 +56,17 @@ function getNextExperienceValue(values) {
 
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
-    $("#experienceDisplay").animate({ "left": "-=100px", "font-size" : "0px" }, 1500, function() {
+    $("#experienceDisplay").animate({ "left": "+=100px", "font-size" : "0px" }, 1500, function() {
       // function callback on completion of the animation.
 
       // get the new value to be displayed
-      $("#experienceDisplay").html(el);
-      $("#experienceDisplay").css({"left" : "+=200"});
-      $("#experienceDisplay").animate({ "left": "-=100px", "font-size" : priorFont }, 1500)
+      $(this).html(el);
+      $(this).css({"left" : "-=200px"});
+      $(this).animate({ "left": "+=100px", "font-size" : priorFont }, 1500, function() {
+        // enable the button again
+        document.getElementById("experienceButton").disabled = false;
+        $("#experienceButton").css({ "color" : "black" });
+      });
     });
   } // else experience counter is >= data.length so do nothing
 }
