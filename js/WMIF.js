@@ -52,8 +52,8 @@ function createSimultaneous(values) {
   document.getElementById("simultaneous").appendChild(div);
 
   // create the table
-  var width = Math.ceil(Math.sqrt(valuesClone.length));
   var valuesClone = values.slice(0);
+  var width = Math.ceil(Math.sqrt(valuesClone.length));
 
   for (var i = 0; i < width; ++i) {
     var row = tbody.insertRow();

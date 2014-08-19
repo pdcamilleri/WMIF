@@ -79,7 +79,7 @@
         <svg class="labels"> </svg>
 
         <div id="simultaneous">
-          <button class="button" onclick="createSimultaneous(data)"> Create Simultanous</button>
+          <button class="button" onclick="createSimultaneous(data)"> Create Simultaneous</button>
         </div>
       </div>
    </body>
