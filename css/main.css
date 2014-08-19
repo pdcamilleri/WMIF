@@ -70,6 +70,10 @@ body {
   background: aliceblue;
 }
 
+#experienceDisplay {
+  position: relative;
+}
+
 
 
 #rect1 { fill: url(#Gradient1); }

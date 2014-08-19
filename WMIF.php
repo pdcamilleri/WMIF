@@ -81,6 +81,12 @@
         <div id="simultaneous">
           <button class="button" onclick="createSimultaneous(data)"> Create Simultaneous</button>
         </div>
+
+        <div id="experience">
+          <button class="button" id="experienceButton" onclick="getNextExperienceValue(data)"> Get next value</button>
+          <div id="experienceDisplay"> Click the button to see the first value</div>
+        </div>
+
       </div>
    </body>
 </html>

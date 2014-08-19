@@ -37,6 +37,32 @@ function createDescription(values) {
 
 }
 
+// displays the next value to the participant when in the experience condition
+function getNextExperienceValue(values) {
+
+  // only define these variables if not already defined
+  if (typeof experienceValues === 'undefined') {
+    experienceValues = values.slice(0);
+  }
+
+  // make the current 
+
+  if (experienceValues.length != 0) {
+    var el = experienceValues.shift();
+
+    var priorFont = $("#experienceDisplay").css("font-size");
+    // animate the outcome
+    $("#experienceDisplay").animate({ "left": "-=100px", "font-size" : "0px" }, 1500, function() {
+      // function callback on completion of the animation.
+
+      // get the new value to be displayed
+      $("#experienceDisplay").html(el);
+      $("#experienceDisplay").css({"left" : "+=200"});
+      $("#experienceDisplay").animate({ "left": "-=100px", "font-size" : priorFont }, 1500)
+    });
+  } // else experience counter is >= data.length so do nothing
+}
+
 
 // creates a table that displays all the values to the participant
 // at the same time, i.e. simultaneously.
