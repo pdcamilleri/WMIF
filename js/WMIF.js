@@ -79,6 +79,8 @@ function createSimultaneous(values) {
   // create a div and table to hold our values
   var div = document.createElement("div");
   var table = document.createElement("table");
+  table.classList.add("table");
+  table.classList.add("table-bordered");
   div.appendChild(table);
   var tbody = table.createTBody();
 
@@ -98,8 +100,6 @@ function createSimultaneous(values) {
     }
     
   }
-
-
 
 }
 
