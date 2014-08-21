@@ -116,17 +116,18 @@ function createDistribution(values) {
   ];
 
 
-  var SVGwidth = 420,
+  var SVGwidth = 450,
       barWidth = 400,
       barHeight = 20;
 
   var x = d3.scale.linear()
       .range([0, barWidth]);
 
+  // set the domain of x to be [0, sum of all data points]
+  x.domain([0, d3.sum(data, function(d) { return d.value; })]);
+
   var chart = d3.select(".chart")
       .attr("width", SVGwidth);
-
-  x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);
 
@@ -152,9 +153,11 @@ function createDistribution(values) {
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });
 
-  // do the exact same thing but in a different svg to align the labels for each bar, dont really need this tho
-  var labels = d3.select(".labels")
-      .attr("width", barWidth);
+  // do the exact same thing but in a different svg to align the labels for each bar.
+  // dont really need this tho
+  //var labels = d3.select(".labels")
+  //    .attr("width", barWidth)
+  //    .attr("height", barHeight * data.length);
 
   var labelbar = labels.selectAll("g")
       .data(data)
@@ -166,12 +169,11 @@ function createDistribution(values) {
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });
 
-  labels.attr("height", barHeight * data.length);
 
   function type(d) {
     d.value = +d.value; // coerce to number
     return d;
-}
+  }
 
 
 
