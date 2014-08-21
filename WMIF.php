@@ -32,51 +32,42 @@
       <title>Decision-making Game</title>
    </head>
    <body>
+      <div id="noticeboard">
+        <p> MID is <?php print_r($mid); ?> </p>
+      </div>
+      <hr/>
+
       <div id="container">
-        <div id="noticeboard">
-          <p> MID is
-            <?php
-              print_r($mid);
-            ?>
-          </p>
-        </div>
-
         <!-- Just have all 3 columns present, and change things using JS -->
-        <div id="content-left" class="column col-md-4">
-          <p> left</p>
-
+        <div id="description">
+          <p>Description</p>
           <button class="button" onclick="createDescription(data)"> Create Description</button>
-
         </div>
 
-        <div id="content-center" class="column col-md-4">
-          <p> center</p>
+        <div id="distribution">
+          <p>Distribution</p>
           <button class="button" onclick="createDistribution(data)"> Create Distribution</button>
+          <br/>
+          <svg class="chart">
+            <defs>
+              <linearGradient id="greygradient" x1="0" x2="0" y1="0" y2="1">
+                <stop class="stop1" offset="0%"/>
+                <stop class="stop2" offset="100%"/>
+              </linearGradient>
+
+              <linearGradient id="colorgradient" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#F7DFA5"/>
+                <stop offset="100%" stop-color="#F0C14B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <svg class="labels"> </svg>
         </div>
 
-        <div id="content-right" class="column col-md-4">
-          <p> right</p>
+        <div id="wordcloud">
+          <p>Word Cloud</p>
           <button class="button" onclick="createWordCloud(data)"> Create Word Cloud</button>
         </div>
-
-        <p>
-          Some text afterwards
-        </p>
-        <svg class="chart">
-          <defs>
-            <linearGradient id="greygradient" x1="0" x2="0" y1="0" y2="1">
-              <stop class="stop1" offset="0%"/>
-              <stop class="stop2" offset="100%"/>
-            </linearGradient>
-
-            <linearGradient id="colorgradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#F7DFA5"/>
-              <stop offset="100%" stop-color="#F0C14B"/>
-            </linearGradient>
-          </defs>
-              
-        </svg>
-        <svg class="labels"> </svg>
 
         <div id="simultaneous">
           <button class="button" onclick="createSimultaneous(data)"> Create Simultaneous</button>

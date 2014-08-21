@@ -223,7 +223,7 @@ function createWordCloud(values) {
       .start();
 
   function draw(words) {
-    d3.select("body").append("svg")
+    d3.select("div#wordcloud").append("svg")
         .attr("width", size)
         .attr("height", size)
       .append("g")
