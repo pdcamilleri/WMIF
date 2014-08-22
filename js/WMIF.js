@@ -7,22 +7,33 @@ function swapColumns(mover, target) {
   mover.insertAfter(target);
 }
 
+// counts the frequency of each integer in the original array.
+// the returned array has a length equal to the max value of the paramater array.
+// each array cell contains the number of items in the original array
+// equal to that cells index.
+// assumes the array only contains positive values. TODO
+function getFrequencyArray(values) {
+  var max = 1 + Math.max.apply(null, values);
+
+  // TODO check if values can be negative. if so, abs
+  var counts = Array(max);
+  for (var i = 0; i < max; ++i) {
+    counts[i] = 0;
+  }
+
+  for (var i = 0; i < max; ++i) {
+    ++counts[values[i]];
+  }
+
+  return counts;
+}
+
 // want to understand the percentages of each outcome in the entire distribution
 // e.g. 20% chance of 4, 80% chance of 3
 function createDescription(values) {
   d("creating description");
 
-  var max = Math.max.apply(null, values);
-
-  // TODO check if values can be negative. if so, abs
-  var counts = Array(max);
-  for (var i = 0; i < values.length; ++i) {
-    counts[i] = 0;
-  }
-
-  for (var i = 0; i < values.length; ++i) {
-    ++counts[values[i]];
-  }
+  var counts = getFrequencyArray(values);
 
   var description = "";
   for (var i = 0; i < counts.length; ++i) {
@@ -175,8 +186,20 @@ function createDistribution(values) {
     return d;
   }
 
+}
 
-
+function createFrequency(values) {
+  d("creating frequency");
+  var counts = getFrequencyArray(values);
+  var text = "";
+  for (var i = 0; i < counts.length; ++i) {
+    if (counts[i] != 0) {
+      text += counts[i] + " / " + counts.length 
+           + " people have the product a review score of " + i + ", ";
+    }
+  }
+  text[0] = text.charAt(0).toUpperCase() + text.slice(1, -2);
+  d(text);
 
 }
 

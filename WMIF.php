@@ -44,6 +44,11 @@
           <button class="button" onclick="createDescription(data)"> Create Description</button>
         </div>
 
+        <div id="frequency">
+          <p>Frequency</p>
+          <button class="button" onclick="createFrequency(data)"> Create Frequency</button>
+        </div>
+
         <div id="distribution">
           <p>Distribution</p>
           <button class="button" onclick="createDistribution(data)"> Create Distribution</button>
