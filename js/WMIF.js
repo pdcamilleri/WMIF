@@ -28,6 +28,23 @@ function getFrequencyArray(values) {
   return counts;
 }
 
+// calculates the average value from a list
+function calculateAverage(values) {
+  var sum = 0;
+  for (var i = 0; i < values.length; ++i) {
+    sum += values[i];
+  }
+  return sum /= values.length;
+}
+
+function createAverage(values) {
+  var average = calculateAverage(values);
+  var paragraph = document.createElement("p");
+  paragraph.innerHTML = average;
+  document.getElementById("average").appendChild(paragraph);
+  d("average is " + average);
+}
+
 // want to understand the percentages of each outcome in the entire distribution
 // e.g. 20% chance of 4, 80% chance of 3
 function createDescription(values) {
