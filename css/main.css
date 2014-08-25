@@ -82,4 +82,7 @@ body {
 .stop2 { stop-color: #FFFfFf;}
 .stop3 { stop-color: rgba(150, 150, 150, 0.6); }
 
-
+.simultaneousTable {
+  width: 700px;
+  margin: 0 auto; /* to center the table */
+}
