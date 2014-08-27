@@ -1,4 +1,57 @@
-var data;
+var problem;
+
+// TODO have a config file that is manipulated by the admin console.
+// grab the true/false values from this
+function getDisplayFilter() {
+  return {
+    description: true,
+    frequency: true,
+    average: true,
+    distribution: true,
+    wordcloud: true,
+    simultaneous: true,
+    experience: true,
+  };
+}
+
+// returns an object representing the problem, 
+// i.e. the values, what information formats to display and how many times the participant needs to sample
+function getProblem() {
+  var problem = {
+    samples: 100, // TODO get this from somewhere?
+    displayFilter: getDisplayFilter(),
+  };
+  return problem;
+}
+
+window.onload = function() {
+  problem = getProblem();
+  populateInputValues();
+  applyDisplayFilter(problem.displayFilter);
+}
+
+// shows and hides certain divs based on the display filter selected by the experimenter
+function applyDisplayFilter(filter) {
+  // TODO way to hook up the show/hide to the object directly?
+  for (var prop in filter) {
+    if (filter[prop]) {
+      $("#" + prop).show();
+    } else {
+      $("#" + prop).hide();
+    }
+  }
+}
+
+// AJAX call to grab the input values from the server
+function populateInputValues() {
+  $.get("getInputData.php", 
+      function(inputData) { 
+        console.log(inputData);
+        problem.values = inputData;
+      }, 
+      'json'
+  );
+}
 
 // move around some columns
 // usage: swapColumns($("#content-left"),$("#content-right"));
@@ -286,21 +339,6 @@ function createWordCloud(values) {
 
   // re-seed the RNG with something 
   Math.seedrandom();
-}
-
-window.onload = function() {
-  getInputValues();
-}
-
-// AJAX call to grab the input values from the server
-function getInputValues() {
-  $.get("getInputData.php", 
-      function(inputData) { 
-        console.log(data);
-        data = inputData;
-      }, 
-      'json'
-  );
 }
 
 // adds the string info to the page

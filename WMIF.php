@@ -41,22 +41,22 @@
         <!-- Just have all 3 columns present, and change things using JS -->
         <div id="description">
           <p>Description</p>
-          <button class="button" onclick="createDescription(data)"> Create Description</button>
+          <button class="button" onclick="createDescription(problem.values)"> Create Description</button>
         </div>
 
         <div id="frequency">
           <p>Frequency</p>
-          <button class="button" onclick="createFrequency(data)"> Create Frequency</button>
+          <button class="button" onclick="createFrequency(problem.values)"> Create Frequency</button>
         </div>
 
         <div id="average">
           <p>Average</p>
-          <button class="button" onclick="createAverage(data)"> Create Average</button>
+          <button class="button" onclick="createAverage(problem.values)"> Create Average</button>
         </div>
 
         <div id="distribution">
           <p>Distribution</p>
-          <button class="button" onclick="createDistribution(data)"> Create Distribution</button>
+          <button class="button" onclick="createDistribution(problem.values)"> Create Distribution</button>
           <br/>
           <svg class="chart">
             <defs>
@@ -76,15 +76,15 @@
 
         <div id="wordcloud">
           <p>Word Cloud</p>
-          <button class="button" onclick="createWordCloud(data)"> Create Word Cloud</button>
+          <button class="button" onclick="createWordCloud(problem.values)"> Create Word Cloud</button>
         </div>
 
         <div id="simultaneous">
-          <button class="button" onclick="createSimultaneous(data)"> Create Simultaneous</button>
+          <button class="button" onclick="createSimultaneous(problem.values)"> Create Simultaneous</button>
         </div>
 
         <div id="experience">
-          <button class="button" id="experienceButton" onclick="getNextExperienceValue(data)"> Get next value</button>
+          <button class="button" id="experienceButton" onclick="getNextExperienceValue(problem.values)"> Get next value</button>
           <div id="experienceDisplay"> Click the button to see the first value</div>
         </div>
 
