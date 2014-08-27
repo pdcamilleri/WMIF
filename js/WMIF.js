@@ -1,24 +1,50 @@
 var problem;
 
+
+function getShowOrHideFunction(id, isShow) {
+  var ret;
+
+  if (isShow) {
+    ret = function() { $("#" + id).show(); };
+  } else {
+    ret = function() { $("#" + id).hide(); };
+  }
+
+  return ret;
+}
+
+// get this from the config file, TODO 
+function getDisplayValue(id) {
+  return true;
+}
+
 // TODO have a config file that is manipulated by the admin console.
 // grab the true/false values from this
 function getDisplayFilter() {
-  return {
-    description: true,
-    frequency: true,
-    average: true,
-    distribution: true,
-    wordcloud: true,
-    simultaneous: true,
-    experience: true,
+  // create filter, populate with garbage, just to create the object so we can iterate over its propeties
+  var filter = {
+    description: 0,
+    frequency: 0,
+    average: 0,
+    distribution: 0,
+    wordcloud: 0,
+    simultaneous: 0,
+    experience: 0,
   };
+
+  // iterate over properties and set hide() or show()
+  for (var prop in filter) {
+    filter[prop] = getShowOrHideFunction(prop, getDisplayValue(prop));
+  }
+
+  return filter;
 }
 
 // returns an object representing the problem, 
 // i.e. the values, what information formats to display and how many times the participant needs to sample
 function getProblem() {
   var problem = {
-    samples: 100, // TODO get this from somewhere?
+    samples: 100, // TODO get this from somewhere? config file,admin console
     displayFilter: getDisplayFilter(),
   };
   return problem;
@@ -32,13 +58,8 @@ window.onload = function() {
 
 // shows and hides certain divs based on the display filter selected by the experimenter
 function applyDisplayFilter(filter) {
-  // TODO way to hook up the show/hide to the object directly?
   for (var prop in filter) {
-    if (filter[prop]) {
-      $("#" + prop).show();
-    } else {
-      $("#" + prop).hide();
-    }
+    filter[prop]();
   }
 }
 
