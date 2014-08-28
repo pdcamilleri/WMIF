@@ -44,16 +44,6 @@
           <button class="button" onclick="createDescription(problem.values)"> Create Description</button>
         </div>
 
-        <div id="frequency">
-          <p>Frequency</p>
-          <button class="button" onclick="createFrequency(problem.values)"> Create Frequency</button>
-        </div>
-
-        <div id="average">
-          <p>Average</p>
-          <button class="button" onclick="createAverage(problem.values)"> Create Average</button>
-        </div>
-
         <div id="distribution">
           <p>Distribution</p>
           <button class="button" onclick="createDistribution(problem.values)"> Create Distribution</button>
@@ -81,6 +71,16 @@
 
         <div id="simultaneous">
           <button class="button" onclick="createSimultaneous(problem.values)"> Create Simultaneous</button>
+        </div>
+
+        <div id="frequency">
+          <p>Frequency</p>
+          <button class="button" onclick="createFrequency(problem.values)"> Create Frequency</button>
+        </div>
+
+        <div id="average">
+          <p>Average</p>
+          <button class="button" onclick="createAverage(problem.values)"> Create Average</button>
         </div>
 
         <div id="experience">
