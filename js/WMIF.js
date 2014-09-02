@@ -1,10 +1,9 @@
 var problem;
 
-
 function getShowOrHideFunction(id, isShow) {
   var ret;
 
-  if (isShow) {
+  if (isShow != false) {
     ret = function() { $("#" + id).show(); };
   } else {
     ret = function() { $("#" + id).hide(); };
@@ -13,16 +12,12 @@ function getShowOrHideFunction(id, isShow) {
   return ret;
 }
 
-// get this from the config file, TODO 
-function getDisplayValue(id) {
-  return true;
-}
-
 // TODO have a config file that is manipulated by the admin console.
 // grab the true/false values from this
-function getDisplayFilter() {
+function populateDisplayFilter() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
-  var filter = {
+
+  problem.filter = {
     description: 0,
     frequency: 0,
     average: 0,
@@ -32,12 +27,17 @@ function getDisplayFilter() {
     experience: 0,
   };
 
-  // iterate over properties and set hide() or show()
-  for (var prop in filter) {
-    filter[prop] = getShowOrHideFunction(prop, getDisplayValue(prop));
-  }
 
-  return filter;
+  $.get("readConfigFile.php", 
+      function(config) { 
+        // iterate over properties and set hide() or show() based on value in config file
+        for (var prop in problem.filter) {
+          problem.filter[prop] = getShowOrHideFunction(prop, config[prop]);
+        }
+        applyDisplayFilter(problem.filter);
+      }, 
+      'json'
+  );
 }
 
 // returns an object representing the problem, 
@@ -45,15 +45,14 @@ function getDisplayFilter() {
 function getProblem() {
   var problem = {
     samples: 100, // TODO get this from somewhere? config file,admin console
-    displayFilter: getDisplayFilter(),
   };
   return problem;
 }
 
 window.onload = function() {
   problem = getProblem();
+  populateDisplayFilter();
   populateInputValues();
-  applyDisplayFilter(problem.displayFilter);
 }
 
 // shows and hides certain divs based on the display filter selected by the experimenter
