@@ -11,15 +11,23 @@
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
 
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/admin.js"></script>
+
     <title>Admin Control Panel</title>
   </head>
   <body>
+    <div id="noticeboard"> Noticeboard</div>
     <?php   
       $config = parse_ini_file("config.ini");
 
       print_r($config);
     
     ?>
+    <p>
+      <button class="button" onclick="saveSettings()"> Save Setting</button>
+    </p>
   </body>
 </html> 
 
