@@ -18,16 +18,63 @@
     <title>Admin Control Panel</title>
   </head>
   <body>
-    <div id="noticeboard"> Noticeboard</div>
+    <div id="noticeboard">Noticeboard</div>
     <?php   
       $config = parse_ini_file("config.ini");
 
       print_r($config);
     
     ?>
-    <p>
-      <button class="button" onclick="saveSettings()"> Save Setting</button>
-    </p>
+    <div id="problem1">
+      <h4>First problem</h4>
+      <p>
+        Select the information formats that you wish to be displayed for problem 1:
+      </p>
+      <form id="mainform">
+        <p>
+          <input type="checkbox" id="description" name="description" value="1">
+          <label for="description">Description</label>
+        </p>
+        <p>
+          <input type="checkbox" id="frequency" name="frequency" value="1">
+          <label for="frequency">Frequency</label>
+        </p>
+        <p>
+          <input type="checkbox" id="average" name="average" value="1">
+          <label for="average">Average</label>
+        </p>
+        <p>
+          <input type="checkbox" id="distribution" name="distribution" value="1">
+          <label for="distribution">Distribution</label>
+        </p>
+        <p>
+          <input type="checkbox" id="wordcloud" name="wordcloud" value="1">
+          <label for="wordcloud">Wordcloud</label>
+        </p>
+        <p>
+          <input type="checkbox" id="simultaneous" name="simultaneous" value="1">
+          <label for="simultaneous">Simultaneous</label>
+        </p>
+        <p>
+          <input type="checkbox" id="experience" name="experience" value="1">
+          <label for="experience">Experience</label>
+        </p>
+      </form>
+      <p>
+        <button class="button" onclick="unCheckAll()">Uncheck All</button>
+      </p>
+      <p>
+        <button class="button" onclick="checkAll()">Check All</button>
+      </p>
+      <p>
+        <button class="button" onclick="saveSettings()"> Save Setting</button>
+      </p>
+    </div>
+
+
   </body>
 </html> 
+
+
+
 
