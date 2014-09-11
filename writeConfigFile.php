@@ -5,8 +5,7 @@
 
 */
 
-define("CONFIG_FILE", "config.ini");
-// $config = parse_ini_file(CONFIG_FILE);
+require_once("constants.php");
 
 $fp = fopen(CONFIG_FILE, "r") or die("Can't open file: " . CONFIG_FILE);
 
