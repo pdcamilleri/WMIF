@@ -40,6 +40,6 @@ fclose($fp);
 // write all of our changes back to the file
 file_put_contents(CONFIG_FILE, $updatedFileContents) or die ("Unable to write to file: " . CONFIG_FILE);
 
-return json_encode($updatedFileContents);
+echo json_encode($updatedFileContents);
 
 ?>
