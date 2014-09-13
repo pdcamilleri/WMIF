@@ -9,6 +9,12 @@ function saveSettings() {
     };
   });
 
+  // TODO use serialzeArray?
+  filter.push({ 
+    name: "samples", 
+    value: $("#samples").val() 
+  });
+
 
   $.ajax({
     type: "POST",

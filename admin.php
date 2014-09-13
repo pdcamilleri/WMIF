@@ -57,6 +57,11 @@
           <input type="checkbox" id="experience" name="experience" value="1">
           <label for="experience">Experience</label>
         </p>
+        <p>
+          <label for="samples">Number of samples:</label>
+          <input type="number" id="samples" name="samples" min="1" max="100" step="1" value="10">
+        </p>
+
       </form>
       <p>
         <button class="button" onclick="unCheckAll()">Uncheck All</button>
