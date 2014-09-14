@@ -1,4 +1,4 @@
-var problem;
+var problem = {};
 
 function getShowOrHideFunction(id, isShow) {
   var ret;
@@ -27,7 +27,6 @@ function populateDisplayFilter() {
     experience: 0,
   };
 
-
   $.get("readConfigFile.php", 
       function(config) { 
         // iterate over properties and set hide() or show() based on value in config file
@@ -35,6 +34,7 @@ function populateDisplayFilter() {
           problem.filter[prop] = getShowOrHideFunction(prop, config[prop]);
         }
         applyDisplayFilter(problem.filter);
+        problem.samples = config['samples'];
       }, 
       'json'
   );
@@ -50,7 +50,6 @@ function getProblem() {
 }
 
 window.onload = function() {
-  problem = getProblem();
   populateDisplayFilter();
   populateInputValues();
 }
@@ -62,15 +61,34 @@ function applyDisplayFilter(filter) {
   }
 }
 
+function createInformationDisplays(values) {
+  createDescription(values);
+  createFrequency(values);
+  createAverage(values);
+  createDistribution(values);
+  createWordCloud(values);
+  createSimultaneous(values);
+  // experience, TODO how to set this up without global?
+
+}
+
 // AJAX call to grab the input values from the server
 function populateInputValues() {
-  $.get("getInputData.php", 
-      function(inputData) { 
-        console.log(inputData);
-        problem.values = inputData;
-      }, 
-      'json'
-  );
+  $.ajax({
+    type: "GET",
+    url: "getInputData.php",
+    success: function(problemValues) {
+      problem.values = problemValues;
+      // i guess problem.values doesnt need to be global then? except for experience
+      // closure? ideal would be to be able to delete the above line problem.values = problemValues
+      createInformationDisplays(problem.values);
+    },
+    dataType: 'json',
+    error: function(jqXHR, textStatus, errorThrown) {
+      d("Error! Could not get problemValues from server!");
+      d(jqXHR.responseText);
+    }
+  }); 
 }
 
 // move around some columns
@@ -85,6 +103,7 @@ function swapColumns(mover, target) {
 // each array cell contains the number of items in the original array
 // equal to that cells index.
 // assumes the array only contains positive values. TODO
+// TODO make this work for floating point values, assumes only integers in input list
 function getFrequencyArray(values) {
   var max = 1 + Math.max.apply(null, values);
 
@@ -261,6 +280,7 @@ function createDistribution(values) {
   //    .attr("width", barWidth)
   //    .attr("height", barHeight * data.length);
 
+  /*
   var labelbar = labels.selectAll("g")
       .data(data)
     .enter().append("g")
@@ -270,7 +290,7 @@ function createDistribution(values) {
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });
-
+  */
 
   function type(d) {
     d.value = +d.value; // coerce to number
