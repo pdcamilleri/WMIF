@@ -16,11 +16,6 @@ $dbUser = $dbConfig[DB_USER];
 $dbUserPassword = $dbConfig[DB_USER_PASSWORD];
 $dbName = $dbConfig[DB_NAME];
 
-print_r("$host\n");
-print_r("$dbUser\n");
-print_r("$dbUserPassword\n");
-print_r("$dbName\n");
-
 // connect to the WMIF database with WMIF user and password
 // TODO can change this to be OO style
 $connection = mysqli_connect($host, $dbUser, $dbUserPassword, $dbName);
