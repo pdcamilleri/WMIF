@@ -39,6 +39,9 @@
 
       <div id="container">
 
+        <div id="productInformation">
+        </div>
+
         <div id="average">
           <p>Average</p>
         </div>

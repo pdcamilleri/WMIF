@@ -61,6 +61,13 @@
           <label for="samples">Number of samples:</label>
           <input type="number" id="samples" name="samples" min="1" max="100" step="1" value="10">
         </p>
+        <p>
+          <label for="productInformation">Product Information:</label>
+          <br/>
+          <textarea id="productInformation" name="productInformation" rows="10" cols="100">
+            Information to be displayed at the top of the Page
+          </textarea>
+        </p>
 
       </form>
       <p>
@@ -73,7 +80,6 @@
         <button class="button" onclick="saveSettings()"> Save Setting</button>
       </p>
     </div>
-
 
   </body>
 </html> 

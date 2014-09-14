@@ -15,6 +15,11 @@ function saveSettings() {
     value: $("#samples").val() 
   });
 
+  filter.push({ 
+    name: "productInformation", 
+    value: $("#productInformation").val()
+  });
+
 
   $.ajax({
     type: "POST",

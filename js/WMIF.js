@@ -35,6 +35,7 @@ function populateDisplayFilter() {
         }
         applyDisplayFilter(problem.filter);
         problem.samples = config['samples'];
+        $("#productInformation").html(config['productInformation']);
       }, 
       'json'
   );
