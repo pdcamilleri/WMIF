@@ -1,4 +1,4 @@
-<?php>
+<?php
   session_start();
   //Collect all the form data
   $ip = $_SERVER["REMOTE_ADDR"];
@@ -38,15 +38,21 @@
       <hr/>
 
       <div id="container">
-        <!-- Just have all 3 columns present, and change things using JS -->
+
+        <div id="average">
+          <p>Average</p>
+        </div>
+
         <div id="description">
           <p>Description</p>
-          <button class="button" onclick="createDescription(problem.values)"> Create Description</button>
+        </div>
+
+        <div id="frequency">
+          <p>Frequency</p>
         </div>
 
         <div id="distribution">
           <p>Distribution</p>
-          <button class="button" onclick="createDistribution(problem.values)"> Create Distribution</button>
           <br/>
           <svg class="chart">
             <defs>
@@ -66,21 +72,9 @@
 
         <div id="wordcloud">
           <p>Word Cloud</p>
-          <button class="button" onclick="createWordCloud(problem.values)"> Create Word Cloud</button>
         </div>
 
         <div id="simultaneous">
-          <button class="button" onclick="createSimultaneous(problem.values)"> Create Simultaneous</button>
-        </div>
-
-        <div id="frequency">
-          <p>Frequency</p>
-          <button class="button" onclick="createFrequency(problem.values)"> Create Frequency</button>
-        </div>
-
-        <div id="average">
-          <p>Average</p>
-          <button class="button" onclick="createAverage(problem.values)"> Create Average</button>
         </div>
 
         <div id="experience">

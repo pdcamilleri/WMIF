@@ -132,16 +132,20 @@ function calculateAverage(values) {
 function createAverage(values) {
   var average = calculateAverage(values);
   var paragraph = document.createElement("p");
-  paragraph.innerHTML = average;
+  paragraph.innerHTML = "Average is " + average + ".";
   document.getElementById("average").appendChild(paragraph);
-  d("average is " + average);
+}
+
+function createDescription(values) {
+  var description = createDescriptionString(values);
+  var paragraph = document.createElement("p");
+  paragraph.innerHTML = description;
+  document.getElementById("description").appendChild(paragraph);
 }
 
 // want to understand the percentages of each outcome in the entire distribution
 // e.g. 20% chance of 4, 80% chance of 3
-function createDescription(values) {
-  d("creating description");
-
+function createDescriptionString(values) {
   var counts = getFrequencyArray(values);
 
   var description = "";
@@ -152,8 +156,8 @@ function createDescription(values) {
   }
 
   // Upper case first letter, remove trailing ", "
-  description[0] = description.charAt(0).toUpperCase() + description.slice(1, -2);
-  d(description);
+  description = description.charAt(0).toUpperCase() + description.slice(1, -2) + ".";
+  return description;
 
 }
 
@@ -225,8 +229,6 @@ function createSimultaneous(values) {
 }
 
 function createDistribution(values) {
-
-  d("creating distribution");
   var data = [ 
     {name: "Locke", value: 4},
     {name: "Reyes", value: 8},
@@ -300,24 +302,28 @@ function createDistribution(values) {
 }
 
 function createFrequency(values) {
-  d("creating frequency");
+  var text = createFrequencyString(values);
+  var paragraph = document.createElement("p");
+  paragraph.innerHTML = text;
+  document.getElementById("frequency").appendChild(paragraph);
+}
+
+function createFrequencyString(values) {
   var counts = getFrequencyArray(values);
   var text = "";
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
       text += counts[i] + " / " + counts.length 
-           + " people have the product a review score of " + i + ", ";
+           + " people gave the product a review score of " + i + ", ";
     }
   }
-  text[0] = text.charAt(0).toUpperCase() + text.slice(1, -2);
-  d(text);
+  text = text.charAt(0).toUpperCase() + text.slice(1, -2) + ".";
+  return text;
 
 }
 
 // uses D3, D3-cloud and seedrandom to create a word cloud
 function createWordCloud(values) {
-  d("creating word cloud");
-
   // local RNG so that we create the exact same Word Cloud is created for all participants
   Math.seedrandom('wmif'); 
 

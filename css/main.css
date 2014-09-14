@@ -86,3 +86,9 @@ body {
   width: 700px;
   margin: 0 auto; /* to center the table */
 }
+
+/* put a border around all divs underneath the main container div */
+#container > div {
+  border: darkgrey;
+  border-style: double;
+}
