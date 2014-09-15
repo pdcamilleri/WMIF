@@ -230,6 +230,9 @@ function createSimultaneous(values) {
 }
 
 function createDistribution(values) {
+  var counts = getFrequencyArray(values);
+  // need to convert this frequency data into an object for our needs
+  /*
   var data = [ 
     {name: "Locke", value: 4},
     {name: "Reyes", value: 8},
@@ -238,7 +241,14 @@ function createDistribution(values) {
     {name: "Lvfv", value: 23},
     {name: "asdf", value: 42}
   ];
+  */
 
+  var data = [];
+  for (var i = 0; i < counts.length; i++) {
+    if (counts[i] != 0) {
+      data.push({name: i.toString, value: counts[i]});
+    }
+  }
 
   var SVGwidth = 450,
       barWidth = 400,
