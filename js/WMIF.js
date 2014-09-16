@@ -152,7 +152,7 @@ function createDescriptionString(values) {
   var description = "";
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
-      description += (counts[i] * 100.0 / counts.length).toFixed(0) + "% chance of " + i + ", ";
+      description += (counts[i] * 100.0 / counts.length).toFixed(0) + "% chance of " + i + "<br/>";
     }
   }
 
@@ -325,7 +325,7 @@ function createFrequencyString(values) {
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
       text += counts[i] + " / " + counts.length 
-           + " people gave the product a review score of " + i + ", ";
+           + " people gave the product a review score of " + i + "<br/>";
     }
   }
   text = text.charAt(0).toUpperCase() + text.slice(1, -2) + ".";
