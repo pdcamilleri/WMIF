@@ -1,4 +1,7 @@
-var problem = {};
+var problem = {
+  samples: 1,
+  samplesSoFar: 0
+};
 
 function getShowOrHideFunction(id, isShow) {
   var ret;
@@ -39,15 +42,6 @@ function populateDisplayFilter() {
       }, 
       'json'
   );
-}
-
-// returns an object representing the problem, 
-// i.e. the values, what information formats to display and how many times the participant needs to sample
-function getProblem() {
-  var problem = {
-    samples: 100, // TODO get this from somewhere? config file,admin console
-  };
-  return problem;
 }
 
 window.onload = function() {
@@ -164,6 +158,13 @@ function createDescriptionString(values) {
 
 // displays the next value to the participant when in the experience condition
 function getNextExperienceValue(values) {
+
+  if (problem.samplesSoFar >= problem.samples) {
+    d("seen all samples");
+    return;
+  }
+
+  problem.samplesSoFar++;
 
   // disable the button, until the end of the animation
   document.getElementById("experienceButton").disabled = true;
