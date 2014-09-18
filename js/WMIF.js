@@ -3,6 +3,11 @@ var problem = {
   samplesSoFar: 0
 };
 
+function nextStage() {
+  $("#introduction").hide();
+  $("#information").show();
+}
+
 function getShowOrHideFunction(id, isShow) {
   var ret;
 

@@ -37,7 +37,18 @@
       </div>
       <hr/>
 
-      <div id="container">
+      <div id="introduction" class="container">
+        <p>
+          Going to show you some information related to the product asd.
+          Want you to look at the reviews and make a decision on whether or not you want to buy that product.
+        </p>
+        <p>
+          When you are ready, click the button to start the experiment
+        </p>
+        <button class="button" onclick="nextStage()">Start Experiment</button>
+      </div>
+
+      <div id="information" class="container" hidden>
 
         <div id="productInformation">
         </div>

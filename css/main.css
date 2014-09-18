@@ -3,7 +3,7 @@ body {
   text-align: center;
 }
 
-#container {
+.container {
   margin: 0 auto;
   width: 90%;
   font-size: large;
@@ -88,7 +88,7 @@ body {
 }
 
 /* put a border around all divs underneath the main container div */
-#container > div {
+#information > div {
   border: darkgrey;
   border-style: double;
 }
