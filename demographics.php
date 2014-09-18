@@ -18,7 +18,7 @@
   </script>
 </head>
 <body>
-  <div id="container">
+  <div id="demographics" class="container">
     <form id="DemographicsForm" method="post" action="WMIF.php" onsubmit="return checkAnswers()">
 
       <p> 

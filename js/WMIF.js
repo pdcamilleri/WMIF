@@ -1,6 +1,7 @@
 var problem = {
   samples: 1,
-  samplesSoFar: 0
+  samplesSoFar: 0,
+  outcomeOrder: []
 };
 
 function nextStage() {
@@ -180,10 +181,10 @@ function getNextExperienceValue(values) {
     experienceValues = values.slice(0);
   }
 
-  // make the current 
-
   if (experienceValues.length != 0) {
     var el = experienceValues.shift();
+    // save the order that each outcome appeared for later
+    problem.outcomeOrder.push(el);
 
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
