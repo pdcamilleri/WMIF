@@ -23,7 +23,7 @@ function getShowOrHideFunction(id, isShow) {
 
 // TODO have a config file that is manipulated by the admin console.
 // grab the true/false values from this
-function populateDisplayFilter() {
+function readConfigFile() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
 
   problem.filter = {
@@ -36,7 +36,7 @@ function populateDisplayFilter() {
     experience: 0,
   };
 
-  $.get("readConfigFile.php", 
+  return $.get("readConfigFile.php", 
       function(config) { 
         // iterate over properties and set hide() or show() based on value in config file
         for (var prop in problem.filter) {
@@ -51,8 +51,15 @@ function populateDisplayFilter() {
 }
 
 window.onload = function() {
-  populateDisplayFilter();
-  populateInputValues();
+  $.when(readConfigFile(), populateInputValues()).done(function() {
+    // need to wait for config values (for #samples) and input values before creating
+    // information displays
+
+    // i guess problem.values doesnt need to be global then? except for experience
+    // closure? ideal would be to be able to delete the above line problem.values = problemValues
+    createInformationDisplays(problem.values.slice(0, problem.samples));
+  });
+ 
 }
 
 // shows and hides certain divs based on the display filter selected by the experimenter
@@ -75,14 +82,11 @@ function createInformationDisplays(values) {
 
 // AJAX call to grab the input values from the server
 function populateInputValues() {
-  $.ajax({
+  return $.ajax({
     type: "GET",
     url: "getInputData.php",
     success: function(problemValues) {
       problem.values = problemValues;
-      // i guess problem.values doesnt need to be global then? except for experience
-      // closure? ideal would be to be able to delete the above line problem.values = problemValues
-      createInformationDisplays(problem.values);
     },
     dataType: 'json',
     error: function(jqXHR, textStatus, errorThrown) {
