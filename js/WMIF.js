@@ -166,6 +166,21 @@ function createDescriptionString(values) {
 
 }
 
+/**
+* Randomize array element order in-place.
+* Using Fisher-Yates shuffle algorithm.
+* http://stackoverflow.com/a/12646864
+*/
+function shuffle(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
 // displays the next value to the participant when in the experience condition
 function getNextExperienceValue(values) {
 
@@ -182,7 +197,7 @@ function getNextExperienceValue(values) {
   
   // only define these variables if not already defined
   if (typeof experienceValues === 'undefined') {
-    experienceValues = values.slice(0);
+    experienceValues = shuffle(values.slice(0));
   }
 
   if (experienceValues.length != 0) {
@@ -211,6 +226,7 @@ function getNextExperienceValue(values) {
 // creates a table that displays all the values to the participant
 // at the same time, i.e. simultaneously.
 function createSimultaneous(values) {
+  shuffle(values);
 
   // create a div and table to hold our values
   var div = document.createElement("div");
