@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <script src="js/admin.js"></script>
 
@@ -66,6 +66,13 @@
           <br/>
           <textarea id="productInformation" name="productInformation" rows="10" cols="100">
             Information to be displayed at the top of the Page
+          </textarea>
+        </p>
+        <p>
+          <label for="expertise">Expertise</label>
+          <br/>
+          <textarea id="expertise" name="expertise" rows="5" cols="100">
+            Little blurb about the reviewers expertise when it comes to the product.
           </textarea>
         </p>
 

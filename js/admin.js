@@ -20,6 +20,10 @@ function saveSettings() {
     value: $("#productInformation").val()
   });
 
+  filter.push({ 
+    name: "expertise", 
+    value: $("#expertise").val()
+  });
 
   $.ajax({
     type: "POST",

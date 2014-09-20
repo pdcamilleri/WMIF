@@ -45,6 +45,7 @@ function readConfigFile() {
         applyDisplayFilter(problem.filter);
         problem.samples = config['samples'];
         $("#productInformation").html(config['productInformation']);
+        $("#expertiseText").html(config['expertise']);
       }, 
       'json'
   );
