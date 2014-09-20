@@ -53,6 +53,21 @@
         <div id="productInformation">
         </div>
 
+        <div id="expertise">
+          <p>
+            Dylan is a novice when it comes to {product}.
+          </p>
+          <p>
+            Dylan is an expert when it comes to {product}.
+          </p>
+          <p>
+            Dylan is the CEO of a company that sells {product}.
+          </p>
+          <img src="resources/expert.jpg" height="200">
+          <img src="resources/novice.jpg" height="200">
+          <img src="resources/biased.jpg" height="200">
+        </div>
+
         <div id="average">
           <p>Average</p>
         </div>
