@@ -59,6 +59,9 @@ window.onload = function() {
     // i guess problem.values doesnt need to be global then? except for experience
     // closure? ideal would be to be able to delete the above line problem.values = problemValues
     createInformationDisplays(problem.values.slice(0, problem.samples));
+  })
+  .fail(function() {
+      d("one of the AJAX calls failed!")
   });
  
 }
