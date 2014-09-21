@@ -16,11 +16,25 @@ $updatedFileContents = "";
 // read file line by line. change value if a matching key exists in POST parameters
 while (($line = fgets($fp)) !== false) {
 
-  $pattern = '/([^;].*) = (.*)/'; 
-  // match a key and value, if first char is not a ';'/comment
-  // might be a source of BUGS! when dealing with things, eg strings?
+  $quotePattern = '/([^;].*) = (".*")/'; 
+  $boolPattern = '/([^;].*) = (.*)/'; 
+  // match a key and value, if first char is not a ';'/comment char
 
-  if (preg_match($pattern, $line, $matches)) {
+  // TODO factorise this somehow?
+  if (preg_match($quotePattern, $line, $matches)) {
+    $key = $matches[1];
+
+    if (isset($_POST[$key])) {
+      $value = $_POST[$key];
+
+      // update the value associated with this key
+      $updatePattern = '/(.*) = (.*)/';
+      $line = preg_replace($updatePattern, "$1 = \"$value\"", $line);
+      if ($line == NULL) {
+        echo "error with key: $key";
+      }
+    }
+  } elseif (preg_match($boolPattern, $line, $matches)) {
     $key = $matches[1];
 
     if (isset($_POST[$key])) {
@@ -29,6 +43,9 @@ while (($line = fgets($fp)) !== false) {
       // update the value associated with this key
       $updatePattern = '/(.*) = (.*)/';
       $line = preg_replace($updatePattern, "$1 = $value", $line);
+      if ($line == NULL) {
+        echo "error with key: $key";
+      }
     }
   }
 
