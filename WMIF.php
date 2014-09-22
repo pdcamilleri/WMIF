@@ -45,7 +45,7 @@
         <p>
           When you are ready, click the button to start the experiment
         </p>
-        <button class="button" onclick="nextStage()">Start Experiment</button>
+        <button class="button" onclick="nextPhase()">Start Experiment</button>
       </div>
 
       <div id="information" class="container" hidden>
@@ -105,6 +105,18 @@
           <div id="experienceDisplay"> Click the button to see the first value</div>
         </div>
 
+        <div>
+          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
+        </div>
+
       </div>
+
+      <div id="end" class="container" hidden>
+        <p>
+          Thank you for participating.
+          Your code is ...
+        </p>
+      </div>
+        
    </body>
 </html>

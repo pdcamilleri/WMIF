@@ -1,12 +1,51 @@
+Phase = {
+  INTRO: "intro",
+  PRODUCT_ONE: "product_1",
+  PRODUCT_TWO: "product_2",
+  SELECTION: "selection",
+  END: "end"
+}
+
 var problem = {
   samples: 1,
   samplesSoFar: 0,
   outcomeOrder: []
 };
 
-function nextStage() {
+var phase = Phase.INTRO;
+
+function enterFirstProductPhase() {
   $("#introduction").hide();
   $("#information").show();
+}
+
+function enterSecondProductPhase() {
+}
+
+function enterSelectionPhase() {
+
+}
+
+function enterEndPhase() {
+  $("#information").hide();
+  $("#end").show();
+}
+
+function nextPhase() {
+  if (phase == Phase.INTRO) {
+    phase = Phase.PRODUCT_ONE;
+    enterFirstProductPhase();
+  } else if (phase == Phase.PRODUCT_ONE) {
+    phase = Phase.PRODUCT_TWO;
+    enterSecondProductPhase();
+  } else if (phase == Phase.PRODUCT_TWO) {
+    phase = Phase.SELECTION;
+    enterSelectionPhase();
+  } else if (phase == Phase.SELECTION) {
+    phase = Phase.END;
+    enterEndPhase();
+  }
+
 }
 
 function getShowOrHideFunction(id, isShow) {
@@ -21,8 +60,6 @@ function getShowOrHideFunction(id, isShow) {
   return ret;
 }
 
-// TODO have a config file that is manipulated by the admin console.
-// grab the true/false values from this
 function readConfigFile() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
 
@@ -142,6 +179,7 @@ function createAverage(values) {
   var average = calculateAverage(values);
   var paragraph = document.createElement("p");
   paragraph.innerHTML = "Average is " + average + ".";
+  document.getElementById("average").innerHTML = "";
   document.getElementById("average").appendChild(paragraph);
 }
 
@@ -149,6 +187,7 @@ function createDescription(values) {
   var description = createDescriptionString(values);
   var paragraph = document.createElement("p");
   paragraph.innerHTML = description;
+  document.getElementById("description").innerHTML = "";
   document.getElementById("description").appendChild(paragraph);
 }
 
@@ -241,7 +280,8 @@ function createSimultaneous(values) {
   div.appendChild(table);
   var tbody = table.createTBody();
 
-  // find an element to place this table inside of
+  // find the element to place this table inside of
+  document.getElementById("simultaneous").innerHTML = "";
   document.getElementById("simultaneous").appendChild(div);
 
   // create the table
@@ -347,6 +387,7 @@ function createFrequency(values) {
   var text = createFrequencyString(values);
   var paragraph = document.createElement("p");
   paragraph.innerHTML = text;
+  document.getElementById("frequency").innerHTML = "";
   document.getElementById("frequency").appendChild(paragraph);
 }
 
@@ -397,8 +438,7 @@ function createWordCloud(values) {
   var size = 300;
 
   d3.layout.cloud().size([size, size])
-      .words( input
-          )
+      .words(input)
       .padding(5)
       .rotate(function() { return ~~(Math.random() * 2) * 90; })
       .font("Impact")
@@ -407,7 +447,9 @@ function createWordCloud(values) {
       .start();
 
   function draw(words) {
-    d3.select("div#wordcloud").append("svg")
+    d3.select("div#wordcloud")
+        .html("") // clear previous content first
+        .append("svg")
         .attr("width", size)
         .attr("height", size)
       .append("g")
