@@ -25,6 +25,25 @@ function saveSettings() {
     value: $("#expertise").val()
   });
 
+
+  filter.push({ 
+    name: "samples2", 
+    value: $("#samples2").val() 
+  });
+
+  filter.push({ 
+    name: "productInformation2", 
+    value: $("#productInformation2").val()
+  });
+
+  filter.push({ 
+    name: "expertise2", 
+    value: $("#expertise2").val()
+  });
+
+
+
+
   $.ajax({
     type: "POST",
     url: "writeConfigFile.php",

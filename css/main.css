@@ -92,3 +92,7 @@ body {
   border: darkgrey;
   border-style: double;
 }
+
+textarea {
+  width: 90%
+}
