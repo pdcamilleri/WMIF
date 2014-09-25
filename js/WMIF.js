@@ -12,6 +12,7 @@ var problem = {
   outcomeOrder: []
 };
 
+var configs;
 var phase = Phase.INTRO;
 
 function enterFirstProductPhase() {
@@ -19,19 +20,26 @@ function enterFirstProductPhase() {
   $("#information").show();
 }
 
+// replace all the information on the page with new information
 function enterSecondProductPhase() {
+  createInformationDisplays(problem.values.slice(0, problem.samples));
+  $("#expertiseText").html(configs['expertise2']);
+  $("#productInformation").html(configs['productInformation2']);
+
 }
 
 function enterSelectionPhase() {
-
+  $("#information").hide();
+  $("#selection").show();
 }
 
 function enterEndPhase() {
-  $("#information").hide();
+  $("#selection").hide();
   $("#end").show();
 }
 
 function nextPhase() {
+  d("ending phase " + phase);
   if (phase == Phase.INTRO) {
     phase = Phase.PRODUCT_ONE;
     enterFirstProductPhase();
@@ -45,6 +53,7 @@ function nextPhase() {
     phase = Phase.END;
     enterEndPhase();
   }
+  d("entering phase " + phase);
 
 }
 
@@ -75,6 +84,7 @@ function readConfigFile() {
 
   return $.get("readConfigFile.php", 
       function(config) { 
+        configs = config;
         // iterate over properties and set hide() or show() based on value in config file
         for (var prop in problem.filter) {
           problem.filter[prop] = getShowOrHideFunction(prop, config[prop]);

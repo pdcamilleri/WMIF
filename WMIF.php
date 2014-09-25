@@ -111,6 +111,16 @@
 
       </div>
 
+      <div id="selection" hidden>
+        <p>
+          Please select which product you prefer
+        </p>
+
+        <div>
+          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
+        </div>
+      </div>
+
       <div id="end" class="container" hidden>
         <p>
           Thank you for participating.
