@@ -113,9 +113,47 @@
       </div>
 
       <div id="selection" hidden>
-        <p>
-          Please select which product you prefer
-        </p>
+        <div id="choiceButtons">
+          <p>
+            After reviewing each product, which do you prefer?
+          </p>
+          <button id="product1" class="button" value="1" onclick="recordChoice(1)">Product 1</button>
+          <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
+        </div>
+
+        <div id="preferenceStrength">
+          <p>
+            How much do you prefer this choice?
+          </p>
+          <form>
+            <fieldset>
+              <legend>Preference</legend>
+                <label class="textleft">Strongly prefer product 1</label>
+                <label class="textcenter" for="size_1">Neutral</label>
+                <label class="textright" for="size_1">Strongly prefer product 2</label>
+                
+                <br/>
+                <input type="radio" name="preference" id="strong1" value="1" />
+                <input type="radio" name="preference" id="mod1" value="2" />
+                <label for="modStrong1"></label>
+                <input type="radio" name="preference" id="weak1" value="3" />
+                <label for="size_1"></label>
+                <input type="radio" name="preference" id="neutral" value="4" />
+                <label for="size_1"></label>
+                <input type="radio" name="preference" id="weak2" value="5" />
+                <label for="size_1"></label>
+                <input type="radio" name="preference" id="mod2" value="6" />
+                <label for="size_1"></label>
+                <input type="radio" name="preference" id="strong2" value="7" />
+            </fieldset>
+          </form>
+        </div>
+
+        <div id="friendRecommendation" hidden>
+          <p>
+            How likely would you be to recommend this product to a friend?
+          </p>
+        </div>
 
         <div>
           <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>

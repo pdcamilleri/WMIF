@@ -9,7 +9,8 @@ Phase = {
 var problem = {
   samples: 1,
   samplesSoFar: 0,
-  outcomeOrder: []
+  outcomeOrder: [],
+  choice: -1
 };
 
 var configs;
@@ -144,6 +145,18 @@ function createInformationDisplays(values) {
   createSimultaneous(values);
   // experience, TODO how to set this up without global?
 
+}
+
+function recordChoice(val) {
+  problem.choice = val;
+  d("you chose " + val);
+  // TODO or disable? but with indication of which was chosen?
+  $("#choiceButtons").hide();
+
+  // only show the radio buttons related to this product
+  $(".product" + val).show();
+  $("#preferenceStrength").show();
+  $("#friendRecommendation").show();
 }
 
 // AJAX call to grab the input values from the server
