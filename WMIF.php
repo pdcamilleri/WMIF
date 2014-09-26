@@ -51,11 +51,12 @@
       <div id="information" class="container" hidden>
 
         <div id="productInformation">
+          If you can see this, then something (probably JS) is not working correctly.
         </div>
 
         <div id="expertise">
           <p id="expertiseText">
-            Dylan is a novice when it comes to {product}.
+            If you can see this, then something (probably JS) is not working correctly.
           </p>
           <img src="resources/expert.jpg" height="200">
           <img src="resources/novice.jpg" height="200">

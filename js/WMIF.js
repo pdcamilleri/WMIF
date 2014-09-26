@@ -23,6 +23,7 @@ function enterFirstProductPhase() {
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
   createInformationDisplays(problem.values.slice(0, problem.samples));
+  applyDisplayFilter(problem.filter2);
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").html(configs['productInformation2']);
 
@@ -69,10 +70,21 @@ function getShowOrHideFunction(id, isShow) {
   return ret;
 }
 
+// TODO getting a bit unwiedly
 function readConfigFile() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
 
   problem.filter = {
+    description: 0,
+    frequency: 0,
+    average: 0,
+    distribution: 0,
+    wordcloud: 0,
+    simultaneous: 0,
+    experience: 0,
+  };
+
+  problem.filter2 = {
     description: 0,
     frequency: 0,
     average: 0,
@@ -88,9 +100,12 @@ function readConfigFile() {
         // iterate over properties and set hide() or show() based on value in config file
         for (var prop in problem.filter) {
           problem.filter[prop] = getShowOrHideFunction(prop, config[prop]);
+          problem.filter2[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
         }
+
         applyDisplayFilter(problem.filter);
         problem.samples = config['samples'];
+        problem.samples2 = config['samples2'];
         $("#productInformation").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
       }, 
