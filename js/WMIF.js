@@ -149,8 +149,8 @@ function createInformationDisplays(values) {
 
 function recordChoice(val) {
   problem.choice = val;
-  d("you chose " + val);
-  // TODO or disable? but with indication of which was chosen?
+  $("#choiceDisplay").html("You chose product " + val);
+
   $("#choiceButtons").hide();
 
   // only show the radio buttons related to this product

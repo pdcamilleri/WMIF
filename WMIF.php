@@ -121,38 +121,51 @@
           <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
         </div>
 
-        <div id="preferenceStrength">
+        <p id="choiceDisplay"> </p>
+
+        <div id="preferenceStrength" hidden>
           <p>
             How much do you prefer this choice?
           </p>
           <form>
             <fieldset>
-              <legend>Preference</legend>
-                <label class="textleft">Strongly prefer product 1</label>
-                <label class="textcenter" for="size_1">Neutral</label>
-                <label class="textright" for="size_1">Strongly prefer product 2</label>
-                
-                <br/>
-                <input type="radio" name="preference" id="strong1" value="1" />
-                <input type="radio" name="preference" id="mod1" value="2" />
-                <label for="modStrong1"></label>
-                <input type="radio" name="preference" id="weak1" value="3" />
-                <label for="size_1"></label>
-                <input type="radio" name="preference" id="neutral" value="4" />
-                <label for="size_1"></label>
-                <input type="radio" name="preference" id="weak2" value="5" />
-                <label for="size_1"></label>
-                <input type="radio" name="preference" id="mod2" value="6" />
-                <label for="size_1"></label>
-                <input type="radio" name="preference" id="strong2" value="7" />
+              <label class="textleft">Strongly prefer product 1</label>
+              <label class="textcenter">Neutral</label>
+              <label class="textright">Strongly prefer product 2</label>
+              
+              <br/>
+
+              <input class="product1" type="radio" name="preference" id="prefstrong1" value="1" />
+              <input class="product1" type="radio" name="preference" id="prefmod1" value="2" />
+              <input class="product1" type="radio" name="preference" id="prefweak1" value="3" />
+              <input class="product1 product2" type="radio" name="preference" id="prefneutral" value="4" />
+              <input class="product2" type="radio" name="preference" id="prefweak2" value="5" />
+              <input class="product2" type="radio" name="preference" id="prefmod2" value="6" />
+              <input class="product2" type="radio" name="preference" id="prefstrong2" value="7" />
             </fieldset>
           </form>
         </div>
+
+        <br/>
+        <br/>
 
         <div id="friendRecommendation" hidden>
           <p>
             How likely would you be to recommend this product to a friend?
           </p>
+
+          <label class="textleft">Very likely</label>
+          <label class="textcenter">Neutral</label>
+          <label class="textright">Very unlikely</label>
+
+          <input type="radio" name="friend" id="friendstrong1" value="1" />
+          <input type="radio" name="friend" id="friendmod1" value="2" />
+          <input type="radio" name="friend" id="friendweak1" value="3" />
+          <input type="radio" name="friend" id="friendneutral" value="4" />
+          <input type="radio" name="friend" id="friendweak2" value="5" />
+          <input type="radio" name="friend" id="friendmod2" value="6" />
+          <input type="radio" name="friend" id="friendstrong2" value="7" />
+
         </div>
 
         <div>
