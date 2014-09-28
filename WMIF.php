@@ -123,54 +123,63 @@
 
         <p id="choiceDisplay"> </p>
 
-        <div id="preferenceStrength" hidden>
-          <p>
-            How much do you prefer this choice?
-          </p>
-          <form>
-            <fieldset>
-              <label class="textleft">Strongly prefer product 1</label>
-              <label class="textcenter">Neutral</label>
-              <label class="textright">Strongly prefer product 2</label>
-              
-              <br/>
 
-              <input class="product1" type="radio" name="preference" id="prefstrong1" value="1" />
-              <input class="product1" type="radio" name="preference" id="prefmod1" value="2" />
-              <input class="product1" type="radio" name="preference" id="prefweak1" value="3" />
-              <input class="product1 product2" type="radio" name="preference" id="prefneutral" value="4" />
-              <input class="product2" type="radio" name="preference" id="prefweak2" value="5" />
-              <input class="product2" type="radio" name="preference" id="prefmod2" value="6" />
-              <input class="product2" type="radio" name="preference" id="prefstrong2" value="7" />
-            </fieldset>
-          </form>
-        </div>
+        <form id="choiceForm" onsubmit="checkChoices(); return false;">
 
-        <br/>
-        <br/>
+          <div id="strengthChoice" hidden>
+            <p>
+              How much do you prefer this choice?
+            </p>
 
-        <div id="friendRecommendation" hidden>
-          <p>
-            How likely would you be to recommend this product to a friend?
-          </p>
+            <div class="labels"> 
+              <label class="alignleft">Strongly prefer product 1</label>
+              <label class="aligncenter">Neutral</label>
+              <label class="alignright">Strongly prefer product 2</label>
+            </div>
 
-          <label class="textleft">Very likely</label>
-          <label class="textcenter">Neutral</label>
-          <label class="textright">Very unlikely</label>
+            <div class="radioButtons"> 
 
-          <input type="radio" name="friend" id="friendstrong1" value="1" />
-          <input type="radio" name="friend" id="friendmod1" value="2" />
-          <input type="radio" name="friend" id="friendweak1" value="3" />
-          <input type="radio" name="friend" id="friendneutral" value="4" />
-          <input type="radio" name="friend" id="friendweak2" value="5" />
-          <input type="radio" name="friend" id="friendmod2" value="6" />
-          <input type="radio" name="friend" id="friendstrong2" value="7" />
+              <input class="product1" type="radio" name="strength" id="strengthstrong1" disabled="disabled" value="1" />
+              <input class="product1" type="radio" name="strength" id="strengthmod1" disabled="disabled" value="2" />
+              <input class="product1" type="radio" name="strength" id="strengthweak1" disabled="disabled" value="3" />
+              <input class="product1 product2" type="radio" name="strength" id="strengthneutral" disabled="disabled" value="4" />
+              <input class="product2" type="radio" name="strength" id="strengthweak2" disabled="disabled" value="5" />
+              <input class="product2" type="radio" name="strength" id="strengthmod2" disabled="disabled" value="6" />
+              <input class="product2" type="radio" name="strength" id="strengthstrong2" disabled="disabled" value="7" />
+            </div>
 
-        </div>
+          </div>
 
-        <div>
-          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
-        </div>
+          <br/>
+          <br/>
+
+          <div id="recommendChoice" hidden>
+            <p>
+              How likely would you be to recommend this product to a friend?
+            </p>
+
+            <div class="labels"> 
+              <label class="alignleft">Very likely</label>
+              <label class="aligncenter">Neutral</label>
+              <label class="alignright">Very unlikely</label>
+            </div>
+
+            <br/>
+
+            <div class="radioButtons">
+              <input type="radio" name="friend" id="friendstrong1" value="1" />
+              <input type="radio" name="friend" id="friendmod1" value="2" />
+              <input type="radio" name="friend" id="friendweak1" value="3" />
+              <input type="radio" name="friend" id="friendneutral" value="4" />
+              <input type="radio" name="friend" id="friendweak2" value="5" />
+              <input type="radio" name="friend" id="friendmod2" value="6" />
+              <input type="radio" name="friend" id="friendstrong2" value="7" />
+            </div>
+
+          </div>
+
+          <button id="nextPhase">Submit answers</button>
+        </form>
       </div>
 
       <div id="end" class="container" hidden>

@@ -10,7 +10,9 @@ var problem = {
   samples: 1,
   samplesSoFar: 0,
   outcomeOrder: [],
-  choice: -1
+  choice: -1,
+  choiceStrength: -1,
+  friend: -1
 };
 
 var configs;
@@ -153,10 +155,25 @@ function recordChoice(val) {
 
   $("#choiceButtons").hide();
 
-  // only show the radio buttons related to this product
-  $(".product" + val).show();
-  $("#preferenceStrength").show();
-  $("#friendRecommendation").show();
+  // only enable the radio buttons related to this product
+  $(".product" + val).attr("disabled", false);
+  $("#strengthChoice").show();
+  $("#recommendChoice").show();
+}
+
+// ensures that the participant has selected answers for both questions
+function checkChoices() {
+  var formData = $("#choiceForm").serializeArray();
+  if (formData.length != 2) {
+    alert("Please answer both questions");
+    d("Please answer both questions");
+  }
+
+  // form is valid, record form data and go to next phase
+  problem.choiceStrength = formData[0].value;
+  problem.friend = formData[1].value;
+  nextPhase();
+
 }
 
 // AJAX call to grab the input values from the server

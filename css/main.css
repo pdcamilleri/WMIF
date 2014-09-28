@@ -98,27 +98,36 @@ textarea {
 }
 
 
-/* TODO fix */
 input[type="radio"] {
   margin: 0 6%;
 }
 
-.textleft {
-  float:left;
-  margin: 0px 20px;
-  font-size:20px;
+.alignleft {
+  float: left;
+  text-align:left;
+  width:33.33333%;
 }
-.textright {
-  float: right;
-  margin: 0px 20px;
+
+.aligncenter {
+  float: left;
+  text-align:center;
+  width:33.33333%;
+}
+
+.alignright {
+  float: left;
+  text-align:right;
+  width:33.33333%;
+}
+
+.labels {
+  margin: 0px 30px;
   font-size:20px;
 }
 
-.textcenter {
-  float: center;
-  font-size:20px;
+.radioButtons {
+  width: 100%;
 }
-
 
 
 
