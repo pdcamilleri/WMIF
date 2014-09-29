@@ -29,7 +29,7 @@ function checkAnswers() {
   // user has entered correct data into the form, send to the database
 
   //var DemographicsForm = document.getElementById("DemographicsForm");
-  var url = 'database.php';
+  var url = 'saveDemographics.php';
 
   // fetch the data for the form
   var data = $("#DemographicsForm").serializeArray();
@@ -43,9 +43,6 @@ function checkAnswers() {
     url: url,
     data: data,
     dataType: 'json',
-    //success: function() {
-    //  alert("posted!");
-    //}
   });
 
   return true;
