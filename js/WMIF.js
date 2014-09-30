@@ -11,6 +11,7 @@ function createProduct() {
     samples: 1,
     samplesSoFar: 0,
     outcomeOrder: [],
+    experienceValues: [],
   };
 }
 
@@ -21,7 +22,7 @@ var state = {
   friend: -1
 };
 
-var currProblem = state.products[0];
+var currentProblem = state.products[0];
 var configs;
 var phase = Phase.INTRO;
 
@@ -39,6 +40,7 @@ function enterSecondProductPhase() {
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").html(configs['productInformation2']);
+  $("#experienceDisplay").html("Click the button to see the first value");
 }
 
 function enterSelectionPhase() {
@@ -133,6 +135,9 @@ window.onload = function() {
     // i guess problem.values doesnt need to be global then? except for experience
     // closure? ideal would be to be able to delete the above line problem.values = problemValues
     createInformationDisplays(state.products[0].values.slice(0, state.products[0].samples));
+
+    state.products[0].experienceValues = shuffle(state.products[0].values.slice(0));
+    state.products[1].experienceValues = shuffle(state.products[1].values.slice(0));
   })
   .fail(function() {
     d("one of the AJAX calls failed!")
@@ -291,28 +296,23 @@ function shuffle(array) {
 }
 
 // displays the next value to the participant when in the experience condition
-function getNextExperienceValue(values) {
+function getNextExperienceValue() {
 
-  if (currProblem.samplesSoFar >= currProblem.samples) {
+  if (currentProblem.samplesSoFar >= currentProblem.samples) {
     d("seen all samples");
     return;
   }
 
-  currProblem.samplesSoFar++;
+  currentProblem.samplesSoFar++;
 
   // disable the button, until the end of the animation
   document.getElementById("experienceButton").disabled = true;
   $("#experienceButton").css({ "color" : "red" });
-  
-  // only define these variables if not already defined
-  if (typeof experienceValues === 'undefined') {
-    experienceValues = shuffle(values.slice(0));
-  }
 
-  if (experienceValues.length != 0) {
-    var el = experienceValues.shift();
+  if (currentProblem.experienceValues.length != 0) {
+    var el = currentProblem.experienceValues.shift();
     // save the order that each outcome appeared for later
-    currProblem.outcomeOrder.push(el);
+    currentProblem.outcomeOrder.push(el);
 
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
@@ -366,10 +366,9 @@ function createSimultaneous(values) {
 
 }
 
-function createDistribution(values) {
-  var counts = getFrequencyArray(values);
-  // need to convert this frequency data into an object for our needs
-  /*
+
+/*
+data variable needs to be in this format to create the graph
   var data = [ 
     {name: "Locke", value: 4},
     {name: "Reyes", value: 8},
@@ -378,14 +377,24 @@ function createDistribution(values) {
     {name: "Lvfv", value: 23},
     {name: "asdf", value: 42}
   ];
-  */
+*/
+function createDistribution(values) {
+  // clear the previous distribution graph (if any)
+  $(".chart > g").remove()
+
+  var counts = getFrequencyArray(values);
 
   var data = [];
   for (var i = 0; i < counts.length; i++) {
     if (counts[i] != 0) {
-      data.push({name: i.toString, value: counts[i]});
+      data.push({name: i.toString(), value: counts[i]});
     }
   }
+
+  createChart(data);
+}
+
+function createChart(data) {
 
   var SVGwidth = 450,
       barWidth = 400,
@@ -407,22 +416,25 @@ function createDistribution(values) {
     .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
+  // add the filled out section of the bar (the yellow part)
   bar.append("rect")
       .attr("width", function(d) { return x(d.value); })
       .attr("height", barHeight - 1)
       .attr("fill", "url(#colorgradient)");
 
+  // add the backing section of the bar, the longer full grey bar
   bar.append("rect")
       .attr("width", function(d) { return barWidth - x(d.value); })
       .attr("transform", function(d) { return "translate(" + x(d.value) + ", 0)"; })
       .attr("height", barHeight - 1)
       .attr("fill", "url(#greygradient)");
-      
+
+  // add the labels to each bar
   bar.append("text")
       .attr("y", barHeight / 2)
       .attr("transform", function(d) { return "translate(" + (barWidth + 15) + ", 0)"; })
       .attr("dy", ".35em")
-      .text(function(d) { return d.value; });
+      .text(function(d) { return d.name; });
 
   // do the exact same thing but in a different svg to align the labels for each bar.
   // dont really need this tho

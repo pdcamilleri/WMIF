@@ -102,7 +102,7 @@
         </div>
 
         <div id="experience">
-          <button class="button" id="experienceButton" onclick="getNextExperienceValue(problem.values)"> Get next value</button>
+          <button class="button" id="experienceButton" onclick="getNextExperienceValue()"> Get next value</button>
           <div id="experienceDisplay"> Click the button to see the first value</div>
         </div>
 
