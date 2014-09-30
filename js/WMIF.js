@@ -6,30 +6,39 @@ Phase = {
   END: "end"
 }
 
-var problem = {
-  samples: 1,
-  samplesSoFar: 0,
-  outcomeOrder: [],
+function createProduct() {
+  return {
+    samples: 1,
+    samplesSoFar: 0,
+    outcomeOrder: [],
+  };
+}
+
+var state = {
+  products: [createProduct(), createProduct()],
   choice: -1,
   choiceStrength: -1,
   friend: -1
 };
 
+var currProblem = state.products[0];
 var configs;
 var phase = Phase.INTRO;
 
 function enterFirstProductPhase() {
+  currentProblem = state.products[0];
   $("#introduction").hide();
   $("#information").show();
 }
 
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
-  createInformationDisplays(problem.values.slice(0, problem.samples));
-  applyDisplayFilter(problem.filter2);
+  currentProblem = state.products[1];
+  createInformationDisplays(currentProblem.values.slice(0, currentProblem.samples));
+  applyDisplayFilter(currentProblem.filter);
+  // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").html(configs['productInformation2']);
-
 }
 
 function enterSelectionPhase() {
@@ -77,7 +86,7 @@ function getShowOrHideFunction(id, isShow) {
 function readConfigFile() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
 
-  problem.filter = {
+  state.products[0].filter = {
     description: 0,
     frequency: 0,
     average: 0,
@@ -87,7 +96,7 @@ function readConfigFile() {
     experience: 0,
   };
 
-  problem.filter2 = {
+  state.products[1].filter = {
     description: 0,
     frequency: 0,
     average: 0,
@@ -101,14 +110,14 @@ function readConfigFile() {
       function(config) { 
         configs = config;
         // iterate over properties and set hide() or show() based on value in config file
-        for (var prop in problem.filter) {
-          problem.filter[prop] = getShowOrHideFunction(prop, config[prop]);
-          problem.filter2[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
+        for (var prop in state.products[0].filter) {
+          state.products[0].filter[prop] = getShowOrHideFunction(prop, config[prop]);
+          state.products[1].filter[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
         }
 
-        applyDisplayFilter(problem.filter);
-        problem.samples = config['samples'];
-        problem.samples2 = config['samples2'];
+        applyDisplayFilter(state.products[0].filter);
+        state.products[0].samples = config['samples'];
+        state.products[1].samples = config['samples2'];
         $("#productInformation").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
       }, 
@@ -123,10 +132,10 @@ window.onload = function() {
 
     // i guess problem.values doesnt need to be global then? except for experience
     // closure? ideal would be to be able to delete the above line problem.values = problemValues
-    createInformationDisplays(problem.values.slice(0, problem.samples));
+    createInformationDisplays(state.products[0].values.slice(0, state.products[0].samples));
   })
   .fail(function() {
-      d("one of the AJAX calls failed!")
+    d("one of the AJAX calls failed!")
   });
  
 }
@@ -150,7 +159,7 @@ function createInformationDisplays(values) {
 }
 
 function recordChoice(val) {
-  problem.choice = val;
+  state.choice = val;
   $("#choiceDisplay").html("You chose product " + val);
 
   $("#choiceButtons").hide();
@@ -170,8 +179,9 @@ function checkChoices() {
   }
 
   // form is valid, record form data and go to next phase
-  problem.choiceStrength = formData[0].value;
-  problem.friend = formData[1].value;
+  state.choiceStrength = formData[0].value;
+  state.friend = formData[1].value;
+  //state.friend = $('input[name=strength]:checked', '#choiceForm').val();
   nextPhase();
 
 }
@@ -182,7 +192,8 @@ function populateInputValues() {
     type: "GET",
     url: "getInputData.php",
     success: function(problemValues) {
-      problem.values = problemValues;
+      state.products[0].values = problemValues[0];
+      state.products[1].values = problemValues[1];
     },
     dataType: 'json',
     error: function(jqXHR, textStatus, errorThrown) {
@@ -282,12 +293,12 @@ function shuffle(array) {
 // displays the next value to the participant when in the experience condition
 function getNextExperienceValue(values) {
 
-  if (problem.samplesSoFar >= problem.samples) {
+  if (currProblem.samplesSoFar >= currProblem.samples) {
     d("seen all samples");
     return;
   }
 
-  problem.samplesSoFar++;
+  currProblem.samplesSoFar++;
 
   // disable the button, until the end of the animation
   document.getElementById("experienceButton").disabled = true;
@@ -301,7 +312,7 @@ function getNextExperienceValue(values) {
   if (experienceValues.length != 0) {
     var el = experienceValues.shift();
     // save the order that each outcome appeared for later
-    problem.outcomeOrder.push(el);
+    currProblem.outcomeOrder.push(el);
 
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
