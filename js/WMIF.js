@@ -57,6 +57,7 @@ function enterEndPhase() {
 }
 
 function nextPhase() {
+  window.scrollTo(0, 0);
   d("ending phase " + phase);
   if (phase == Phase.INTRO) {
     phase = Phase.PRODUCT_ONE;
