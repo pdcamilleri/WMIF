@@ -185,7 +185,8 @@
       <div id="end" class="container" hidden>
         <p>
           Thank you for participating.
-          Your code is ...
+          Your code is ... and if you were curious, the next review score for the product you chose
+          was <div id="randomValueFromChoice"></div>.
         </p>
       </div>
         
