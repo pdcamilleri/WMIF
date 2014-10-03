@@ -134,10 +134,14 @@ window.onload = function() {
 
     // i guess problem.values doesnt need to be global then? except for experience
     // closure? ideal would be to be able to delete the above line problem.values = problemValues
-    createInformationDisplays(state.products[0].values.slice(0, state.products[0].samples));
 
     state.products[0].experienceValues = shuffle(state.products[0].values.slice(0));
     state.products[1].experienceValues = shuffle(state.products[1].values.slice(0));
+
+    state.products[0].simultaneousValues = shuffle(state.products[0].values.slice(0));
+    state.products[1].simultaneousValues = shuffle(state.products[1].values.slice(0));
+
+    createInformationDisplays(state.products[0].values.slice(0, state.products[0].samples));
   })
   .fail(function() {
     d("one of the AJAX calls failed!")
@@ -158,7 +162,7 @@ function createInformationDisplays(values) {
   createAverage(values);
   createDistribution(values);
   createWordCloud(values);
-  createSimultaneous(values);
+  createSimultaneous(currentProblem.simultaneousValues);
   // experience, TODO how to set this up without global?
 
 }
@@ -335,7 +339,6 @@ function getNextExperienceValue() {
 // creates a table that displays all the values to the participant
 // at the same time, i.e. simultaneously.
 function createSimultaneous(values) {
-  shuffle(values);
 
   // create a div and table to hold our values
   var div = document.createElement("div");
