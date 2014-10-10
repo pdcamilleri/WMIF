@@ -433,6 +433,8 @@ function createDistribution(values) {
     }
   }
 
+  data = shuffle(data);
+
   createChart(data);
 }
 
