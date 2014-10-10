@@ -275,18 +275,53 @@ function createDescription(values) {
 function createDescriptionString(values) {
   var counts = getFrequencyArray(values);
 
-  var description = "";
+  var descriptions = [];
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
-      description += (counts[i] * 100.0 / counts.length).toFixed(0) + "% chance of " + i + "<br/>";
+      descriptions.push((counts[i] * 100.0 / counts.length).toFixed(0) + "% chance of " + i + "<br/>");
     }
   }
 
-  // Upper case first letter, remove trailing ", "
-  description = description.charAt(0).toUpperCase() + description.slice(1, -2) + ".";
-  return description;
+  descriptions = shuffle(descriptions);
+
+  var str = "";
+  while (descriptions.length != 0) {
+    str += descriptions.pop();
+  }
+  
+  return str;
 
 }
+
+function createFrequency(values) {
+  var text = createFrequencyString(values);
+  var paragraph = document.createElement("p");
+  paragraph.innerHTML = text;
+  document.getElementById("frequency").innerHTML = "";
+  document.getElementById("frequency").appendChild(paragraph);
+}
+
+function createFrequencyString(values) {
+  var counts = getFrequencyArray(values);
+  var text = [];
+  for (var i = 0; i < counts.length; ++i) {
+    if (counts[i] != 0) {
+      text.push(counts[i] + " / " + counts.length 
+           + " people gave the product a review score of " + i + "<br/>");
+    }
+  }
+
+  text = shuffle(text);
+
+  var str = "";
+  while (text.length != 0) {
+    str += text.pop();
+  }
+
+  return str;
+
+}
+
 
 /**
 * Randomize array element order in-place.
@@ -465,28 +500,6 @@ function createChart(data) {
     d.value = +d.value; // coerce to number
     return d;
   }
-
-}
-
-function createFrequency(values) {
-  var text = createFrequencyString(values);
-  var paragraph = document.createElement("p");
-  paragraph.innerHTML = text;
-  document.getElementById("frequency").innerHTML = "";
-  document.getElementById("frequency").appendChild(paragraph);
-}
-
-function createFrequencyString(values) {
-  var counts = getFrequencyArray(values);
-  var text = "";
-  for (var i = 0; i < counts.length; ++i) {
-    if (counts[i] != 0) {
-      text += counts[i] + " / " + counts.length 
-           + " people gave the product a review score of " + i + "<br/>";
-    }
-  }
-  text = text.charAt(0).toUpperCase() + text.slice(1, -2) + ".";
-  return text;
 
 }
 
