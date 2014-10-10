@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/table.css" />
 
     <title>Admin Control Panel</title>
   </head>
@@ -29,38 +30,95 @@
 
     <div id="problem1" class="col-md-6">
       <h4>First problem</h4>
-      <p>
-        Select the information formats that you wish to be displayed for problem 1:
-      </p>
       <form id="mainform">
-        <p>
-          <input type="checkbox" id="description" name="description" value="1">
-          <label for="description">Description</label>
-        </p>
-        <p>
-          <input type="checkbox" id="frequency" name="frequency" value="1">
-          <label for="frequency">Frequency</label>
-        </p>
-        <p>
-          <input type="checkbox" id="average" name="average" value="1">
-          <label for="average">Average</label>
-        </p>
-        <p>
-          <input type="checkbox" id="distribution" name="distribution" value="1">
-          <label for="distribution">Distribution</label>
-        </p>
-        <p>
-          <input type="checkbox" id="wordcloud" name="wordcloud" value="1">
-          <label for="wordcloud">Wordcloud</label>
-        </p>
-        <p>
-          <input type="checkbox" id="simultaneous" name="simultaneous" value="1">
-          <label for="simultaneous">Simultaneous</label>
-        </p>
-        <p>
-          <input type="checkbox" id="experience" name="experience" value="1">
-          <label for="experience">Experience</label>
-        </p>
+        <table class="niceTable">
+          <thead>
+            <tr>
+              <th>
+                Information formats
+              </th>
+              <th>
+                Randomise?
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <input type="checkbox" id="description" name="description" value="1">
+                <label for="description">Description</label>
+              </td>
+              <td>
+                <input type="checkbox" id="randomisedescription" name="randomisedescription" value="1"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="frequency" name="frequency" value="1">
+                <label for="frequency">Frequency</label>
+              </td>
+              <td>
+                <input type="checkbox" id="randomisefrequency" name="randomisefrequency" value="1"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="average" name="average" value="1">
+                <label for="average">Average</label>
+              </td>
+              <td>
+                Cannot be randomised
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="distribution" name="distribution" value="1">
+                <label for="distribution">Distribution</label>
+              </td>
+              <td>
+                <input type="checkbox" id="randomisedistribution" name="randomisedistribution" value="1"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="wordcloud" name="wordcloud" value="1">
+                <label for="wordcloud">Wordcloud</label>
+              </td>
+              <td>
+                Cannot be randomised
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="simultaneous" name="simultaneous" value="1">
+                <label for="simultaneous">Simultaneous</label>
+              </td>
+              <td>
+                <input type="checkbox" id="randomisesimultaneous" name="randomisesimultaneous" value="1"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="experience" name="experience" value="1">
+                <label for="experience">Experience</label>
+              </td>
+              <td>
+                <input type="checkbox" id="randomiseexperience" name="randomiseexperience" value="1"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+
         <p>
           <label for="samples">Number of samples:</label>
           <input type="number" id="samples" name="samples" min="1" max="100" step="1" value="10">
@@ -94,42 +152,90 @@
 
     <div id="problem2" class="col-md-6">
       <h4>Second problem</h4>
-      <p>
-        Select the information formats that you wish to be displayed for problem 1:
-      </p>
       <form id="form2">
-        <p>
-          <input type="checkbox" id="description2" name="description2" value="1">
-          <label for="description">Description</label>
-        </p>
-        <p>
-          <input type="checkbox" id="frequency2" name="frequency2" value="1">
-          <label for="frequency2">Frequency</label>
-        </p>
-        <p>
-          <input type="checkbox" id="average2" name="average2" value="1">
-          <label for="average2">Average</label>
-        </p>
-        <p>
-          <input type="checkbox" id="distribution2" name="distribution2" value="1">
-          <label for="distribution2">Distribution</label>
-        </p>
-        <p>
-          <input type="checkbox" id="wordcloud2" name="wordcloud2" value="1">
-          <label for="wordcloud2">Wordcloud</label>
-        </p>
-        <p>
-          <input type="checkbox" id="simultaneous2" name="simultaneous2" value="1">
-          <label for="simultaneous2">Simultaneous</label>
-        </p>
-        <p>
-          <input type="checkbox" id="experience2" name="experience2" value="1">
-          <label for="experience2">Experience</label>
-        </p>
+        <table class="niceTable">
+          <thead>
+            <tr>
+              <th>
+                Information formats
+              </th>
+              <th>
+                Randomise?
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input type="checkbox" id="description2" name="description2" value="1"/>
+              <label for="description">Description</label>
+            </td>
+            <td>
+              <input type="checkbox" id="randomisedescription2" name="randomisedescription2" value="1"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="frequency2" name="frequency2" value="1"/>
+              <label for="frequency2">Frequency</label>
+            </td>
+            <td>
+              <input type="checkbox" id="randomisefrequency2" name="randomisefrequency2" value="1"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="average2" name="average2" value="1"/>
+              <label for="average2">Average</label>
+            </td>
+            <td>
+              Cannot be randomised
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="distribution2" name="distribution2" value="1"/>
+              <label for="distribution2">Distribution</label>
+            </td>
+            <td>
+              <input type="checkbox" id="randomisedistribution2" name="randomisedistribution2" value="1"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="wordcloud2" name="wordcloud2" value="1"/>
+              <label for="wordcloud2">Wordcloud</label>
+            </td>
+            <td>
+             Cannot be randomised
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="simultaneous2" name="simultaneous2" value="1"/>
+              <label for="simultaneous2">Simultaneous</label>
+            </td>
+            <td>
+              <input type="checkbox" id="randomisesimultaneous2" name="randomisesimultaneous2" value="1"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="experience2" name="experience2" value="1"/>
+              <label for="experience2">Experience</label>
+            </td>
+            <td>
+              <input type="checkbox" id="randomiseexperience2" name="randomiseexperience2" value="1"/>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
         <p>
           <label for="samples2">Number of samples:</label>
           <input type="number" id="samples2" name="samples2" min="1" max="100" step="1" value="10">
         </p>
+
         <p>
           <label for="productInformation2">Product Information:</label>
           <br/>
