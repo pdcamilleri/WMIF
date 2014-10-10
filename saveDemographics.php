@@ -1,6 +1,7 @@
 <?php
 
 require_once("constants.php");
+require_once("database.php");
 
 function post($key) {
   if (isset($_POST[$key])) {
@@ -9,21 +10,7 @@ function post($key) {
   return false;
 }
 
-// Setup variables to connect to database
-$dbConfig = parse_ini_file(DB_CONFIG_FILE);
-$host = $dbConfig[HOST];
-$dbUser = $dbConfig[DB_USER];
-$dbUserPassword = $dbConfig[DB_USER_PASSWORD];
-$dbName = $dbConfig[DB_NAME];
-
-// connect to the WMIF database with WMIF user and password
-// TODO can change this to be OO style
-$connection = mysqli_connect($host, $dbUser, $dbUserPassword, $dbName);
-
-if (mysqli_connect_errno()) {
-  printf("Connect failed: %s\n", mysqli_connect_error());
-  exit();
-}
+$connection = getDatabaseConnection();
 
 // check if we can get hold of all of the required form paramaters
 if (!
