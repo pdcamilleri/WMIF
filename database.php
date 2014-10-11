@@ -20,4 +20,15 @@ function getDatabaseConnection() {
   return $connection;
 }
 
+function error($connection, $errorStr = "no error string provided") {
+  mysqli_close($connection);
+
+  $resp = new stdClass();
+  $resp->success = false;
+  $resp->error = $errorStr;
+  print json_encode($resp);
+
+  exit();
+}
+
 ?>

@@ -12,6 +12,10 @@ function post($key) {
 
 $connection = getDatabaseConnection();
 
+// setup our response "object"
+$resp = new stdClass();
+$resp->success = false;
+
 // check if we can get hold of all of the required form paramaters
 if (!
      (
@@ -24,13 +28,7 @@ if (!
        && post('mid')
      )
    ) {
-  print_r($_POST);
-  //printf("not good\n");
-  //print_r($_POST['Age']);
-  mysqli_close($connection);
-  exit();
-} else {
-  print_r("all looking good\n"); 
+  error("not all demographic fields were received");
 }
 
 // let make sure we escape the data
@@ -48,13 +46,9 @@ $sql = sprintf("INSERT INTO %s VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s',
     $mid, $gender, $age, $education, $employment, $marital, $income
 );
 
-
 // lets run our query
 $result = mysqli_query($connection, $sql);
 
-// setup our response "object"
-$resp = new stdClass();
-$resp->success = false;
 if($result) {
   $resp->success = true;
 }
