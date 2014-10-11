@@ -29,6 +29,10 @@
       <link rel="stylesheet" type="text/css" href="css/main.css" />
       <script type="text/javascript" src="js/WMIF.js"></script>
 
+      <script type="text/javascript">
+        var mid = <?php echo json_encode($_SESSION['mid']); ?>;
+      </script>
+
       <title>Decision-making Game</title>
    </head>
    <body>

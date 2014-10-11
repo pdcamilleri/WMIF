@@ -56,6 +56,27 @@ function enterEndPhase() {
   $("#end").show();
 }
 
+function sendDataToServer() {
+  var url = 'saveChoices.php';
+
+  // setup the ajax request
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: state,
+    dataType: 'json',
+    success: function(response) {
+      d("success");
+      console.log(response);
+    },
+    error: function(repsonse) {
+      d("error"); },
+
+  });
+
+  return true;
+}
+
 function nextPhase() {
   window.scrollTo(0, 0);
   d("ending phase " + phase);
@@ -145,6 +166,7 @@ function shouldRandomise(val) {
 }
 
 window.onload = function() {
+  state.mid = mid;
   $.when(readConfigFile(), populateInputValues()).done(function() {
     // need to wait for config values (for #samples) and input values before creating
     // information displays
@@ -206,7 +228,10 @@ function checkChoices() {
   // form is valid, record form data and go to next phase
   state.choiceStrength = formData[0].value;
   state.friend = formData[1].value;
-  //state.friend = $('input[name=strength]:checked', '#choiceForm').val();
+  d("sending data");
+  delete state.products[0].filter;
+  delete state.products[1].filter;
+  sendDataToServer();
   nextPhase();
 
 }
