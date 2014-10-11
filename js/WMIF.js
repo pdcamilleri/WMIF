@@ -35,7 +35,7 @@ function enterFirstProductPhase() {
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
   currentProblem = state.products[1];
-  createInformationDisplays(currentProblem.values.slice(0, currentProblem.samples));
+  createInformationDisplays();
   applyDisplayFilter(currentProblem.filter);
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
@@ -88,7 +88,7 @@ function getShowOrHideFunction(id, isShow) {
   return ret;
 }
 
-// TODO getting a bit unwiedly
+// TODO getting a bit unwiedly, even moreso now
 function readConfigFile() {
   // create filter, populate with garbage, just to create the object so we can iterate over its propeties
 
@@ -112,6 +112,12 @@ function readConfigFile() {
     experience: 0,
   };
 
+  state.products[0].randomiseFilter = {
+  }
+
+  state.products[1].randomiseFilter = {
+  }
+
   return $.get("readConfigFile.php", 
       function(config) { 
         configs = config;
@@ -119,6 +125,9 @@ function readConfigFile() {
         for (var prop in state.products[0].filter) {
           state.products[0].filter[prop] = getShowOrHideFunction(prop, config[prop]);
           state.products[1].filter[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
+
+          state.products[0].randomiseFilter[prop] = shouldRandomise(config["randomise" + prop]);
+          state.products[1].randomiseFilter[prop] = shouldRandomise(config["randomise" + prop + "2"]);
         }
 
         applyDisplayFilter(state.products[0].filter);
@@ -131,21 +140,18 @@ function readConfigFile() {
   );
 }
 
+function shouldRandomise(val) {
+  return val != false;
+}
+
 window.onload = function() {
   $.when(readConfigFile(), populateInputValues()).done(function() {
     // need to wait for config values (for #samples) and input values before creating
     // information displays
 
-    // i guess problem.values doesnt need to be global then? except for experience
-    // closure? ideal would be to be able to delete the above line problem.values = problemValues
+    createInformationDisplays();
 
-    state.products[0].experienceValues = shuffle(state.products[0].values.slice(0));
-    state.products[1].experienceValues = shuffle(state.products[1].values.slice(0));
 
-    state.products[0].simultaneousValues = shuffle(state.products[0].values.slice(0));
-    state.products[1].simultaneousValues = shuffle(state.products[1].values.slice(0));
-
-    createInformationDisplays(state.products[0].values.slice(0, state.products[0].samples));
   })
   .fail(function() {
     d("one of the AJAX calls failed!")
@@ -160,13 +166,19 @@ function applyDisplayFilter(filter) {
   }
 }
 
-function createInformationDisplays(values) {
+function createInformationDisplays() {
+  // i guess problem.values doesnt need to be global then? except for experience
+  // closure? ideal would be to be able to delete the above line problem.values = problemValues
+
+  var values = currentProblem.values;
+
   createDescription(values);
   createFrequency(values);
   createAverage(values);
   createDistribution(values);
   createWordCloud(values);
-  createSimultaneous(currentProblem.simultaneousValues);
+  createSimultaneous();
+  createExperience(values);
   // experience, TODO how to set this up without global?
 
 }
@@ -254,6 +266,14 @@ function calculateAverage(values) {
   return sum /= values.length;
 }
 
+function createExperience(values) {
+  if (currentProblem.randomiseFilter['experience']) {
+    currentProblem.experienceValues = shuffle(values.slice(0));
+  } else {
+    currentProblem.experienceValues = values.slice(0);
+  }
+}
+
 function createAverage(values) {
   var average = calculateAverage(values);
   var paragraph = document.createElement("p");
@@ -282,11 +302,13 @@ function createDescriptionString(values) {
     }
   }
 
-  descriptions = shuffle(descriptions);
+  if (currentProblem.randomiseFilter['description']) {
+    shuffle(descriptions);
+  }
 
   var str = "";
   while (descriptions.length != 0) {
-    str += descriptions.pop();
+    str += descriptions.shift();
   }
   
   return str;
@@ -311,17 +333,18 @@ function createFrequencyString(values) {
     }
   }
 
-  text = shuffle(text);
+  if (currentProblem.randomiseFilter['frequency']) {
+    shuffle(text);
+  }
 
   var str = "";
   while (text.length != 0) {
-    str += text.pop();
+    str += text.shift();
   }
 
   return str;
 
 }
-
 
 /**
 * Randomize array element order in-place.
@@ -377,7 +400,18 @@ function getNextExperienceValue() {
 
 // creates a table that displays all the values to the participant
 // at the same time, i.e. simultaneously.
-function createSimultaneous(values) {
+function createSimultaneous() {
+
+  if (currentProblem.randomiseFilter['simultaneous']) {
+    currentProblem.simultaneousValues = shuffle(currentProblem.values.slice(0));
+  } else {
+    currentProblem.simultaneousValues = currentProblem.values.slice(0);
+  }
+
+  createSimultaneousTable(currentProblem.simultaneousValues);
+}
+
+function createSimultaneousTable(values) {
 
   // create a div and table to hold our values
   var div = document.createElement("div");
@@ -433,7 +467,9 @@ function createDistribution(values) {
     }
   }
 
-  data = shuffle(data);
+  if (currentProblem.randomiseFilter['distribution']) {
+    shuffle(data);
+  }
 
   createChart(data);
 }
