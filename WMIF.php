@@ -99,15 +99,24 @@
         </div>
 
         <div id="wordcloud">
-          <p>Word Cloud</p>
+          <p>The size of the score represents how frequently that score has occurred</p>
+          <br/>
+          <div id="cloud">
+          </div>
         </div>
 
         <div id="simultaneous">
+          <p> 
+            A list of the scores:
+          </p>
         </div>
 
         <div id="experience">
+          <p>
+            Click the button below to see the previous scores. There are <span id="totalScores"></span> previous scores.
+          </p>
           <button class="button" id="experienceButton" onclick="getNextExperienceValue()"> Get next value</button>
-          <div id="experienceDisplay"> Click the button to see the first value</div>
+          <div id="experienceDisplay"> ? </div>
         </div>
 
         <div>
@@ -119,7 +128,7 @@
       <div id="selection" hidden>
         <div id="choiceButtons">
           <p>
-            After reviewing each product, which do you prefer?
+            Which do you prefer?
           </p>
           <button id="product1" class="button" value="1" onclick="recordChoice(1)">Product 1</button>
           <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
@@ -132,7 +141,7 @@
 
           <div id="strengthChoice" hidden>
             <p>
-              How much do you prefer this choice?
+              How much do you prefer this option?
             </p>
 
             <div class="labels"> 
@@ -155,11 +164,19 @@
           </div>
 
           <br/>
+
+          <div id="choiceWhy" hidden>
+            <label for="why">Please explain why you choose this option?</label>
+            <br/>
+            <textarea id="why" name="why" rows="5" cols="100">
+            </textarea>
+          </div>
+
           <br/>
 
           <div id="recommendChoice" hidden>
             <p>
-              How likely would you be to recommend this product to a friend?
+              How likely would you be to recommend your choice to someone else?
             </p>
 
             <div class="labels"> 
@@ -188,9 +205,12 @@
 
       <div id="end" class="container" hidden>
         <p>
-          Thank you for participating.
-          Your code is ... and if you were curious, the next review score for the product you chose
-          was <div id="randomValueFromChoice"></div>.
+          Thank you for participating!
+          Your completiong code is <strong>WMIF1</strong>
+        </p>
+        <p>
+          If you were curious, the next review score for the product you chose
+          was <span id="randomValueFromChoice"></span>.
         </p>
       </div>
         

@@ -215,6 +215,7 @@ function recordChoice(val) {
   $(".product" + val).attr("disabled", false);
   $("#strengthChoice").show();
   $("#recommendChoice").show();
+  $("#choiceWhy").show();
 }
 
 // ensures that the participant has selected answers for both questions
@@ -297,12 +298,22 @@ function createExperience(values) {
   } else {
     currentProblem.experienceValues = values.slice(0);
   }
+
+  // change text on the button
+  document.getElementById("experienceButton").innerHTML = 
+    "See score " + (currentProblem.samplesSoFar + 1) + " of " + currentProblem.samples;
+
+  document.getElementById("totalScores").innerHTML = currentProblem.samples;
+  // fix the height of the experience element
+  //$("#experience").css({height : $("#experience").height() + 10});
+  $("#experience").css({height : "150px"});
+
 }
 
 function createAverage(values) {
-  var average = calculateAverage(values);
+  var average = calculateAverage(values).toFixed(1);
   var paragraph = document.createElement("p");
-  paragraph.innerHTML = "Average is " + average + ".";
+  paragraph.innerHTML = "Average score is " + average;
   document.getElementById("average").innerHTML = "";
   document.getElementById("average").appendChild(paragraph);
 }
@@ -323,7 +334,7 @@ function createDescriptionString(values) {
   var descriptions = [];
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
-      descriptions.push((counts[i] * 100.0 / counts.length).toFixed(0) + "% chance of " + i + "<br/>");
+      descriptions.push((counts[i] * 100.0 / counts.length).toFixed(0) + "% of scores were " + i + "<br/>");
     }
   }
 
@@ -354,7 +365,7 @@ function createFrequencyString(values) {
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
       text.push(counts[i] + " / " + counts.length 
-           + " people gave the product a review score of " + i + "<br/>");
+           + " scores were " + i + "<br/>");
     }
   }
 
@@ -414,9 +425,16 @@ function getNextExperienceValue() {
       $(this).html(el);
       $(this).css({"left" : "-=200px"});
       $(this).animate({ "left": "+=100px", "font-size" : priorFont }, 1500, function() {
+
+      if (currentProblem.experienceValues.length != 0) {
         // enable the button again
         document.getElementById("experienceButton").disabled = false;
         $("#experienceButton").css({ "color" : "black" });
+        document.getElementById("experienceButton").innerHTML = 
+          "See score " + (currentProblem.samplesSoFar + 1) + " of " + currentProblem.samples;
+      } else {
+       document.getElementById("experienceButton").innerHTML = "All scores have been seen";
+      }
       });
     });
   } // else experience counter is >= data.length so do nothing
@@ -448,7 +466,7 @@ function createSimultaneousTable(values) {
   var tbody = table.createTBody();
 
   // find the element to place this table inside of
-  document.getElementById("simultaneous").innerHTML = "";
+  //document.getElementById("simultaneous").innerHTML = "";
   document.getElementById("simultaneous").appendChild(div);
 
   // create the table
@@ -541,13 +559,11 @@ function createChart(data) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name; });
 
-  // do the exact same thing but in a different svg to align the labels for each bar.
-  // dont really need this tho
-  //var labels = d3.select(".labels")
-  //    .attr("width", barWidth)
-  //    .attr("height", barHeight * data.length);
+  // TODO table this up like amazon does
+  var labels = d3.select(".labels")
+      .attr("width", barWidth)
+      .attr("height", barHeight * data.length);
 
-  /*
   var labelbar = labels.selectAll("g")
       .data(data)
     .enter().append("g")
@@ -557,7 +573,6 @@ function createChart(data) {
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });
-  */
 
   function type(d) {
     d.value = +d.value; // coerce to number
@@ -608,7 +623,7 @@ function createWordCloud(values) {
       .start();
 
   function draw(words) {
-    d3.select("div#wordcloud")
+    d3.select("div#wordcloud > #cloud")
         .html("") // clear previous content first
         .append("svg")
         .attr("width", size)
