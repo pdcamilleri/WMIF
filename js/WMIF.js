@@ -156,6 +156,7 @@ function readConfigFile() {
         state.products[1].samples = parseInt(config['samples2']);
         $("#productInformation").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
+        $("#introduction").children("p").html(config['problemInstructions']);
       }, 
       'json'
   );

@@ -43,11 +43,7 @@
 
       <div id="introduction" class="container">
         <p>
-          Going to show you some information related to the product asd.
-          Want you to look at the reviews and make a decision on whether or not you want to buy that product.
-        </p>
-        <p>
-          When you are ready, click the button to start the experiment
+          shouldnt see this
         </p>
         <button class="button" onclick="nextPhase()">Start Experiment</button>
       </div>

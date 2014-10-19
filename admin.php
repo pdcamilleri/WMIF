@@ -28,6 +28,21 @@
 
     <hr/>
 
+
+    <form>
+      <label for="generalInstructions">General Instruction:</label>
+      <br/>
+      <textarea id="generalInstructions" name="generalInstructions" rows="10" cols="100">
+        info for the intro page
+      </textarea>
+
+      <label for="problemInstructions">Problem Information:</label>
+      <br/>
+      <textarea id="problemInstructions" name="problemInstructions" rows="10" cols="100">
+        Information to be displayed on the first page
+      </textarea>
+    </form>
+
     <div id="problem1" class="col-md-6">
       <h4>First problem</h4>
       <form id="mainform">
