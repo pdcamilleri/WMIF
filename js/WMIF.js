@@ -173,6 +173,8 @@ window.onload = function() {
 
     createInformationDisplays();
 
+    initiateSliders();
+    populateOutcomeValuesInSlider();
 
   })
   .fail(function() {
@@ -216,7 +218,108 @@ function recordChoice(val) {
   $("#strengthChoice").show();
   $("#recommendChoice").show();
   $("#choiceWhy").show();
+  $("#sliders").show();
 }
+
+function initiateSliders() {
+  var sliders = $(".sliders .ui-slider");
+  sliders.slider({ 
+    value: 0,
+    min: 0,
+    max: 100,
+    step: 1,
+    slide: function(event, ui) {
+      var handle = ui.handle;
+
+      handle.innerHTML = ui.value;
+
+      var total = 0;
+      // sums up the total value of each slider that is not the current slider
+      $(this).parent().parent().parent().find(".ui-slider").not(this).each(function() {
+        total += $(this).slider("option", "value");
+      });
+
+      // Need to do this because apparently jQ UI
+      // does not update value until this event completes
+      total += ui.value;
+
+      // show the value to the user
+
+      // first get the score associated with this series of sliders
+      var sliderScore = $(this).parent().parent().parent().parent().find(".sliderScore");
+      sliderScore.html(total + '%');
+
+      // update the color if the sliders total to 100%
+      if (total == 100) {
+        sliderScore.css('color','green');
+      } else {
+        sliderScore.css('color','red');
+      }
+
+      // see if we should enable the submit button
+      checkSliderTotals();
+
+    }
+  }); 
+
+  // set the initial value of the slider to be 0
+  $(".ui-slider-handle").text("0");
+}
+
+function checkSliderTotals() {
+  var allSlidersAre100 = true;
+
+  // check all the sliders. if just one is off, disable the submit button
+  $(".sliderScore").each(function() {
+    if ($(this).html() != '100%') {
+      allSlidersAre100 = false;
+    }
+  });
+
+  if (allSlidersAre100) {
+    enableSliderSubmit();
+  } else {
+    disableSliderSubmit();
+  }
+
+}
+
+function disableSliderSubmit() {
+  document.getElementById("submitChoices").disabled = true;
+  document.getElementById("submitChoices").style.color = 'grey';
+}
+
+function enableSliderSubmit() {
+  document.getElementById("submitChoices").disabled = false;
+  document.getElementById("submitChoices").style.color = '';
+}
+
+// this function sets the outcomes for the sliders to correspond to the particular choice set/problem
+function populateOutcomeValuesInSlider() {
+  var numSliderSets = state.products.length;
+  for (var i = 1; i < numSliderSets + 1; ++i) {
+    var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    $("#sliders_" + i).find(".outcomeValues").each(function() {
+      $(this).html(values.shift());
+    });
+
+  }
+
+}
+
+// http://stackoverflow.com/a/1890233 
+function unique(arr) {
+  var hash = {}, result = [];
+  for ( var i = 0, l = arr.length; i < l; ++i ) {
+    if ( !hash.hasOwnProperty(arr[i]) ) { //it works with objects! in FF, at least
+      hash[ arr[i] ] = true;
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
+
 
 // ensures that the participant has selected answers for both questions
 function checkChoices() {
