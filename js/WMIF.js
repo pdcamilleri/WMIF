@@ -152,8 +152,8 @@ function readConfigFile() {
         }
 
         applyDisplayFilter(state.products[0].filter);
-        state.products[0].samples = config['samples'];
-        state.products[1].samples = config['samples2'];
+        state.products[0].samples = parseInt(config['samples']);
+        state.products[1].samples = parseInt(config['samples2']);
         $("#productInformation").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
       }, 
@@ -402,14 +402,13 @@ function createExperience(values) {
     currentProblem.experienceValues = values.slice(0);
   }
 
-  // change text on the button
-  document.getElementById("experienceButton").innerHTML = 
-    "See score " + (currentProblem.samplesSoFar + 1) + " of " + currentProblem.samples;
-
   document.getElementById("totalScores").innerHTML = currentProblem.samples;
+
   // fix the height of the experience element
   //$("#experience").css({height : $("#experience").height() + 10});
   $("#experience").css({height : "150px"});
+
+  enableExperienceButton(1);
 
 }
 
@@ -510,9 +509,7 @@ function getNextExperienceValue() {
 
   currentProblem.samplesSoFar++;
 
-  // disable the button, until the end of the animation
-  document.getElementById("experienceButton").disabled = true;
-  $("#experienceButton").css({ "color" : "red" });
+  disableExperienceButton();
 
   if (currentProblem.experienceValues.length != 0) {
     var el = currentProblem.experienceValues.shift();
@@ -522,25 +519,33 @@ function getNextExperienceValue() {
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
     $("#experienceDisplay").animate({ "left": "+=100px", "font-size" : "0px" }, 1500, function() {
-      // function callback on completion of the animation.
 
       // get the new value to be displayed
       $(this).html(el);
       $(this).css({"left" : "-=200px"});
       $(this).animate({ "left": "+=100px", "font-size" : priorFont }, 1500, function() {
 
-      if (currentProblem.experienceValues.length != 0) {
-        // enable the button again
-        document.getElementById("experienceButton").disabled = false;
-        $("#experienceButton").css({ "color" : "black" });
-        document.getElementById("experienceButton").innerHTML = 
-          "See score " + (currentProblem.samplesSoFar + 1) + " of " + currentProblem.samples;
-      } else {
-       document.getElementById("experienceButton").innerHTML = "All scores have been seen";
-      }
+        if (currentProblem.samples != currentProblem.samplesSoFar) {
+          enableExperienceButton(currentProblem.samplesSoFar + 1);
+        } else {
+          document.getElementById("experienceButton").innerHTML = "All scores have been seen";
+        }
+
       });
     });
   } // else experience counter is >= data.length so do nothing
+}
+
+function disableExperienceButton() {
+  document.getElementById("experienceButton").disabled = true;
+  $("#experienceButton").css({ "color" : "red" });
+}
+
+function enableExperienceButton(num) {
+  document.getElementById("experienceButton").disabled = false;
+  $("#experienceButton").css({ "color" : "black" });
+  document.getElementById("experienceButton").innerHTML = 
+    "See score " + num + " of " + currentProblem.samples;
 }
 
 
