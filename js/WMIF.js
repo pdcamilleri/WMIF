@@ -3,8 +3,9 @@ Phase = {
   PRODUCT_ONE: "product_1",
   PRODUCT_TWO: "product_2",
   SELECTION: "selection",
+  ATTENTION_CHECK: "attention check",
   END: "end"
-}
+};
 
 function createProduct() {
   return {
@@ -48,8 +49,13 @@ function enterSelectionPhase() {
   $("#selection").show();
 }
 
-function enterEndPhase() {
+function enterAttentionCheckPhase() {
   $("#selection").hide();
+  $("#attentionCheck").show();
+}
+
+function enterEndPhase() {
+  $("#attentionCheck").hide();
   var values = state.products[state.choice - 1].values;
   var randomVal = values[Math.floor(Math.random() * values.length)];
   $("#randomValueFromChoice").html(randomVal);
@@ -90,11 +96,13 @@ function nextPhase() {
     phase = Phase.SELECTION;
     enterSelectionPhase();
   } else if (phase == Phase.SELECTION) {
+    phase = Phase.ATTENTION_CHECK;
+    enterAttentionCheckPhase();
+  } else if (phase == Phase.ATTENTION_CHECK) {
     phase = Phase.END;
     enterEndPhase();
   }
   d("entering phase " + phase);
-
 }
 
 function getShowOrHideFunction(id, isShow) {

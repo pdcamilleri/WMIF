@@ -362,6 +362,58 @@
         </form>
       </div>
 
+      <div id="attentionCheck" hidden>
+        <form>
+          <fieldset>
+            <legend>Which of the following did not appear in the experiment</legend>
+            <p>
+              <input type="radio" name="missing" id="attnmissing" value="0" />
+              <label for="missing">A line graph showing review ratings over time</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attndescription" name="missing" value="1">
+              <label for="description">Description</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attnfrequency" name="missing" value="1">
+              <label for="frequency">Frequency</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attnaverage" name="missing" value="1">
+              <label for="average">Average</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attndistribution" name="missing" value="1">
+              <label for="distribution">Distribution</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attnwordcloud" name="missing" value="1">
+              <label for="wordcloud">Wordcloud</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attnsimultaneous" name="missing" value="1">
+              <label for="simultaneous">Simultaneous</label>
+            </p>
+
+            <p>
+              <input type="radio" id="attnexperience" name="missing" value="1">
+              <label for="experience">Experience</label>
+            </p>
+
+          </fieldset>
+        </form>
+
+        <div>
+          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
+        </div>
+      </div>
+
       <div id="end" class="container" hidden>
         <p>
           Thank you for participating!
