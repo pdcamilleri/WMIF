@@ -8,7 +8,12 @@ function saveSettings() {
     };
   });
 
-  var allInputs = $("form").serializeArray();
+  var allInputs = $("form").serializeArray()
+    .map(function(val, index, array) {
+      val.value = val.value.replace(/\n+/g, "<br/>"); 
+      return val;
+    }
+  )
 
   var combinedInputs = $.makeArray(checkboxes).concat(allInputs);
   console.log(combinedInputs);
@@ -45,7 +50,7 @@ function populateValues(config) {
           // if its a checkbox, we want to check it, not set its value
           $(this).prop('checked', config[key]); 
         } else {
-          $(this).val(config[key]);
+          $(this).val(config[key].replace(/<br\/>/g, "\n"));
         }
       }
     )

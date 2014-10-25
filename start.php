@@ -9,10 +9,14 @@
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="Cache-Control" content="no-cache" />
     <meta http-equiv="Pragma" content="no-cache" />
+
     <title>Decision-Making Game</title>
+
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/start.js"></script>
+
   </head>
   <body>
   <div id="container" hidden>

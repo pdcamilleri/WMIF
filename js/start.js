@@ -2,12 +2,9 @@ window.onload = function() {
   checkJavaScriptValidity();
   $.get("readConfigFile.php", 
       function(config) { 
-        $("#generalInstructions").html(config['problemInstructions']);
-      }, 
+        $("#generalInstructions").html(config['generalInstructions']); }, 
       'json'
-  );
-}
-
+  ); } 
 //Check that the client browser has javascript enabled
 function checkJavaScriptValidity() {
   // if JS is enabled, show the main content.
