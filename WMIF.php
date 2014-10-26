@@ -78,6 +78,7 @@
         <div id="distribution">
           <p>Distribution</p>
           <br/>
+          <svg class="labels"> </svg>
           <svg class="chart">
             <defs>
               <linearGradient id="greygradient" x1="0" x2="0" y1="0" y2="1">
@@ -91,7 +92,6 @@
               </linearGradient>
             </defs>
           </svg>
-          <svg class="labels"> </svg>
         </div>
 
         <div id="wordcloud">

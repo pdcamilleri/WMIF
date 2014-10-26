@@ -629,6 +629,8 @@ function createDistribution(values) {
 
   if (currentProblem.randomiseFilter['distribution']) {
     shuffle(data);
+  } else {
+    data.reverse();
   }
 
   createChart(data);
@@ -637,8 +639,10 @@ function createDistribution(values) {
 function createChart(data) {
 
   var SVGwidth = 450,
+      labelsWidth = 100,
+      labelsHeight = 20,
       barWidth = 400,
-      barHeight = 20;
+      barHeight = labelsHeight;
 
   var x = d3.scale.linear()
       .range([0, barWidth]);
@@ -674,12 +678,12 @@ function createChart(data) {
       .attr("y", barHeight / 2)
       .attr("transform", function(d) { return "translate(" + (barWidth + 15) + ", 0)"; })
       .attr("dy", ".35em")
-      .text(function(d) { return d.name; });
+      .text(function(d) { return d.value; });
 
   // TODO table this up like amazon does
   var labels = d3.select(".labels")
-      .attr("width", barWidth)
-      .attr("height", barHeight * data.length);
+      .attr("width", labelsWidth)
+      .attr("height", labelsHeight * data.length);
 
   var labelbar = labels.selectAll("g")
       .data(data)
@@ -689,7 +693,7 @@ function createChart(data) {
   labelbar.append("text")
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
-      .text(function(d) { return d.value; });
+      .text(function(d) { return d.name + " star"; });
 
   function type(d) {
     d.value = +d.value; // coerce to number
