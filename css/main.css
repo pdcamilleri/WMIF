@@ -1,13 +1,26 @@
 
 body {
   text-align: center;
+  background-color:#EEEEEE;
 }
 
 .container {
-  margin: 0 auto;
-  width: 90%;
+  margin: 2% auto;
+  width: 80%;
   font-size: large;
   font-family: sans-serif;
+  text-align : center;
+  /* from ExCon */
+  background : #ffffff;
+  border-style : solid;
+  border-width : 1px;
+  border-color : #ccc;
+  padding : 30px;
+  border:1px solid #ccc;
+  -webkit-box-shadow:rgba(0,0,0,.2) 0 0 5px;
+  -moz-box-shadow:rgba(0,0,0,.2) 0 0 5px;
+  -o-box-shadow:rgba(0,0,0,.2) 0 0 5px;
+  box-shadow:rgba(0,0,0,.2) 0 0 5px;
 }
 
 .title {
@@ -84,13 +97,20 @@ body {
 
 .simultaneousTable {
   width: 700px;
-  margin: 0 auto; /* to center the table */
+  margin: 10px auto; /* to center the table */
 }
 
 /* put a border around all divs underneath the main container div */
 #information > div {
+  /*
   border: darkgrey;
   border-style: double;
+  */
+}
+
+.info-format {
+  padding:11px;
+  border-bottom: 1px solid #ddd;
 }
 
 textarea {

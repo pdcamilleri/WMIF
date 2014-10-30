@@ -42,6 +42,7 @@
       <hr/>
 
       <div id="introduction" class="container">
+        <h2 class="page-header"> Problem Instructions </h2>
         <p>
           shouldnt see this
         </p>
@@ -51,31 +52,32 @@
       <div id="information" class="container" hidden>
 
         <div id="productInformation">
-          If you can see this, then something (probably JS) is not working correctly.
+          <h3 class="page-header">  </h3>
+          <p class="lead"> </p>
         </div>
 
         <div id="expertise">
           <p id="expertiseText">
             If you can see this, then something (probably JS) is not working correctly.
           </p>
-          <img src="resources/expert.jpg" height="200">
+          <!--img src="resources/expert.jpg" height="200">
           <img src="resources/novice.jpg" height="200">
-          <img src="resources/biased.jpg" height="200">
+          <img src="resources/biased.jpg" height="200"-->
         </div>
 
-        <div id="average">
+        <div id="average" class="info-format">
           <p>Average</p>
         </div>
 
-        <div id="description">
+        <div id="description" class="info-format">
           <p>Description</p>
         </div>
 
-        <div id="frequency">
+        <div id="frequency" class="info-format">
           <p>Frequency</p>
         </div>
 
-        <div id="distribution">
+        <div id="distribution" class="info-format">
           <p>Distribution</p>
           <br/>
           <svg class="labels"> </svg>
@@ -94,20 +96,20 @@
           </svg>
         </div>
 
-        <div id="wordcloud">
+        <div id="wordcloud" class="info-format">
           <p>The size of the score represents how frequently that score has occurred</p>
           <br/>
           <div id="cloud">
           </div>
         </div>
 
-        <div id="simultaneous">
+        <div id="simultaneous" class="info-format">
           <p> 
             A list of the scores:
           </p>
         </div>
 
-        <div id="experience">
+        <div id="experience" class="info-format">
           <p>
             Click the button below to see the previous scores. There are <span id="totalScores"></span> previous scores.
           </p>

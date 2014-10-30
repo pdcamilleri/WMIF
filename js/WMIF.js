@@ -33,14 +33,18 @@ function enterFirstProductPhase() {
   $("#information").show();
 }
 
+
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
   currentProblem = state.products[1];
+
+  // TODO better place for this?
+  $("#productInformation").children("h3").text("Product 2 Information");
   createInformationDisplays();
   applyDisplayFilter(currentProblem.filter);
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
-  $("#productInformation").html(configs['productInformation2']);
+  $("#productInformation").children("p").html(configs['productInformation2']);
   $("#experienceDisplay").html("Click the button to see the first value");
 }
 
@@ -162,7 +166,7 @@ function readConfigFile() {
         applyDisplayFilter(state.products[0].filter);
         state.products[0].samples = parseInt(config['samples']);
         state.products[1].samples = parseInt(config['samples2']);
-        $("#productInformation").html(config['productInformation']);
+        $("#productInformation").children("p").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
         $("#introduction").children("p").html(config['problemInstructions']);
       }, 
@@ -180,6 +184,8 @@ window.onload = function() {
     // need to wait for config values (for #samples) and input values before creating
     // information displays
 
+    // TODO...
+    $("#productInformation").children("h3").text("Product 1 Information");
     createInformationDisplays();
 
     initiateSliders();

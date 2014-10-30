@@ -12,16 +12,19 @@
 
     <title>Decision-Making Game</title>
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="js/start.js"></script>
 
   </head>
   <body>
-  <div id="container" hidden>
-    <p  class="title">Instructions</p>
+  <div class="container" hidden>
+    <h1 class="page-header">Instructions Page</h3>
     <div id="generalInstructions">
+      <p></p>
     </div>
     <form action="demographics.php" method="GET">
       <div>
