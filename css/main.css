@@ -142,12 +142,95 @@ input[type="radio"] {
 
 .labels {
   margin: 0px;
-  font-size:20px;
+  font-size:18px;
 }
 
 .radioButtons {
   width: 100%;
 }
 
+.sliders > li {
+  list-style:none;
+  padding: 1px;
+}
+
+.ui-slider {
+  float: right;
+  width: 80%;
+}
+
+.slider-box {
+  width: 60%;
+  padding: 10px 40px 10px 0px;
+  margin: auto;
+
+}
+
+.ui-slider .ui-slider-handle {
+  width: 2.2em;
+}
+
+.ui-slider-handle {
+  text-decoration: none;
+  width: 30px;
+  text-align: center;
+}
+
+ul > li > div {
+  background-color: rgb(192, 219, 245);
+}
+
+/* TODO find better way to change size of this text 
+#strengthChoice {
+  font-size: 20px;
+
+}
+*/
+
+.ui-slider-handle {
+  left: 0%;
+  text-align: center;
+}
+
+.ui-widget .ui-widget {
+  margin-top: 5px;
+  font-size: 1em;
+  padding-top: 15px;
+}
+
+/* you win css */
+body {
+  font:15px tahoma, sans-serif;
+}
+
+    .ui-slider .ui-slider-handle2 {
+              height: 0.01em;
+                              width: 0.01em;
+                                             }
+    .ui-slider .ui-state-default2 {
+              color: #FFFFFF;
+                             background: #FFFFFF;
+                                                 border: #FFFFFF;
+                                                                 }
+.slider {
+     margin: 10px 10px;
+}
+
+.ui-slider-horizontal { 
+     height: .8em; 
+}
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-left: 0px;
+}
+
+/* styling for the moving handle bit of the slider */
+.ui-slider-handle {
+     text-decoration: none;
+        /*width: 30px; */
+        text-align: center;
+}
 
 
