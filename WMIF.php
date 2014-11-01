@@ -140,7 +140,7 @@
 
         <form id="choiceForm" class="container" onsubmit="checkChoices(); return false;" hidden>
 
-          <div id="strengthChoice" hidden>
+          <div id="strengthChoice" class="question" hidden>
             <p>
               How much do you prefer this option?
             </p>
@@ -164,9 +164,7 @@
 
           </div>
 
-          <br/>
-
-          <div id="choiceWhy" hidden>
+          <div id="choiceWhy" class="question" hidden>
             <label for="why">
               Please explain why you choose this option?
             </label>
@@ -175,9 +173,7 @@
             </textarea>
           </div>
 
-          <br/>
-
-          <div id="recommendChoice" hidden>
+          <div id="recommendChoice" class="question" hidden>
             <p>
               How likely would you be to recommend your choice to someone else?
             </p>
@@ -202,15 +198,19 @@
 
           </div>
 
-          <div id="sliders" hidden>
+          <div id="sliders" class="question" hidden>
 
           <!-- TODO convert to php loop -->
             <div>
 
-              <br/>
               <p>
                 Estimate the likelihood of each outcome occuring
               </p>
+
+
+              <label> 
+                Product A
+              </label>
 
               <ul class="sliders" id="sliders_1" index="1">
                 <li>
@@ -292,6 +292,11 @@
             <br/>
 
             <div>
+
+              <label> 
+                Product B
+              </label>
+
               <ul class="sliders" id="sliders_2" index="1">
                 <li>
                   <div class="ui-widget slider-box">
@@ -371,7 +376,7 @@
 
           </div>
 
-          <button id="submitChoices">Submit answers</button>
+          <button class="button" id="submitChoices" disabled>Submit answers</button>
         </form>
       </div>
 

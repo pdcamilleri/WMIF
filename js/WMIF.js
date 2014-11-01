@@ -189,6 +189,8 @@ window.onload = function() {
     createInformationDisplays();
 
     initiateSliders();
+    disableSliderSubmit();
+
     populateOutcomeValuesInSlider();
 
   })
