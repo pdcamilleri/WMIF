@@ -107,6 +107,8 @@
           <p> 
             A list of the scores:
           </p>
+          <div id="simultaneous-table">
+          </div>
         </div>
 
         <div id="experience" class="info-format">
@@ -118,15 +120,16 @@
         </div>
 
         <div>
-          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
+          <br/>
+          <button id="nextPhase" class="button" onclick="nextPhase()">Move to next phase</button>
         </div>
 
       </div>
 
       <div id="selection" hidden>
-        <div id="choiceButtons">
+        <div id="choiceButtons" class="container">
           <p>
-            Which do you prefer?
+            Please indicate which of the following do you prefer?
           </p>
           <button id="product1" class="button" value="1" onclick="recordChoice(1)">Product 1</button>
           <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
@@ -135,7 +138,7 @@
         <p id="choiceDisplay"> </p>
 
 
-        <form id="choiceForm" onsubmit="checkChoices(); return false;">
+        <form id="choiceForm" class="container" onsubmit="checkChoices(); return false;" hidden>
 
           <div id="strengthChoice" hidden>
             <p>
@@ -164,7 +167,9 @@
           <br/>
 
           <div id="choiceWhy" hidden>
-            <label for="why">Please explain why you choose this option?</label>
+            <label for="why">
+              Please explain why you choose this option?
+            </label>
             <br/>
             <textarea id="why" name="why" rows="5" cols="100">
             </textarea>
@@ -201,6 +206,12 @@
 
           <!-- TODO convert to php loop -->
             <div>
+
+              <br/>
+              <p>
+                Estimate the likelihood of each outcome occuring
+              </p>
+
               <ul class="sliders" id="sliders_1" index="1">
                 <li>
                   <div class="ui-widget slider-box">
@@ -418,12 +429,13 @@
 
       <div id="end" class="container" hidden>
         <p>
-          Thank you for participating!
-          Your completiong code is <strong>WMIF1</strong>
+          Thank you for completing this task. 
+          Note, the next review score for the product that you chose was 
+          <span id="randomValueFromChoice"></span>.
         </p>
         <p>
-          If you were curious, the next review score for the product you chose
-          was <span id="randomValueFromChoice"></span>.
+          In order to complete this HIT you must submit a completition code back into the AMT website. 
+          Your completion code is <strong>WIMF1_X</strong>
         </p>
       </div>
         

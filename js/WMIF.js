@@ -230,6 +230,9 @@ function recordChoice(val) {
 
   // only enable the radio buttons related to this product
   $(".product" + val).attr("disabled", false);
+
+  $("#choiceForm").show();
+  // TODO remove some of these, just hide the outer guy?
   $("#strengthChoice").show();
   $("#recommendChoice").show();
   $("#choiceWhy").show();
@@ -590,7 +593,8 @@ function createSimultaneousTable(values) {
 
   // find the element to place this table inside of
   //document.getElementById("simultaneous").innerHTML = "";
-  document.getElementById("simultaneous").appendChild(div);
+  document.getElementById("simultaneous-table").innerHTML = "";
+  document.getElementById("simultaneous-table").appendChild(div);
 
   // create the table
   var valuesClone = values.slice(0);
@@ -699,7 +703,7 @@ function createChart(data) {
   labelbar.append("text")
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
-      .text(function(d) { return d.name + " star"; });
+      .text(function(d) { return d.name + " stars"; });
 
   function type(d) {
     d.value = +d.value; // coerce to number
