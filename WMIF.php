@@ -78,8 +78,6 @@
         </div>
 
         <div id="distribution" class="info-format">
-          <p>Distribution</p>
-          <br/>
           <svg class="labels"> </svg>
           <svg class="chart">
             <defs>

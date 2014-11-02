@@ -591,7 +591,7 @@ function createSimultaneousTable(values) {
   table.classList.add("table");
   table.classList.add("table-bordered");
   div.appendChild(table);
-  var tbody = table.createTBody();
+  var tbody = table.appendChild(document.createElement('tbody'));
 
   // find the element to place this table inside of
   //document.getElementById("simultaneous").innerHTML = "";
