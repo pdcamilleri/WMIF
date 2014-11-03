@@ -37,7 +37,7 @@
    </head>
    <body>
       <div id="noticeboard">
-        <p> MID is <?php print_r($mid); ?> </p>
+        <!--p> MID is <?php print_r($mid); ?> </p-->
       </div>
       <hr/>
 

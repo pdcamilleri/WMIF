@@ -783,5 +783,8 @@ function createWordCloud(values) {
 // adds the string info to the page
 function d(info) {
   console.log(info);
-  $("#noticeboard").append("<br>" + info);
+  //$("#noticeboard").append("<br>" + info);
 }
+
+
+
