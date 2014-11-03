@@ -119,27 +119,26 @@
 
         <div>
           <br/>
-          <button id="nextPhase" class="button" onclick="nextPhase()">Move to next phase</button>
+          <button id="nextPhase" class="button" onclick="nextPhase()">Continue</button>
         </div>
 
       </div>
 
       <div id="selection" hidden>
         <div id="choiceButtons" class="container">
-          <p>
-            Please indicate which of the following do you prefer?
+          <p class="question-text">
+            Please indicate which of the following you prefer?
           </p>
           <button id="product1" class="button" value="1" onclick="recordChoice(1)">Product 1</button>
           <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
         </div>
 
-        <p id="choiceDisplay"> </p>
-
-
         <form id="choiceForm" class="container" onsubmit="checkChoices(); return false;" hidden>
 
+          <p id="choiceDisplay"> </p>
+
           <div id="strengthChoice" class="question" hidden>
-            <p>
+            <p class="question-text">
               How much do you prefer this option?
             </p>
 
@@ -163,7 +162,7 @@
           </div>
 
           <div id="choiceWhy" class="question" hidden>
-            <label for="why">
+            <label class="question-text" for="why">
               Please explain why you choose this option?
             </label>
             <br/>
@@ -172,7 +171,7 @@
           </div>
 
           <div id="recommendChoice" class="question" hidden>
-            <p>
+            <p class="question-text">
               How likely would you be to recommend your choice to someone else?
             </p>
 
@@ -201,7 +200,7 @@
           <!-- TODO convert to php loop -->
             <div>
 
-              <p>
+              <p class="question-text">
                 Estimate the likelihood of each outcome occuring
               </p>
 
@@ -210,81 +209,90 @@
                 Product A
               </label>
 
-              <ul class="sliders" id="sliders_1" index="1">
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-              </ul>
               <p>
-                <span class="sliderScore" id="sliderScore_1" style="color:red">0%</span>
+                Based on what you have learned, please adjust the bars below to reflect the 
+                probability with which you think that each of the possible scores on the left 
+                will occur on the next review. Note that the bars for each product must sum 
+                total to 100; this total will automatically update below the set of slider bars.
               </p>
+
+              <div class="sliders">
+                  <ul  id="sliders_1" index="1">
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                  </ul>
+                <p>
+                  <span class="sliderScore" id="sliderScore_1" style="color:red">0%</span>
+                </p>
+              </div>
             </div>
 
             <br/>
@@ -295,97 +303,99 @@
                 Product B
               </label>
 
-              <ul class="sliders" id="sliders_2" index="1">
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="ui-widget slider-box">
-                    <span class="outcomeValues">-</span>
-                    <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
-                    <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
-                  </div>
-                </li>
-              </ul>
-              <p>
-                <span class="sliderScore" id="sliderScore_2" style="color:red">0%</span>
-              </p>
+              <div class="sliders">
+                  <ul id="sliders_2" index="1">
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="ui-widget slider-box">
+                        <span class="outcomeValues">-</span>
+                        <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"> 
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;">0</a></div>
+                      </div>
+                    </li>
+                  </ul>
+                <p>
+                  <span class="sliderScore" id="sliderScore_2" style="color:red">0%</span>
+                </p>
+              </div>
             </div>
 
           </div>
 
-          <button class="button" id="submitChoices" disabled>Submit answers</button>
+          <button class="button" id="submitChoices" disabled>Continue</button>
         </form>
       </div>
 
-      <div id="attentionCheck" hidden>
+      <div id="attentionCheck" class="container" hidden>
         <form>
           <fieldset>
             <legend>Which of the following did not appear in the experiment</legend>
-            <p>
+            <!--p>
               <input type="radio" name="missing" id="attnmissing" value="0" />
               <label for="missing">A line graph showing review ratings over time</label>
-            </p>
+            </p-->
 
             <p>
               <input type="radio" id="attndescription" name="missing" value="1">
@@ -426,7 +436,7 @@
         </form>
 
         <div>
-          <button id="nextPhase" onclick="nextPhase()">Move to next phase</button>
+          <button id="nextPhase" class="button" onclick="nextPhase()">Continue</button>
         </div>
       </div>
 
@@ -438,9 +448,11 @@
         </p>
         <p>
           In order to complete this HIT you must submit a completition code back into the AMT website. 
-          Your completion code is <strong>WIMF1_X</strong>
+          Your completion code is <strong>WIMF1_<span id="numSamples"><span></strong>
         </p>
       </div>
         
    </body>
 </html>
+
+

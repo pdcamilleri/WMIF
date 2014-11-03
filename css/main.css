@@ -28,6 +28,10 @@ body {
   font-weight: bold;
 }
 
+.question-text {
+  font-weight: bold;
+}
+
 .question {
   margin-bottom: 5px;
 }
@@ -149,7 +153,7 @@ input[type="radio"] {
   width: 100%;
 }
 
-.sliders > li {
+.sliders li {
   list-style:none;
   padding: 1px;
 }
@@ -159,8 +163,15 @@ input[type="radio"] {
   width: 80%;
 }
 
+.sliders {
+  border: black;
+  border-style: solid;
+  width: 80%;
+  margin: auto;
+}
+
 .slider-box {
-  width: 60%;
+  width: 75%;
   padding: 10px 40px 10px 0px;
   margin: auto;
 
@@ -168,6 +179,7 @@ input[type="radio"] {
 
 .ui-slider .ui-slider-handle {
   width: 2.2em;
+ text-decoration: none;
 }
 
 .ui-slider-handle {
@@ -177,7 +189,7 @@ input[type="radio"] {
 }
 
 ul > li > div {
-  background-color: rgb(192, 219, 245);
+  background-color: rgb(255, 255, 255);
 }
 
 /* TODO find better way to change size of this text 
@@ -192,10 +204,24 @@ ul > li > div {
   text-align: center;
 }
 
+.ui-widget.slider-box {
+  border: grey;
+  border-style: solid;
+}
+
 .ui-widget .ui-widget {
   margin-top: 5px;
   font-size: 1em;
   padding-top: 15px;
+}
+
+#attentionCheck p {
+  text-align: left;
+  padding-left: 20%;
+}
+
+label {
+  font-weight:normal
 }
 
 /* you win css */

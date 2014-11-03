@@ -45,7 +45,7 @@ function enterSecondProductPhase() {
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").children("p").html(configs['productInformation2']);
-  $("#experienceDisplay").html("Click the button to see the first value");
+  $("#experienceDisplay").html("?");
 }
 
 function enterSelectionPhase() {
@@ -63,6 +63,7 @@ function enterEndPhase() {
   var values = state.products[state.choice - 1].values;
   var randomVal = values[Math.floor(Math.random() * values.length)];
   $("#randomValueFromChoice").html(randomVal);
+  $("#numSamples").html(randomVal);
   $("#end").show();
 }
 
