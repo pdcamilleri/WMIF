@@ -720,16 +720,7 @@ function createWordCloud(values) {
   // local RNG so that we create the exact same Word Cloud is created for all participants
   Math.seedrandom('wmif'); 
 
-  var length = Math.max.apply(null, values); 
-  var counts = Array(length);
-
-  for (var i = 0; i < values.length; ++i) {
-    counts[i] = 0;
-  }
-
-  for (var i = 0; i < values.length; ++i) {
-    ++counts[values[i]];
-  }
+  var counts = getFrequencyArray(values);
 
   var uniqueValues = [];
   for (var i = 0; i < counts.length; ++i) {
