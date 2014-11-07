@@ -395,8 +395,8 @@ function getFrequencyArray(values) {
   var max = 1 + Math.max.apply(null, values);
 
   // TODO check if values can be negative. if so, abs
-  var counts = Array(max - 1);
-  for (var i = 0; i < values.length; ++i) {
+  var counts = Array(max);
+  for (var i = 0; i < counts.length; ++i) {
     counts[i] = 0;
   }
 
