@@ -27,16 +27,29 @@ var currentProblem = state.products[0];
 var configs;
 var phase = Phase.INTRO;
 
+// TODO change to disableButton(#buttonid) { ...
+function disableContinueButton() {
+  document.getElementById("nextPhase").disabled = true;
+  document.getElementById("nextPhase").style.color = 'grey';
+}
+
+function enableContinueButton() {
+  document.getElementById("nextPhase").disabled = false;
+  document.getElementById("nextPhase").style.color = '';
+}
+
 function enterFirstProductPhase() {
   currentProblem = state.products[0];
+  disableContinueButton();
+
   $("#introduction").hide();
   $("#information").show();
 }
 
-
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
   currentProblem = state.products[1];
+  disableContinueButton();
 
   // TODO better place for this?
   $("#productInformation").children("h3").text("Product 2 Information");
@@ -45,7 +58,7 @@ function enterSecondProductPhase() {
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").children("p").html(configs['productInformation2']);
-  $("#experienceDisplay").html("?");
+  $("#experienceDisplay").html("-");
 }
 
 function enterSelectionPhase() {
@@ -570,6 +583,7 @@ function getNextExperienceValue() {
           enableExperienceButton(currentProblem.samplesSoFar + 1);
         } else {
           document.getElementById("experienceButton").innerHTML = "All scores have been seen";
+          enableContinueButton();
         }
 
       });
