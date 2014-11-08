@@ -341,24 +341,44 @@ function unique(arr) {
   return result;
 }
 
-
 // ensures that the participant has selected answers for both questions
 function checkChoices() {
   var formData = $("#choiceForm").serializeArray();
-  if (formData.length != 2) {
+  // TODO bit of a hack here
+  var count = 0;
+  for (var i = 0; i < formData.length; i++) {
+    if (formData[i].name == "strength" || formData[i].name == "friend") {
+      count++;
+    }
+  }
+
+  if (count != 2) {
     alert("Please answer both questions");
     d("Please answer both questions");
+    return
   }
 
   // form is valid, record form data and go to next phase
   state.choiceStrength = formData[0].value;
   state.friend = formData[1].value;
-  d("sending data");
+  d("sending data to server");
   delete state.products[0].filter;
   delete state.products[1].filter;
   sendDataToServer();
+  //state.friend = $('input[name=strength]:checked', '#choiceForm').val();
   nextPhase();
 
+}
+
+// checks that at least one opiton was selected
+function checkAttention() {
+  var formData = $("#attentionForm").serializeArray();
+  if (formData.length != 1) {
+    alert("Please answer the question before continuing");
+    return;
+  }
+
+  nextPhase();
 }
 
 // AJAX call to grab the input values from the server

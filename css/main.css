@@ -259,4 +259,8 @@ ul, ol {
         text-align: center;
 }
 
+p > label {
+  max-width: 80%;
+}
+
 
