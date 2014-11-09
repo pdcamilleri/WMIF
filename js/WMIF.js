@@ -202,6 +202,12 @@ window.onload = function() {
     $("#productInformation").children("h3").text("Product 1 Information");
     createInformationDisplays();
 
+    // TODO need to expand for multiple products?
+    for (var i = 0; i < state.products.length; i += 2) {
+      state.products[i].values = state.products[i].values.slice(0, state.products[i].samples);
+      state.products[i + 1].values = state.products[i + 1].values.slice(0, state.products[i + 1].samples);
+    }
+    createInformationDisplays();
     initiateSliders();
     disableSliderSubmit();
 
@@ -663,15 +669,17 @@ data variable needs to be in this format to create the graph
 */
 function createDistribution(values) {
   // clear the previous distribution graph (if any)
-  $(".chart > g").remove()
+  $(".chart > g").remove();
 
+  // get data in the correct format (see above comment) 
   var counts = getFrequencyArray(values);
-
   var data = [];
+  // add extra 0's if we need them
+  for (var i = counts.length; i <= 10; i++) {
+    counts.push(0);
+  }
   for (var i = 0; i < counts.length; i++) {
-    if (counts[i] != 0) {
-      data.push({name: i.toString(), value: counts[i]});
-    }
+    data.push({name: i.toString(), value: counts[i]});
   }
 
   if (currentProblem.randomiseFilter['distribution']) {
