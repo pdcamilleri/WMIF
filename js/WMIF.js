@@ -475,7 +475,7 @@ function createExperience(values) {
 function createAverage(values) {
   var average = calculateAverage(values).toFixed(1);
   var paragraph = document.createElement("p");
-  paragraph.innerHTML = "Average score is " + average;
+  paragraph.innerHTML = "Average score was " + average;
   document.getElementById("average").innerHTML = "";
   document.getElementById("average").appendChild(paragraph);
 }
@@ -496,7 +496,7 @@ function createDescriptionString(values) {
   var descriptions = [];
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
-      descriptions.push((counts[i] * 100.0 / counts.length).toFixed(0) + "% of scores were " + i + "<br/>");
+      descriptions.push((counts[i] * 100.0 / values.length).toFixed(0) + "% of scores were " + i + "<br/>");
     }
   }
 
@@ -526,7 +526,7 @@ function createFrequencyString(values) {
   var text = [];
   for (var i = 0; i < counts.length; ++i) {
     if (counts[i] != 0) {
-      text.push(counts[i] + " / " + counts.length 
+      text.push(counts[i] + " / " + values.length 
            + " scores were " + i + "<br/>");
     }
   }
