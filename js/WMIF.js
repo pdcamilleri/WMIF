@@ -67,6 +67,9 @@ function enterSelectionPhase() {
 }
 
 function enterAttentionCheckPhase() {
+  // TODO this needs to change based on what was presented to the user first
+  // see issue #55 on github
+  document.getElementById("correctlabel").innerHTML = state.products[0].samples;
   $("#selection").hide();
   $("#attentionCheck").show();
 }

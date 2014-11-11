@@ -393,9 +393,12 @@
       </div>
 
       <div id="attentionCheck" class="container" hidden>
-        <form id="attentionForm" onsubmit="checkAttention(); return false;" >
+        <form id="attentionForm" >
           <fieldset>
-            <legend>Which of the following did not appear in the experiment</legend>
+            <legend>
+              Which of the following appeared at the top of the page for Product A?
+            </legend>
+
             <!--p>
               <input type="radio" name="missing" id="attnmissing" value="0" />
               <label for="missing">A line graph showing review ratings over time</label>
@@ -452,7 +455,56 @@
 
           </fieldset>
 
-          <button class="button" id="submitAttention">Continue</button>
+          <fieldset>
+            <legend>
+              In the task, how many review scores did you learn about for Product A?
+            </legend>
+
+            <p>
+              <input type="radio" id="wrong1" name="numsamples" value="0">
+              <label for="wrong1">
+                9
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="wrong2" name="numsamples" value="0">
+              <label for="wrong2">
+                25
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="wrong3" name="numsamples" value="0">
+              <label for="wrong3">
+                52
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="wrong4" name="numsamples" value="0">
+              <label for="wrong4">
+                77
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="wrong5" name="numsamples" value="0">
+              <label for="wrong5">
+                90
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="correct" name="numsamples" value="1">
+              <label id="correctlabel" for="correct">
+              </label>
+            </p>
+
+          </fieldset>
+
+          <input type="submit" value="Continue" class="button" id="submitAttention" 
+                 onclick="checkAttention(); return false;"/>
 
         </form>
       </div>
