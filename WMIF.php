@@ -19,7 +19,8 @@
 
       <!-- Bootstrap -->
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"-->
+      <link rel="stylesheet" href="css/bootstrap.css">
 
       <!-- D3 & Word Cloud stuff -->
       <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
