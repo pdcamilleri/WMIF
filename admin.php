@@ -28,7 +28,6 @@
 
     <hr/>
 
-
     <form>
       <label for="generalInstructions">General Instruction:</label>
       <br/>
@@ -41,6 +40,12 @@
       <textarea id="problemInstructions" name="problemInstructions" rows="10" cols="100">
         Information to be displayed on the first page
       </textarea>
+      <p>
+        <label for="slidertext">Slider question text:</label>
+        <br/>
+        <textarea id="slidertext" name="slidertext" rows="10">
+        </textarea>
+      </p>
     </form>
 
     <div id="problem1" class="col-md-6">
@@ -129,10 +134,6 @@
             </tr>
           </tbody>
         </table>
-
-
-
-
 
         <p>
           <label for="samples">Number of samples:</label>
@@ -265,6 +266,8 @@
             Little blurb about the reviewers expertise when it comes to the product.
           </textarea>
         </p>
+
+ 
 
       </form>
       <p>

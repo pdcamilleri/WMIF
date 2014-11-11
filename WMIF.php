@@ -204,21 +204,13 @@
           <!-- TODO convert to php loop -->
             <div>
 
-              <p class="question-text">
-                Estimate the likelihood of each outcome occuring
-              </p>
-
+              <div class="question-text" id="slidertext">
+                <p></p>
+              </div>
 
               <label> 
                 Product A
               </label>
-
-              <p>
-                Based on what you have learned, please adjust the bars below to reflect the 
-                probability with which you think that each of the possible scores on the left 
-                will occur on the next review. Note that the bars for each product must sum 
-                total to 100; this total will automatically update below the set of slider bars.
-              </p>
 
               <div class="sliders">
                   <ul  id="sliders_1" index="1">

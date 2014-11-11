@@ -186,6 +186,8 @@ function readConfigFile() {
         $("#productInformation").children("p").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
         $("#introduction").children("p").html(config['problemInstructions']);
+        $("#slidertext").children("p").html(config['slidertext']);
+
       }, 
       'json'
   );
