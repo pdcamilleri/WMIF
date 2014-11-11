@@ -58,7 +58,7 @@ function enterSecondProductPhase() {
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
   $("#productInformation").children("p").html(configs['productInformation2']);
-  $("#experienceDisplay").html("-");
+  $("#experienceDisplay").html("");
 }
 
 function enterSelectionPhase() {
@@ -246,7 +246,7 @@ function createInformationDisplays() {
 
 function recordChoice(val) {
   state.choice = val;
-  $("#choiceDisplay").html("You chose product " + val);
+  $("#choiceDisplay").html("You chose: <br/> <h3 style='font-weight: 700;'>Product " + val + "</h3>");
 
   $("#choiceButtons").hide();
 
@@ -392,11 +392,10 @@ function checkChoices() {
 // checks that at least one opiton was selected
 function checkAttention() {
   var formData = $("#attentionForm").serializeArray();
-  if (formData.length != 1) {
-    alert("Please answer the question before continuing");
+  if (formData.length != 2) {
+    alert("Please answer both questions before continuing");
     return;
   }
-
   nextPhase();
 }
 
@@ -679,6 +678,7 @@ function createDistribution(values) {
     counts.push(0);
   }
   for (var i = 0; i < counts.length; i++) {
+    // add extra 0's if we need them
     data.push({name: i.toString(), value: counts[i]});
   }
 

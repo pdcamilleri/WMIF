@@ -118,7 +118,7 @@
             Click the button below to see the previous scores. There are <span id="totalScores"></span> previous scores.
           </p>
           <button class="button" id="experienceButton" onclick="getNextExperienceValue()"> Get next value</button>
-          <div id="experienceDisplay"> - </div>
+          <div id="experienceDisplay"></div>
         </div>
 
         <div>
