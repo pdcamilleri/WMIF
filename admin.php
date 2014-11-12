@@ -40,10 +40,18 @@
       <textarea id="problemInstructions" name="problemInstructions" rows="10" cols="100">
         Information to be displayed on the first page
       </textarea>
+
       <p>
         <label for="slidertext">Slider question text:</label>
         <br/>
         <textarea id="slidertext" name="slidertext" rows="10">
+        </textarea>
+      </p>
+
+      <p>
+        <label for="productText">Product type (e.g. mobile phone):</label>
+        <br/>
+        <input id="productText" type="text" name="productText">
         </textarea>
       </p>
     </form>

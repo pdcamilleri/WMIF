@@ -133,8 +133,14 @@
           <p class="question-text">
             Please indicate which of the following you prefer?
           </p>
-          <button id="product1" class="button" value="1" onclick="recordChoice(1)">Product 1</button>
-          <button id="product2" class="button" value="2" onclick="recordChoice(2)">Product 2</button>
+          <button id="product1" class="button" value="1" onclick="recordChoice(1)">
+            <span class="productText"></span>
+            A
+          </button>
+          <button id="product2" class="button" value="2" onclick="recordChoice(2)">
+            <span class="productText"></span> 
+            B
+          </button>
         </div>
 
         <form id="choiceForm" class="container" onsubmit="checkChoices(); return false;" hidden>
@@ -209,7 +215,8 @@
               </div>
 
               <label> 
-                Product A
+                <span class="productText"></span> 
+                A
               </label>
 
               <div class="sliders">
@@ -296,7 +303,8 @@
             <div>
 
               <label> 
-                Product B
+                <span class="productText"></span> 
+                B
               </label>
 
               <div class="sliders">
@@ -388,7 +396,9 @@
         <form id="attentionForm" >
           <fieldset>
             <legend>
-              Which of the following appeared at the top of the page for Product A?
+              Which of the following appeared at the top of the page for 
+              <span class="productText"></span> 
+              A?
             </legend>
 
             <!--p>
@@ -449,7 +459,9 @@
 
           <fieldset>
             <legend>
-              In the task, how many review scores did you learn about for Product A?
+              In the task, how many review scores did you learn about for 
+              <span class="productText"></span> 
+              A?
             </legend>
 
             <p>

@@ -52,7 +52,7 @@ function enterSecondProductPhase() {
   disableContinueButton();
 
   // TODO better place for this?
-  $("#productInformation").children("h3").text("Product 2 Information");
+  $("#productInformation").children("h3").text(configs['productText'] + " B Information");
   createInformationDisplays();
   applyDisplayFilter(currentProblem.filter);
   // TODO thought - maybe stick this in the problem object?
@@ -187,6 +187,7 @@ function readConfigFile() {
         $("#expertiseText").html(config['expertise']);
         $("#introduction").children("p").html(config['problemInstructions']);
         $("#slidertext").children("p").html(config['slidertext']);
+        $(".productText").html(config['productText']);
 
       }, 
       'json'
@@ -204,8 +205,8 @@ window.onload = function() {
     // information displays
 
     // TODO...
-    $("#productInformation").children("h3").text("Product 1 Information");
-    createInformationDisplays();
+    $("#productInformation").children("h3").text(configs['productText'] + " A Information");
+
 
     // TODO need to expand for multiple products?
     for (var i = 0; i < state.products.length; i += 2) {
@@ -251,7 +252,9 @@ function createInformationDisplays() {
 
 function recordChoice(val) {
   state.choice = val;
-  $("#choiceDisplay").html("You chose: <br/> <h3 style='font-weight: 700;'>Product " + val + "</h3>");
+
+  $("#choiceDisplay").html("You chose: <br/> <h3 style='font-weight: 700;'>" + configs['productText'] +
+      " " + String.fromCharCode(65 + val) + "</h3>");
 
   $("#choiceButtons").hide();
 
