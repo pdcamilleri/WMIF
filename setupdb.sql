@@ -33,7 +33,7 @@ CREATE TABLE simultaneous_values (
                         -- to know if this product was the 1st or 2nd that was shown to the user, consult the ...
   idx INT NOT NULL,
   value FLOAT NOT NULL,
-  PRIMARY KEY (id, problem_id, idx),
+  PRIMARY KEY (id, problem_id, optn, idx),
   FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE experience_values (
   optn INT NOT NULL, -- pretty sure we need a product here too
   idx INT NOT NULL,
   value FLOAT NOT NULL,
-  PRIMARY KEY (id, problem_id, idx),
+  PRIMARY KEY (id, problem_id, optn, idx),
   FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE original_values (
   optn INT NOT NULL, -- pretty sure we need a product here
   idx INT NOT NULL,
   value FLOAT NOT NULL,
-  PRIMARY KEY (id, problem_id, idx),
+  PRIMARY KEY (id, problem_id, optn, idx),
   FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
 );
 
@@ -95,7 +95,6 @@ CREATE TABLE formats_shown (
   distribution_shown INT NOT NULL,
   distribution_random INT NOT NULL,
   wordcloud_shown INT NOT NULL,
-  wordcloud_random INT NOT NULL,
   simultaneous_shown INT NOT NULL,
   simultaneous_random INT NOT NULL,
   experience_shown INT NOT NULL,
