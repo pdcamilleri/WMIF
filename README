@@ -1,0 +1,6 @@
+To get working, need to create a db.ini file to store database stuff. Place this 
+above document root and set its path in constants.php in place of the current
+string for DATABASE_CONFIG_FILE.
+
+A sample db.ini file is provided, need to populate it properly
+with database passwords and such.
