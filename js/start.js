@@ -2,7 +2,7 @@ window.onload = function() {
   checkJavaScriptValidity();
   $.get("readConfigFile.php", 
       function(config) { 
-        $("#generalInstructions").html(config['generalInstructions']); }, 
+        $("#generalInstructions").children("p").html(config['generalInstructions']); }, 
       'json'
   ); } 
 //Check that the client browser has javascript enabled
