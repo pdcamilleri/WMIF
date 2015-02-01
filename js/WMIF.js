@@ -9,6 +9,23 @@ Phase = {
   END: "end"
 };
 
+function createState() {
+  return {
+    products: [createProduct(), createProduct()],
+    survey: { 
+      choice: -1,
+      choiceStrength: -1,
+      friend: -1,
+      why: "-",
+      upper: -1,
+      best: -1,
+      lower: -1
+    },
+    isSwitched: false,
+    phase: Phase.INTRO
+  };
+}
+
 function createProduct() {
   return {
     samples: 1,
@@ -18,23 +35,9 @@ function createProduct() {
   };
 }
 
-var state = {
-  products: [createProduct(), createProduct()],
-  survey: { 
-    choice: -1,
-    choiceStrength: -1,
-    friend: -1,
-    why: "-"
-    upper: -1,
-    best: -1,
-    lower: -1
-  },
-  isSwitched: false;
-};
-
+var state;
 var currentProblem;// = state.products[0];
 var configs;
-var phase = Phase.INTRO;
 
 // TODO change to disableButton(#buttonid) { ...
 function disableContinueButton() {
@@ -156,30 +159,30 @@ function sendDataToServer() {
 
 function nextPhase() {
   window.scrollTo(0, 0);
-  d("ending phase " + phase);
-  if (phase == Phase.INTRO) {
-    phase = Phase.PRODUCT_ONE;
+  d("ending state.phase " + state.phase);
+  if (state.phase == Phase.INTRO) {
+    state.phase = Phase.PRODUCT_ONE;
     enterFirstProductPhase();
-  } else if (phase == Phase.PRODUCT_ONE) {
-    phase = Phase.PRODUCT_TWO;
+  } else if (state.phase == Phase.PRODUCT_ONE) {
+    state.phase = Phase.PRODUCT_TWO;
     enterSecondProductPhase();
-  } else if (phase == Phase.PRODUCT_TWO) {
-    phase = Phase.SELECTION;
+  } else if (state.phase == Phase.PRODUCT_TWO) {
+    state.phase = Phase.SELECTION;
     enterSelectionPhase();
-  } else if (phase == Phase.SELECTION) {
-    phase = Phase.SLIDER;
+  } else if (state.phase == Phase.SELECTION) {
+    state.phase = Phase.SLIDER;
     enterSliderPhase();
-  } else if (phase == Phase.SLIDER) {
-    phase = Phase.INTERVAL;
+  } else if (state.phase == Phase.SLIDER) {
+    state.phase = Phase.INTERVAL;
     enterIntervalPhase();
-  } else if (phase == Phase.INTERVAL) {
-    phase = Phase.ATTENTION_CHECK;
+  } else if (state.phase == Phase.INTERVAL) {
+    state.phase = Phase.ATTENTION_CHECK;
     enterAttentionCheckPhase();
-  } else if (phase == Phase.ATTENTION_CHECK) {
-    phase = Phase.END;
+  } else if (state.phase == Phase.ATTENTION_CHECK) {
+    state.phase = Phase.END;
     enterEndPhase();
   }
-  d("entering phase " + phase);
+  d("entering state.phase " + state.phase);
 }
 
 function getShowOrHideFunction(id, isShow) {
@@ -259,7 +262,11 @@ function shouldRandomise(val) {
   return val != false;
 }
 
-window.onload = function() {
+window.onload = setupExperiment;
+
+function setupExperiment() {
+  //$(".container").show();
+  state = createState();
   state.mid = mid;
   $.when(readConfigFile(), populateInputValues()).done(function() {
     // need to wait for config values (for #samples) and input values before creating
@@ -474,7 +481,7 @@ function checkChoices() {
     return;
   }
 
-  // form is valid, record form data and go to next phase
+  // form is valid, record form data and go to next state.phase
   state.survey.choiceStrength = formData[0].value;
   state.survey.friend = formData[1].value;
   d("sending data to server");
