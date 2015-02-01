@@ -133,11 +133,11 @@
           <p class="question-text">
             Please indicate which of the following you prefer?
           </p>
-          <button id="product1" class="button" value="1" onclick="recordChoice(1)">
+          <button id="product1" class="button" value="1" onclick="recordChoice(0)">
             <span class="productText"></span>
             A
           </button>
-          <button id="product2" class="button" value="2" onclick="recordChoice(2)">
+          <button id="product2" class="button" value="2" onclick="recordChoice(1)">
             <span class="productText"></span> 
             B
           </button>
@@ -176,8 +176,7 @@
               Please explain why you choose this option?
             </label>
             <br/>
-            <textarea id="why" name="why" rows="5" cols="100">
-            </textarea>
+            <textarea id="why" name="why" rows="5" cols="100"></textarea>
           </div>
 
           <div id="recommendChoice" class="question" hidden>
@@ -204,6 +203,10 @@
             </div>
 
           </div>
+          <button class="button">Continue</button>
+        </form>
+      </div>
+
 
 
       <div id="slider" class="container" hidden>

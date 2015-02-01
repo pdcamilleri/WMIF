@@ -53,12 +53,13 @@ function enterFirstProductPhase() {
 
 // replace all the information on the page with new information
 function enterSecondProductPhase() {
+  // TODO can this line be removed?
   currentProblem = state.products[1];
   disableContinueButton();
 
   // TODO better place for this?
   $("#productInformation").children("h3").text(configs['productText'] + " B Information");
-  createInformationDisplays();
+  createInformationDisplays(state.products[1]);
   applyDisplayFilter(currentProblem.filter);
   // TODO thought - maybe stick this in the problem object?
   $("#expertiseText").html(configs['expertise2']);
@@ -91,16 +92,46 @@ function enterAttentionCheckPhase() {
 
 function enterEndPhase() {
   $("#attentionCheck").hide();
-  var values = state.products[state.choice - 1].values;
+  var values = state.products[state.survey.choice].values;
   var randomVal = values[Math.floor(Math.random() * values.length)];
+
+  unrandomise();
+  sendDataToServer();
+  // TODO
+  // TODO if there are more products to display, then restart the experiment
+  // TODO
+  /*
+     shift state.products
+     shift state.products
+     window.onload()
+
+   */
+
   $("#randomValueFromChoice").html(randomVal);
   $("#numSamples").html(randomVal);
   $("#end").show();
 }
 
+function unrandomise() {
+  if (isSwitched) {
+    // final choice
+    state.survey.choice = (state.survey.choice + 1) % 2;
+    // choice strength
+    state.survey.choiceStrength = 7 - state.survey.choiceStrength + 1;
+    // the sliders, best/worst estimate, etc are stored in the product
+    // so they don't need to be individually switched
+
+    // Swap the products themselves back
+    var tmp = state.products[0];
+    state.products[0] = state.products[1];
+    state.products[1] = tmp;
+  }
+}
+
 function sendDataToServer() {
   var url = 'saveChoices.php';
 
+  state.config = configs;
   // setup the ajax request
   $.ajax({
     type: 'POST',
@@ -191,11 +222,15 @@ function readConfigFile() {
 
   return $.get("readConfigFile.php", 
       function(config) { 
+        // TODO refactor config to be part of state?
         configs = config;
         // iterate over properties and set hide() or show() based on value in config file
         for (var prop in state.products[0].filter) {
-          state.products[0].filter[prop] = getShowOrHideFunction(prop, config[prop]);
-          state.products[1].filter[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
+          //state.products[0].filter[prop] = getShowOrHideFunction(prop, config[prop]);
+          //state.products[1].filter[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
+          // set whether or not to show this particular information format?
+          state.products[0].filter[prop] = config[prop];
+          state.products[1].filter[prop] = config[prop + "2"];
 
           state.products[0].randomiseFilter[prop] = shouldRandomise(config["randomise" + prop]);
           state.products[1].randomiseFilter[prop] = shouldRandomise(config["randomise" + prop + "2"]);
@@ -234,7 +269,14 @@ window.onload = function() {
       state.products[i].values = state.products[i].values.slice(0, state.products[i].samples);
       state.products[i + 1].values = state.products[i + 1].values.slice(0, state.products[i + 1].samples);
     }
-    createInformationDisplays();
+
+    randomiseOptions();
+
+    // TODO - factor this line out by removing references to currentProblem
+    currentProblem = state.products[0]; // should not need this, should be set when entering first product stage
+    // TODO
+
+    createInformationDisplays(state.products[0]);
     initiateSliders();
     disableSliderSubmit();
 
@@ -244,21 +286,42 @@ window.onload = function() {
   .fail(function() {
     d("one of the AJAX calls failed!")
   });
- 
+}
+
+
+var isSwitched = false;
+/* Approach for randomising is to just switch around the information in the state variable.
+   the rest of the program will proceed normally.
+   Information related to which choices the user makes will be stored in the state variable.
+   Then at the end, right before data is sent to the server, the data is unrandomised,
+   only if it was randomised at the beginning.
+   */
+// switches options 1 and 2 around 50% of the time
+function randomiseOptions() {
+  if (Math.random() > 0.5 || true) {
+    console.log("Switching!");
+    isSwitched = true;
+    var tmp = state.products[0];
+    state.products[0] = state.products[1];
+    state.products[1] = tmp;
+  }
+
 }
 
 // shows and hides certain divs based on the display filter selected by the experimenter
 function applyDisplayFilter(filter) {
   for (var prop in filter) {
-    filter[prop]();
+    // TODO change this to getShowOrHide thing
+    func = getShowOrHideFunction(prop, filter[prop]);
+    func();
   }
 }
 
-function createInformationDisplays() {
+function createInformationDisplays(problem) {
   // i guess problem.values doesnt need to be global then? except for experience
   // closure? ideal would be to be able to delete the above line problem.values = problemValues
 
-  var values = currentProblem.values;
+  var values = problem.values;
 
   createDescription(values);
   createFrequency(values);
@@ -272,7 +335,7 @@ function createInformationDisplays() {
 }
 
 function recordChoice(val) {
-  state.choice = val;
+  state.survey.choice = val;
 
   $("#choiceDisplay").html("You chose: <br/> <h3 style='font-weight: 700;'>" + configs['productText'] +
       " " + String.fromCharCode(65 + val) + "</h3>");
@@ -280,7 +343,7 @@ function recordChoice(val) {
   $("#choiceButtons").hide();
 
   // only enable the radio buttons related to this product
-  $(".product" + val).attr("disabled", false);
+  $(".product" + (val + 1)).attr("disabled", false);
 
   $("#choiceForm").show();
   // TODO remove some of these, just hide the outer guy?
@@ -288,6 +351,7 @@ function recordChoice(val) {
   $("#recommendChoice").show();
   $("#choiceWhy").show();
   $("#sliders").show();
+
 }
 
 function initiateSliders() {
@@ -395,8 +459,15 @@ function checkChoices() {
   // TODO bit of a hack here
   var count = 0;
   for (var i = 0; i < formData.length; i++) {
-    if (formData[i].name == "strength" || formData[i].name == "friend") {
+    if (formData[i].name == "strength") {
+      state.survey.choiceStrength = formData[i].value;
       count++;
+    } else if (formData[i].name == "friend") {
+      state.survey.friend = formData[i].value;
+      count++;
+    } else if (formData[i].name == "why") {
+      state.survey.why = formData[i].value;
+      // we don't count the why field, as it is optional
     }
   }
 
@@ -407,13 +478,20 @@ function checkChoices() {
   }
 
   // form is valid, record form data and go to next phase
-  state.choiceStrength = formData[0].value;
-  state.friend = formData[1].value;
+  state.survey.choiceStrength = formData[0].value;
+  state.survey.friend = formData[1].value;
   d("sending data to server");
+  // TODO map to convert this to true/falses based on show/hide
+  // maybe one extra level of indirection, store the true/false in the product
+  // and call the show/hide based on that
   delete state.products[0].filter;
   delete state.products[1].filter;
-  sendDataToServer();
-  //state.friend = $('input[name=strength]:checked', '#choiceForm').val();
+  //sendDataToServer();
+  //state.survey.friend = $('input[name=strength]:checked', '#choiceForm').val();
+  nextPhase();
+
+}
+
 // TODO what needs to be checked for check interval?
 // lower <= best <= upper?
 // TODO CREATE_ISSUE should I be collecting the interval for both products, or just the chosen product?
