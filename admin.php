@@ -49,6 +49,13 @@
       </p>
 
       <p>
+        <label for="intervaltext">Interval question text:</label>
+        <br/>
+        <textarea id="intervaltext" name="intervaltext" rows="10">
+        </textarea>
+      </p>
+
+      <p>
         <label for="productText">Product type (e.g. mobile phone):</label>
         <br/>
         <input id="productText" type="text" name="productText">

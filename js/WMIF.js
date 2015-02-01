@@ -3,6 +3,8 @@ Phase = {
   PRODUCT_ONE: "product_1",
   PRODUCT_TWO: "product_2",
   SELECTION: "selection",
+  SLIDER: "slider",
+  INTERVAL: "interval",
   ATTENTION_CHECK: "attention check",
   END: "end"
 };
@@ -18,12 +20,15 @@ function createProduct() {
 
 var state = {
   products: [createProduct(), createProduct()],
-  choice: -1,
-  choiceStrength: -1,
-  friend: -1
+  survey: { 
+    choice: -1,
+    choiceStrength: -1,
+    friend: -1,
+    why: "-"
+  }
 };
 
-var currentProblem = state.products[0];
+var currentProblem;// = state.products[0];
 var configs;
 var phase = Phase.INTRO;
 
@@ -66,11 +71,21 @@ function enterSelectionPhase() {
   $("#selection").show();
 }
 
+function enterSliderPhase() {
+  $("#selection").hide();
+  $("#slider").show();
+}
+
+function enterIntervalPhase() {
+  $("#slider").hide();
+  $("#interval").show();
+}
+
 function enterAttentionCheckPhase() {
   // TODO this needs to change based on what was presented to the user first
   // see issue #55 on github
   document.getElementById("correctlabel").innerHTML = state.products[0].samples;
-  $("#selection").hide();
+  $("#interval").hide();
   $("#attentionCheck").show();
 }
 
@@ -117,6 +132,12 @@ function nextPhase() {
     phase = Phase.SELECTION;
     enterSelectionPhase();
   } else if (phase == Phase.SELECTION) {
+    phase = Phase.SLIDER;
+    enterSliderPhase();
+  } else if (phase == Phase.SLIDER) {
+    phase = Phase.INTERVAL;
+    enterIntervalPhase();
+  } else if (phase == Phase.INTERVAL) {
     phase = Phase.ATTENTION_CHECK;
     enterAttentionCheckPhase();
   } else if (phase == Phase.ATTENTION_CHECK) {
@@ -187,6 +208,7 @@ function readConfigFile() {
         $("#expertiseText").html(config['expertise']);
         $("#introduction").children("p").html(config['problemInstructions']);
         $("#slidertext").children("p").html(config['slidertext']);
+        $("#intervaltext").children("p").html(config['intervaltext']);
         $(".productText").html(config['productText']);
 
       }, 
@@ -206,7 +228,6 @@ window.onload = function() {
 
     // TODO...
     $("#productInformation").children("h3").text(configs['productText'] + " A Information");
-
 
     // TODO need to expand for multiple products?
     for (var i = 0; i < state.products.length; i += 2) {
@@ -382,7 +403,7 @@ function checkChoices() {
   if (count != 2) {
     alert("Please answer both questions");
     d("Please answer both questions");
-    return
+    return;
   }
 
   // form is valid, record form data and go to next phase
@@ -393,6 +414,32 @@ function checkChoices() {
   delete state.products[1].filter;
   sendDataToServer();
   //state.friend = $('input[name=strength]:checked', '#choiceForm').val();
+// TODO what needs to be checked for check interval?
+// lower <= best <= upper?
+// TODO CREATE_ISSUE should I be collecting the interval for both products, or just the chosen product?
+function checkInterval() {
+  // TODO check that state.product[state.survey.choice] is correct
+  state.products[state.survey.choice].lower = $("#lowerEstimate").val();
+  state.products[state.survey.choice].best  = $("#bestEstimate").val();
+  state.products[state.survey.choice].upper = $("#upperEstimate").val();
+  nextPhase();
+}
+
+// saves the slider choices into the state
+function saveSliderChoices() {
+
+  // TODO 
+  //$("#sliders_1 .slider-box > .outcomeValues") // to only grab out the first sliders stuff
+  //$(".slider-box .ui-slider-handle")[0].innerHTML == "100"
+  //$(".slider-box > .outcomeValues")[0].innerHTML == "1"
+
+  for (var i = 0; i < 2; ++i) {
+    var sliders = []; 
+    $("#sliders_" + (i + 1) + " .slider-box .ui-slider-handle").each(function() { 
+      sliders.push($(this).html());
+    });
+    state.products[i].sliders = sliders;
+  }
   nextPhase();
 
 }

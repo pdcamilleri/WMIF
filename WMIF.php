@@ -205,7 +205,9 @@
 
           </div>
 
-          <div id="sliders" class="question" hidden>
+
+      <div id="slider" class="container" hidden>
+          <div id="sliders" class="question">
 
           <!-- TODO convert to php loop -->
             <div>
@@ -385,12 +387,37 @@
                 </p>
               </div>
             </div>
-
           </div>
+          <button class="button" id="submitChoices" onclick="saveSliderChoices();">Continue</button>
+        </div>
 
-          <button class="button" id="submitChoices" disabled>Continue</button>
+
+
+      <div id="interval" class="container" hidden>
+        <form id="intervalForm" class="question">
+
+          <div id="intervaltext" class="question-text">
+            <p></p>
+          </div>
+          
+          <p>
+            <label for="lowerEstimate">Lower estimate: </label>
+            <input type="number" id="lowerEstimate" name="lowerEstimate" min="1" max="100" step="1" required>
+          </p>
+ 
+          <p>
+            <label for="bestEstimate">Best estimate:</label>
+            <input type="number" id="bestEstimate" name="bestEstimate" min="1" max="100" step="1" required>
+          </p>
+ 
+          <p>
+            <label for="upperEstimate">Upper estimate:</label>
+            <input type="number" id="upperEstimate" name="upperEstimate" min="1" max="100" step="1" required>
+          </p>
+          <button class="button" id="submitEstimates" onclick="checkInterval(); return false;">Continue</button>
         </form>
       </div>
+
 
       <div id="attentionCheck" class="container" hidden>
         <form id="attentionForm" >
