@@ -1,0 +1,17 @@
+Randomisation:
+The order in which products/options are presented to the user needs to be randomised.
+This is done in 2 parts. Firstly, at the start of the experiment, there is a 50 - 50% chance
+that the order the options will be presented in will be switched (from as they appear in the
+input csv file). If this is done, the two products in the state variable are switched.
+At the end of the experiment they are switched back, and then written to the database,
+so that the results in the database are consistent with the inputCSV file. And if the options
+are swithced, a boolean variable stating so is also stored in the DB.
+
+The second step is the result of the survey, where the participant chooses their preferred
+option. These results are "unrandomised" by flipping the result of each value. So if the 
+participant stated a strong value for preference 1, encoded as a value of 1 (7 being strongly
+preferred the 2nd option) then the unrandomised value will be 7 and vice versa. Similarly, if their 
+overall choice was for option 2, then this would be unrandomised to option 1, just before the
+data is sent to the server for storage.
+
+If the options are not randomised, then none of this occurs.

@@ -25,7 +25,9 @@ var state = {
     choiceStrength: -1,
     friend: -1,
     why: "-"
-  }
+  },
+  isSwitched: false;
+
 };
 
 var currentProblem;// = state.products[0];
@@ -113,7 +115,7 @@ function enterEndPhase() {
 }
 
 function unrandomise() {
-  if (isSwitched) {
+  if (state.isSwitched) {
     // final choice
     state.survey.choice = (state.survey.choice + 1) % 2;
     // choice strength
@@ -289,16 +291,9 @@ window.onload = function() {
 }
 
 
-var isSwitched = false;
-/* Approach for randomising is to just switch around the information in the state variable.
-   the rest of the program will proceed normally.
-   Information related to which choices the user makes will be stored in the state variable.
-   Then at the end, right before data is sent to the server, the data is unrandomised,
-   only if it was randomised at the beginning.
-   */
 // switches options 1 and 2 around 50% of the time
 function randomiseOptions() {
-  if (Math.random() > 0.5 || true) {
+  if (Math.random() > 0.5) {
     console.log("Switching!");
     isSwitched = true;
     var tmp = state.products[0];
