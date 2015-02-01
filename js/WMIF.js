@@ -25,9 +25,11 @@ var state = {
     choiceStrength: -1,
     friend: -1,
     why: "-"
+    upper: -1,
+    best: -1,
+    lower: -1
   },
   isSwitched: false;
-
 };
 
 var currentProblem;// = state.products[0];
@@ -487,14 +489,10 @@ function checkChoices() {
 
 }
 
-// TODO what needs to be checked for check interval?
-// lower <= best <= upper?
-// TODO CREATE_ISSUE should I be collecting the interval for both products, or just the chosen product?
 function checkInterval() {
-  // TODO check that state.product[state.survey.choice] is correct
-  state.products[state.survey.choice].lower = $("#lowerEstimate").val();
-  state.products[state.survey.choice].best  = $("#bestEstimate").val();
-  state.products[state.survey.choice].upper = $("#upperEstimate").val();
+  state.survey.lower = $("#lowerEstimate").val();
+  state.survey.best  = $("#bestEstimate").val();
+  state.survey.upper = $("#upperEstimate").val();
   nextPhase();
 }
 
