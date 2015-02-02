@@ -397,7 +397,7 @@
 
 
       <div id="interval" class="container" hidden>
-        <form id="intervalForm" class="question">
+        <form id="intervalForm" class="question" onsubmit="checkInterval(); return false;">
 
           <div id="intervaltext" class="question-text">
             <p></p>
@@ -417,10 +417,9 @@
             <label for="upperEstimate">Upper estimate:</label>
             <input type="number" id="upperEstimate" name="upperEstimate" min="1" max="100" step="1" required>
           </p>
-          <button class="button" id="submitEstimates" onclick="checkInterval(); return false;">Continue</button>
+          <button class="button" id="submitEstimates">Continue</button>
         </form>
       </div>
-
 
       <div id="attentionCheck" class="container" hidden>
         <form id="attentionForm" >
