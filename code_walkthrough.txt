@@ -1,4 +1,5 @@
 Randomisation:
+
 The order in which products/options are presented to the user needs to be randomised.
 This is done in 2 parts. Firstly, at the start of the experiment, there is a 50 - 50% chance
 that the order the options will be presented in will be switched (from as they appear in the
@@ -15,3 +16,15 @@ overall choice was for option 2, then this would be unrandomised to option 1, ju
 data is sent to the server for storage.
 
 If the options are not randomised, then none of this occurs.
+
+Reset the experiment
+
+The experiment is reset by undoing all of the actions that the user performed that may 
+have changed the state of the HTML document. These include moving the sliders, clicking
+on radio buttons, entering text or numbers into forms, and performing actions that change
+the state variable, clicking buttons to hide/show certain containers, etc.
+
+These are all undone and the page is returned to a state equivalent to when the experiment was initially
+launched.
+
+TODO handle multiple problems when the experiment is reset

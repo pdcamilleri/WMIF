@@ -42,6 +42,7 @@
    <body>
       <div id="noticeboard">
         <!--p> MID is <?php print_r($mid); ?> </p-->
+        <button onclick="resetExperiment();"> Reset Experiment</button>
       </div>
       <hr/>
 
@@ -128,8 +129,8 @@
 
       </div>
 
-      <div id="selection" hidden>
-        <div id="choiceButtons" class="container">
+      <div id="selection" class="container" hidden>
+        <div id="choiceButtons">
           <p class="question-text">
             Please indicate which of the following you prefer?
           </p>
@@ -143,7 +144,7 @@
           </button>
         </div>
 
-        <form id="choiceForm" class="container" onsubmit="checkChoices(); return false;" hidden>
+        <form id="choiceForm" onsubmit="checkChoices(); return false;" hidden>
 
           <p id="choiceDisplay"> </p>
 

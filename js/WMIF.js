@@ -262,6 +262,45 @@ function shouldRandomise(val) {
   return val != false;
 }
 
+// Resets the experiments for the next problem.
+function resetExperiment() {
+  $(".container").hide();
+  $("#introduction").show();
+  $("#experienceDisplay").html("");
+  setupExperiment();
+  // Reset the radio buttons.
+  $("input:radio").prop("checked", false);
+  // reset the "Why you chose this option?" free response.
+  $("#why").val("");
+
+  // Sliders are reset and button is disabled, good :), but the text still says 100% in green.
+  $(".sliderScore").css("color", "red");
+  $(".sliderScore").css("color", "red").html("0%");
+
+  // Reset the upper, lower and best estimates.
+  $("#intervalForm").find("input").val("");
+
+  // TODO https://github.com/pdcamilleri/WMIF/issues/62
+  // Reset the sanity check questions. Or is this only done at the end of the experiment...?
+  // Next two sanity check questions are still filled out from the previous question.
+
+  resetChoice();
+
+}
+
+function resetChoice() {
+  // Show the two buttons for the participant to choose between.
+  $("#choiceButtons").show();
+
+  // Hide the survey form.
+  $("#choiceForm").hide();
+
+  // Re-enabled all radio buttons 
+  // (as some would be disabled, depending on the choice for the previous problem).
+  $( "input[name='strength']" ).attr("disabled", false)
+
+}
+
 window.onload = setupExperiment;
 
 function setupExperiment() {
