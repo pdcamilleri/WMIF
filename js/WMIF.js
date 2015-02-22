@@ -227,7 +227,7 @@ function readConfigFile() {
   state.products[1].randomiseFilter = {
   }
 
-  return $.get("readConfigFile.php", 
+  return $.get("readConfigFile.php", //?time=" + $.now(), 
       function(config) { 
         // TODO refactor config to be part of state?
         configs = config;
@@ -341,7 +341,7 @@ function setupExperiment() {
 
 // switches options 1 and 2 around 50% of the time
 function randomiseOptions() {
-  if (Math.random() > 0.5) {
+  if (Math.random() > 0.5 || false) {
     console.log("Switching!");
     isSwitched = true;
     var tmp = state.products[0];
