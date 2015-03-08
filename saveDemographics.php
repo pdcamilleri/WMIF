@@ -12,10 +12,6 @@ function post($key) {
 
 $connection = getDatabaseConnection();
 
-// setup our response "object"
-$resp = new stdClass();
-$resp->success = false;
-
 // check if we can get hold of all of the required form paramaters
 if (!
      (
@@ -49,6 +45,9 @@ $sql = sprintf("INSERT INTO %s VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s',
 // lets run our query
 $result = mysqli_query($connection, $sql);
 
+// setup our response "object"
+$resp = new stdClass();
+$resp->success = false;
 if($result) {
   $resp->success = true;
 }

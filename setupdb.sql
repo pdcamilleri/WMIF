@@ -78,7 +78,7 @@ CREATE TABLE slider_outcomes (
   optn INT NOT NULL,
   idx INT NOT NULL,
   value INT NOT NULL,
-  PRIMARY KEY (id, problem_id, optn),
+  PRIMARY KEY (id, problem_id, optn, idx),
   FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
 );
 

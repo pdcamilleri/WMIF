@@ -12,21 +12,25 @@
       <meta http-equiv="Pragma" content="no-cache" />
 
       <!-- JQuery -->
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-->
+      <script src="js/jquery.min.js"></script>
       <!--link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" /-->
-      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+      <!--script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script-->
+      <script src="js/jquery-ui.min.js"></script>
       <link rel="stylesheet" href="css/jquery-ui.css" />
 
       <!-- Bootstrap -->
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script-->
+      <script src="js/bootstrap.min.js"></script>
       <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"-->
       <link rel="stylesheet" href="css/bootstrap.css">
 
       <!-- D3 & Word Cloud stuff -->
-      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <!--script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script-->
+      <script src="js/d3.v3.min.js" charset="utf-8"></script>
+      <!--script src="js/d3-cloud/d3.layout.cloud.js"></script-->
       <script src="js/d3-cloud/d3.layout.cloud.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.6/seedrandom.min.js"> </script>
-
+      <!--script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.6/seedrandom.min.js"> </script-->
       <script src="js/seedrandom.min.js"> </script>
 
       <!-- My own stuff -->

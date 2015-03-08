@@ -297,7 +297,7 @@ function resetChoice() {
 
   // Re-enabled all radio buttons 
   // (as some would be disabled, depending on the choice for the previous problem).
-  $( "input[name='strength']" ).attr("disabled", false)
+  $( "input[name='strength']" ).attr("disabled", false);
 
 }
 
@@ -332,16 +332,17 @@ function setupExperiment() {
 
     populateOutcomeValuesInSlider();
 
+    clickToSelectionPhase(); // DO NOT COMMIT
+
   })
   .fail(function() {
     d("one of the AJAX calls failed!")
   });
 }
 
-
 // switches options 1 and 2 around 50% of the time
 function randomiseOptions() {
-  if (Math.random() > 0.5) {
+  if (Math.random() > 0.5 || true) {
     console.log("Switching!");
     isSwitched = true;
     var tmp = state.products[0];
@@ -349,6 +350,17 @@ function randomiseOptions() {
     state.products[1] = tmp;
   }
 
+}
+
+function clickToSelectionPhase() {
+  //$(".button")[0].click(); // click the start exp button so i dont have to
+  //$(".button")[0].click(); // click the start exp button so i dont have to
+  /*
+  $(".button")[0].click(); // click the start exp button so i dont have to
+  $("#product1").click();
+  $("#strengthstrong1").click();
+  $("#friendstrong1").click();
+  */
 }
 
 // shows and hides certain divs based on the display filter selected by the experimenter
@@ -747,14 +759,17 @@ function getNextExperienceValue() {
     // save the order that each outcome appeared for later
     currentProblem.outcomeOrder.push(el);
 
+    //var animationLength = 1500;
+    var animationLength = 100; // debug animation length
+
     var priorFont = $("#experienceDisplay").css("font-size");
     // animate the outcome
-    $("#experienceDisplay").animate({ "left": "+=100px", "font-size" : "0px" }, 1500, function() {
+    $("#experienceDisplay").animate({ "left": "+=100px", "font-size" : "0px" }, animationLength, function() {
 
       // get the new value to be displayed
       $(this).html(el);
       $(this).css({"left" : "-=200px"});
-      $(this).animate({ "left": "+=100px", "font-size" : priorFont }, 1500, function() {
+      $(this).animate({ "left": "+=100px", "font-size" : priorFont }, animationLength, function() {
 
         if (currentProblem.samples != currentProblem.samplesSoFar) {
           enableExperienceButton(currentProblem.samplesSoFar + 1);
