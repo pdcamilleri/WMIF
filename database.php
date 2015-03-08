@@ -32,7 +32,7 @@ echo "\n";
 }
 
 function error($connection, $errorStr = "no error string provided") {
-  echo "$connection\n";
+  //echo "$connection\n";
   mysqli_close($connection);
 
   $resp = new stdClass();

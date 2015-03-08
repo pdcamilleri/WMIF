@@ -424,7 +424,7 @@
 
       <div id="attentionCheck" class="container" hidden>
         <form id="attentionForm" >
-          <fieldset>
+          <fieldset id="attncheck1">
             <legend>
               Which of the following appeared at the top of the page for 
               <span class="productText"></span> 
@@ -437,49 +437,49 @@
             </p-->
 
             <p>
-              <input type="radio" id="attndescription" name="missing" value="1">
+              <input type="radio" id="attndescription" name="missing" value="0">
               <label for="attndescription">
                 A summary of the scores in the format "X% of scores were Y".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnfrequency" name="missing" value="1">
+              <input type="radio" id="attnfrequency" name="missing" value="0">
               <label for="attnfrequency">
                 A summary of the scores in the format "X / Y scores were Z".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnaverage" name="missing" value="1">
+              <input type="radio" id="attnaverage" name="missing" value="0">
               <label for="attnaverage">
                 A summary of the scores in the format "Average score is X".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attndistribution" name="missing" value="1">
+              <input type="radio" id="attndistribution" name="missing" value="0">
               <label for="attndistribution">
                 A summary of the scores in a frequency bar chart.
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnwordcloud" name="missing" value="1">
+              <input type="radio" id="attnwordcloud" name="missing" value="0">
               <label for="attnwordcloud">
                 A summary of the scores in graphical format where more frequent scores were displayed as physically larger.
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnsimultaneous" name="missing" value="1">
+              <input type="radio" id="attnsimultaneous" name="missing" value="0">
               <label for="attnsimultaneous">
                 A list of all the scores all displayed at the same time. 
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnexperience" name="missing" value="1">
+              <input type="radio" id="attnexperience" name="missing" value="0">
               <label for="attnexperience">
                 A list of all the scores each displayed one at a time. 
               </label>
@@ -487,7 +487,7 @@
 
           </fieldset>
 
-          <fieldset>
+          <fieldset id="attncheck2">
             <legend>
               In the task, how many review scores did you learn about for 
               <span class="productText"></span> 

@@ -8,6 +8,7 @@ define("NUM_SLIDERS_OUTCOMES", 10);
 
 require_once("constants.php");
 require_once("database.php");
+require_once("createCSVfile.php");
 
 function post($key) {
   if (isset($_POST[$key])) {
@@ -69,9 +70,9 @@ function insertArrayIntoDatabase($connection, $id, $problemID, $optn, $dbTableNa
 }
 
 
-function saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend) {
-  $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
-                    'choices', $id, $problemID, $choice, $choiceStrength, $friend);
+function saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why) {
+  $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", 
+                    'choices', $id, $problemID, $choice, $choiceStrength, $friend, $why);
 
   return mysqli_query($connection, $insertQuery);
 }
@@ -83,6 +84,12 @@ function saveSamples($connection, $id, $problemID, $optn, $samples1) {
   return mysqli_query($connection, $insertQuery);
 }
 
+function saveAttentionCheck($connection, $id, $problemID, $attnCheck) {
+  $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s');", 
+                      'attention_check', $id, $problemID, $attnCheck['missing'], $attnCheck['numsamples']);
+
+  return mysqli_query($connection, $insertQuery);
+}
 
 function saveSimultaneousValues($connection, $id, $problemID, $optn, $array) {
   insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'simultaneous_values', $array);
@@ -116,8 +123,6 @@ function saveSliderOutcomes($connection, $id, $problemID, $optn, $idx, $outcomes
   }
 }
 
-
-
 $connection = getDatabaseConnection();
 
 // get all the post paramaters
@@ -144,6 +149,10 @@ $filter1 = $optn1['randomiseFilter'];
 $sliders1 = $optn1['sliders'];
 $sliders2 = $optn2['sliders'];
 
+$attnCheck = $survey['attentionCheck'];
+
+
+
 #if (! ( $mid && $optn1 && $optn2 && $choice && $choiceStrength && $friend)) {
 #  error($connection, "not all choice paramaters provided");
 #}
@@ -157,7 +166,7 @@ $id = getID($connection, $mid);
 
 
 // TODO what to do if $msqli_query fails
-saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend);
+saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why);
 
 saveSamples($connection, $id, $problemID, 0, $samples1);
 saveSamples($connection, $id, $problemID, 1, $samples1);
@@ -184,7 +193,12 @@ saveSliderOutcomes($connection, $id, $problemID, 1, $idx, $sliders2);
 // save the formats
 saveFilter($connection, $id, $problemID, 0, $filter1);
 
+// Save the answers to the attention check question
 
+saveAttentionCheck($connection, $id, $problemID, $attnCheck);
+
+//echo "creating csv";
+createCSV($id);
 
 // setup our response "object"
 $resp = new stdClass();

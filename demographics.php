@@ -21,9 +21,6 @@
   <div id="demographics" class="container">
     <form id="DemographicsForm" method="post" action="WMIF.php" onsubmit="return checkAnswers()">
 
-      <p> 
-        MTurk ID: <?php echo json_encode($_SESSION['mid']);    ?>
-      </p>
       <p class="title">Demographics</p>
 
       <p>Please fill in your demographic details below.</p>

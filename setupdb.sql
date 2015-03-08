@@ -21,6 +21,7 @@ CREATE TABLE choices (
   chose_risky INT,
   choice_strength INT,
   friend_recommendation INT,
+  why TEXT,
   PRIMARY KEY (id, problem_id), -- a problem is a choice between two or more products.
   FOREIGN KEY (id) REFERENCES demographics(id)
 );
@@ -113,6 +114,15 @@ CREATE TABLE samples (
   FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
 );
 
+-- attention check
+CREATE TABLE attention_check (
+  id INT NOT NULL,
+  problem_id INT NOT NULL,
+  attention_format INT NOT NULL,
+  attention_samples INT NOT NULL,
+  PRIMARY KEY (id, problem_id),
+  FOREIGN KEY (id, problem_id) REFERENCES choices(id, problem_id)
+);
 
 
 
