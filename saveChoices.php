@@ -4,8 +4,6 @@
 
 define("NUM_SLIDERS_OUTCOMES", 10);
 
-// TODO factor out this code
-
 require_once("constants.php");
 require_once("database.php");
 require_once("createCSVfile.php");
@@ -15,28 +13,6 @@ function post($key) {
     return $_POST[$key];
   }
   return false;
-}
-
-// TODO move to common  database place
-// returns the id corresponding to the given MID
-function getID($connection, $mid) {
-
-  $getIDquery = sprintf("SELECT id FROM demographics WHERE mid = '%s';", $mid);
-
-  $result = mysqli_query($connection, $getIDquery);
-
-  if (!$result) {
-    error($connection, "select query failed: $getIDquery");
-  }
-
-  $row = mysqli_fetch_array($result);
-  if ($row == NULL) {
-    error($connection, "no rows returned from select query: $getIDquery");
-  }
-
-  $id = $row['id'];
-
-  return $id;
 }
 
 function saveFilter($connection, $id, $problemID, $optn, $filter /*$rFilter*/) {
@@ -56,16 +32,11 @@ function saveFilter($connection, $id, $problemID, $optn, $filter /*$rFilter*/) {
 }
 
 function insertArrayIntoDatabase($connection, $id, $problemID, $optn, $dbTableName, $array) {
-  //print_r(count($array) . "\n");
- 
   for ($i = 0; $i < count($array); $i++) {
 
     $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
                     $dbTableName, $id, $problemID, $i, $optn, $array[$i]);
-                    //$dbTableName, '2', '0', $i, $array[$i]);
     $result = mysqli_query($connection, $insertQuery);
-    #print_r($insertQuery . "\n");
-    #print_r($result . "\n");
   }
 
 }
@@ -111,16 +82,11 @@ function saveConfidenceInterval($connection, $id, $problemID, $optn, $lower, $be
 }
 
 function saveSliderOutcomes($connection, $id, $problemID, $optn, $idx, $outcomes) {
-
-  // TODO this needs to be seriously refactored
-  //$sliderOutcomes = (1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
   for ($i = 0; $i < count($outcomes); ++$i) {
     $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 'slider_outcomes', $id, $problemID, $optn, $i, $outcomes[$i]);
 
     $result = mysqli_query($connection, $insertQuery);
-
-    
-    // TODO doing anything with the result here?
+    // TODO check result
   }
 }
 
@@ -152,8 +118,6 @@ $sliders2 = $optn2['sliders'];
 
 $attnCheck = $survey['attentionCheck'];
 
-
-
 #if (! ( $mid && $optn1 && $optn2 && $choice && $choiceStrength && $friend)) {
 #  error($connection, "not all choice paramaters provided");
 #}
@@ -163,10 +127,10 @@ $attnCheck = $survey['attentionCheck'];
 $problemID = 1;
 
 // user already exists in database so get this users ID (not MID, as MID may not be unique)
+// TODO doesnt make sense to get ID from MID if MID isnt unique. It should be unique
 $id = getID($connection, $mid);
 
 
-// TODO what to do if $msqli_query fails
 saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why);
 
 saveSamples($connection, $id, $problemID, 0, $samples1);
@@ -181,11 +145,6 @@ saveExperienceValues($connection, $id, $problemID, 1, $optn2['outcomeOrder']);
 saveOriginalValues($connection, $id, $problemID, 0, $optn1['values']);
 saveOriginalValues($connection, $id, $problemID, 1, $optn2['values']);
 
-// save the confidence interval
-// TODO
-// if ($choice)
-
-// TODO remove optn?
 saveConfidenceInterval($connection, $id, $problemID, 0, $lower, $best, $upper);
 
 saveSliderOutcomes($connection, $id, $problemID, 0, $idx, $sliders1);
@@ -195,7 +154,6 @@ saveSliderOutcomes($connection, $id, $problemID, 1, $idx, $sliders2);
 saveFilter($connection, $id, $problemID, 0, $filter1);
 
 // Save the answers to the attention check question
-
 saveAttentionCheck($connection, $id, $problemID, $attnCheck);
 
 //echo "creating csv";

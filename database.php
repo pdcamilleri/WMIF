@@ -43,4 +43,29 @@ function getMIDfromId($cxn, $id) {
   return $row['mid'];
 }
 
+// returns the id corresponding to the given MID
+// TODO confirm MID is unique?
+// TODO enforce MID uniqueness in database
+function getID($connection, $mid) {
+
+  $getIDquery = sprintf("SELECT id FROM demographics WHERE mid = '%s';", $mid);
+
+  $result = mysqli_query($connection, $getIDquery);
+
+  if (!$result) {
+    error($connection, "select query failed: $getIDquery");
+  }
+
+  $row = mysqli_fetch_array($result);
+  if ($row == NULL) {
+    error($connection, "no rows returned from select query: $getIDquery");
+  }
+
+  $id = $row['id'];
+
+  return $id;
+}
+
+
+
 ?>
