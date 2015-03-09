@@ -1,26 +1,26 @@
 <?php 
 
+// dump demographic data
+// for choice in choiceTable
+//   (always have these)
+// - choice
+// - confidence interval
+// - samples for each problem
+// - slider outcomes
+// - original values 
+// - formats shown and randomisation property
+//   (only somtimes have these)
+// - exp values
+// - simul values
+// endfor
+
+
 require_once("constants.php");
 require_once("database.php");
 date_default_timezone_set('Australia/Sydney');
 
-// TODO move to common database place
-function getMIDfromId($cxn, $id) {
-  $query = sprintf("SELECT * FROM demographics WHERE id = '%s';", $id);
-  $result = mysqli_query($cxn, $query);
-  if (!$result && $result['num_rows'] != 1) {
-    error($cxn, "select query failed: $query");
-  }
-
-  $row = mysqli_fetch_array($result);
-
-  return $row['mid'];
-}
-
 // connect to database
 function createCSV($id) {
-  // TODO get ID from argv??
-  //$id = '1';
   $cxn = getDatabaseConnection();
   $mid = getMIDfromId($cxn, $id);
   $string = createCSVforId($cxn, $id);
@@ -265,28 +265,16 @@ function createCSVforId($cxn, $id) {
   return $str;
 
   
-  // dump demographic data
-
-  // for choice in choiceTable
-  //   (always have these)
-  // - choice
-  // - confidence interval
-  // - samples for each problem
-  // - slider outcomes
-  // - original values 
-  // - formats shown and randomisation property
-  //   (only somtimes have these)
-  // - exp values
-  // - simul values
-  // endfor
-
 }
 
+/*
+
+// to manually generate CSV files
 function main() {
-   //createCSV(15);
+  //createCSV(15);
 }
-
-//main();
+main();
+*/
 
 ?>
 

@@ -10,17 +10,6 @@ function getDatabaseConnection() {
   $dbUserPassword = $dbConfig[DB_USER_PASSWORD] . "!";
   $dbName = $dbConfig[DB_NAME];
 
-/*
-echo $host;
-echo "\n";
-echo $dbUser;
-echo "\n";
-echo $dbUserPassword;
-echo "\n";
-echo $dbName;
-echo "\n";
-*/
-
   $connection = mysqli_connect($host, $dbUser, $dbUserPassword, $dbName, 3306);
 
   if (mysqli_connect_errno()) {
@@ -32,7 +21,6 @@ echo "\n";
 }
 
 function error($connection, $errorStr = "no error string provided") {
-  //echo "$connection\n";
   mysqli_close($connection);
 
   $resp = new stdClass();
@@ -43,6 +31,16 @@ function error($connection, $errorStr = "no error string provided") {
   exit();
 }
 
-$connection = getDatabaseConnection();
+function getMIDfromId($cxn, $id) {
+  $query = sprintf("SELECT * FROM demographics WHERE id = '%s';", $id);
+  $result = mysqli_query($cxn, $query);
+  if (!$result && $result['num_rows'] != 1) {
+    error($cxn, "select query failed: $query");
+  }
+
+  $row = mysqli_fetch_array($result);
+
+  return $row['mid'];
+}
 
 ?>
