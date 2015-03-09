@@ -7,10 +7,21 @@ function getDatabaseConnection() {
   $dbConfig = parse_ini_file(DB_CONFIG_FILE);
   $host = $dbConfig[HOST];
   $dbUser = $dbConfig[DB_USER];
-  $dbUserPassword = $dbConfig[DB_USER_PASSWORD];
+  $dbUserPassword = $dbConfig[DB_USER_PASSWORD] . "!";
   $dbName = $dbConfig[DB_NAME];
 
-  $connection = mysqli_connect($host, $dbUser, $dbUserPassword, $dbName);
+/*
+echo $host;
+echo "\n";
+echo $dbUser;
+echo "\n";
+echo $dbUserPassword;
+echo "\n";
+echo $dbName;
+echo "\n";
+*/
+
+  $connection = mysqli_connect($host, $dbUser, $dbUserPassword, $dbName, 3306);
 
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -21,6 +32,7 @@ function getDatabaseConnection() {
 }
 
 function error($connection, $errorStr = "no error string provided") {
+  //echo "$connection\n";
   mysqli_close($connection);
 
   $resp = new stdClass();
@@ -30,5 +42,7 @@ function error($connection, $errorStr = "no error string provided") {
 
   exit();
 }
+
+$connection = getDatabaseConnection();
 
 ?>

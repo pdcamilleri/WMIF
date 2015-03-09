@@ -18,17 +18,15 @@ function getMIDfromId($cxn, $id) {
 }
 
 // connect to database
-function main() {
+function createCSV($id) {
   // TODO get ID from argv??
-  $id = '1';
+  //$id = '1';
   $cxn = getDatabaseConnection();
   $mid = getMIDfromId($cxn, $id);
   $string = createCSVforId($cxn, $id);
   //$filename = "results" . DIRECTORY_SEPARATOR . $id . "." . $mid . "." . date("Y-m-d.H:i:s") . ".csv";
-  $filename = "results" . DIRECTORY_SEPARATOR . $id . ".csv";
-  $fp = fopen($filename, 'a') or die("cant open file: ". "results".DIRECTORY_SEPARATOR.$mid);
-  fwrite($fp, "$string\n");
-  fclose($fp);
+  $filename = "results" . DIRECTORY_SEPARATOR . $mid . ".txt";
+  file_put_contents($filename, $string) or die ("Unable to write to file: " . $filename);
   return;
 }
 
@@ -49,6 +47,7 @@ function getDemographicData($cxn, $id) {
   $str .= "$row[education],";
   $str .= "$row[employment],";
   $str .= "$row[marital],";
+  $str .= "$row[income],";
   return $str;
 
 }
@@ -60,6 +59,7 @@ function createChoiceString($cxn, $row) {
   $str .= "$row[chose_risky],";
   $str .= "$row[choice_strength],";
   $str .= "$row[friend_recommendation],";
+  $str .= "$row[why],";
 
   return $str;
 }
@@ -94,7 +94,6 @@ function createConfidenceIntervalString($cxn, $id, $problemId) {
   $row = mysqli_fetch_array($result);
 
   $str = "";
-  $str .= "$row[optn],";
   $str .= "$row[lower],";
   $str .= "$row[best],";
   $str .= "$row[upper],";
@@ -203,6 +202,23 @@ function createFormatsShownString($cxn, $id, $problemId) {
 
 }
 
+function createAttentionCheckString($cxn, $id, $problemId) {
+  $query = sprintf("SELECT * FROM attention_check WHERE id = '%s' AND problem_id = '%s';", $id, $problemId);
+
+  $result = mysqli_query($cxn, $query);
+
+  if (!$result) {
+    error($cxn, "select query failed: $query");
+  }
+
+  $row = mysqli_fetch_array($result);
+
+  $str = "";
+  $str .= "$row[attention_format],";
+  $str .= "$row[attention_samples],";
+  return $str;
+
+}
 
 // create a CSV file for particular id
 function createCSVforId($cxn, $id) {
@@ -242,6 +258,7 @@ function createCSVforId($cxn, $id) {
     $str .= createFormatsShownString($cxn, $id, $problemId);
     $str .= createExperienceValuesString($cxn, $id, $problemId);
     $str .= createSimultaneousValuesString($cxn, $id, $problemId);
+    $str .= createAttentionCheckString($cxn, $id, $problemId);
     $str .= "\n";
   }
 
@@ -265,9 +282,11 @@ function createCSVforId($cxn, $id) {
 
 }
 
-main();
+function main() {
+   //createCSV(15);
+}
+
+//main();
 
 ?>
-
-
 

@@ -19,7 +19,11 @@ function createState() {
       why: "-",
       upper: -1,
       best: -1,
-      lower: -1
+      lower: -1,
+      attentionCheck: {
+        missing: -1, //TODO change to format
+        numsamples: -1 // TODO change to samples
+      }
     },
     isSwitched: false,
     phase: Phase.INTRO
@@ -52,7 +56,11 @@ function enableContinueButton() {
 
 function enterFirstProductPhase() {
   currentProblem = state.products[0];
-  disableContinueButton();
+  if (currentProblem.filter['experience'] == true) {
+    disableContinueButton();
+  } else {
+    enableContinueButton();
+  }
 
   $("#introduction").hide();
   $("#information").show();
@@ -62,7 +70,11 @@ function enterFirstProductPhase() {
 function enterSecondProductPhase() {
   // TODO can this line be removed?
   currentProblem = state.products[1];
-  disableContinueButton();
+  if (currentProblem.filter['experience'] == true) {
+    disableContinueButton();
+  } else {
+    enableContinueButton();
+  }
 
   // TODO better place for this?
   $("#productInformation").children("h3").text(configs['productText'] + " B Information");
@@ -93,8 +105,42 @@ function enterAttentionCheckPhase() {
   // TODO this needs to change based on what was presented to the user first
   // see issue #55 on github
   document.getElementById("correctlabel").innerHTML = state.products[0].samples;
+
+  // TODO change the values for the numsamples from 0 and 1 if correct to 0
+  // if correct and the value of the radio button otherwise
+
+  // set the correct answer based on what was first shown to the user.
+  // TODO hack
+  if (state.products[0].filter.description == "1") {
+    $("#attndescription").val('1');
+  } else if (state.products[0].filter.experience == "1") {
+    $("#attnexperience").val('1');
+  }
+
+  // randomise the order of the radio button options
+  // TODO hack
+  var arr = $("#attncheck1 p").toArray()
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    swapNodes(arr[i], arr[j]);
+  }
+
+  var arr = $("#attncheck2 p").toArray()
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    swapNodes(arr[i], arr[j]);
+  }
+
   $("#interval").hide();
   $("#attentionCheck").show();
+}
+
+// http://stackoverflow.com/a/698440
+function swapNodes(a, b) {
+  var aparent = a.parentNode;
+  var asibling = a.nextSibling === b ? a : a.nextSibling;
+  b.parentNode.insertBefore(a, b);
+  aparent.insertBefore(b, asibling);
 }
 
 function enterEndPhase() {
@@ -227,7 +273,7 @@ function readConfigFile() {
   state.products[1].randomiseFilter = {
   }
 
-  return $.get("readConfigFile.php", 
+  return $.get("readConfigFile.php", //?time=" + $.now(), 
       function(config) { 
         // TODO refactor config to be part of state?
         configs = config;
@@ -342,7 +388,8 @@ function setupExperiment() {
 
 // switches options 1 and 2 around 50% of the time
 function randomiseOptions() {
-  if (Math.random() > 0.5 || true) {
+  // TODO randomiation turned off, need to fix
+  if (Math.random() > 0.5 && false) {
     console.log("Switching!");
     isSwitched = true;
     var tmp = state.products[0];
@@ -533,14 +580,14 @@ function checkChoices() {
   }
 
   // form is valid, record form data and go to next state.phase
-  state.survey.choiceStrength = formData[0].value;
-  state.survey.friend = formData[1].value;
+  //state.survey.choiceStrength = formData[0].value;
+  //state.survey.friend = formData[1].value;
   d("sending data to server");
   // TODO map to convert this to true/falses based on show/hide
   // maybe one extra level of indirection, store the true/false in the product
   // and call the show/hide based on that
-  delete state.products[0].filter;
-  delete state.products[1].filter;
+  //delete state.products[0].filter;
+  //delete state.products[1].filter;
   //sendDataToServer();
   //state.survey.friend = $('input[name=strength]:checked', '#choiceForm').val();
   nextPhase();
@@ -580,6 +627,8 @@ function checkAttention() {
     alert("Please answer both questions before continuing");
     return;
   }
+  state.survey.attentionCheck[formData[0].name] = formData[0].value;
+  state.survey.attentionCheck[formData[1].name] = formData[1].value;
   nextPhase();
 }
 

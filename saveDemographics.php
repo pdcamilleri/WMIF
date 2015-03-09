@@ -10,7 +10,7 @@ function post($key) {
   return false;
 }
 
-$connection = getDatabaseConnection();
+$cxn = getDatabaseConnection();
 
 // check if we can get hold of all of the required form paramaters
 if (!
@@ -28,13 +28,15 @@ if (!
 }
 
 // let make sure we escape the data
-$gender = mysql_real_escape_string(post('Gender'));
-$age = mysql_real_escape_string(post('Age'));
-$education = mysql_real_escape_string(post('Education'));
-$employment = mysql_real_escape_string(post('Employment'));
-$marital = mysql_real_escape_string(post('Marital'));
-$income = mysql_real_escape_string(post('Income'));
-$mid = mysql_real_escape_string(post('mid'));
+$gender = mysqli_real_escape_string($cxn, post('Gender'));
+$age = mysqli_real_escape_string($cxn, post('Age'));
+$education = mysqli_real_escape_string($cxn, post('Education'));
+
+$employment = mysqli_real_escape_string($cxn, post('Employment'));
+
+$marital = mysqli_real_escape_string($cxn, post('Marital'));
+$income = mysqli_real_escape_string($cxn, post('Income'));
+$mid = mysqli_real_escape_string($cxn, post('mid'));
 
 // lets setup our insert query
 $sql = sprintf("INSERT INTO %s VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
@@ -43,7 +45,7 @@ $sql = sprintf("INSERT INTO %s VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s',
 );
 
 // lets run our query
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($cxn, $sql);
 
 // setup our response "object"
 $resp = new stdClass();
@@ -52,7 +54,7 @@ if($result) {
   $resp->success = true;
 }
 
-mysqli_close($connection);
+mysqli_close($cxn);
 
 print json_encode($resp);
 ?>
