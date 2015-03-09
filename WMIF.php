@@ -436,54 +436,54 @@
             </legend>
 
             <!--p>
-              <input type="radio" name="missing" id="attnmissing" value="0" />
-              <label for="missing">A line graph showing review ratings over time</label>
+              <input type="radio" name="format" id="attnformat" value="0" />
+              <label for="format">A line graph showing review ratings over time</label>
             </p-->
 
             <p>
-              <input type="radio" id="attndescription" name="missing" value="0">
+              <input type="radio" id="attndescription" name="format" value="0">
               <label for="attndescription">
                 A summary of the scores in the format "X% of scores were Y".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnfrequency" name="missing" value="0">
+              <input type="radio" id="attnfrequency" name="format" value="0">
               <label for="attnfrequency">
                 A summary of the scores in the format "X / Y scores were Z".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnaverage" name="missing" value="0">
+              <input type="radio" id="attnaverage" name="format" value="0">
               <label for="attnaverage">
                 A summary of the scores in the format "Average score is X".
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attndistribution" name="missing" value="0">
+              <input type="radio" id="attndistribution" name="format" value="0">
               <label for="attndistribution">
                 A summary of the scores in a frequency bar chart.
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnwordcloud" name="missing" value="0">
+              <input type="radio" id="attnwordcloud" name="format" value="0">
               <label for="attnwordcloud">
                 A summary of the scores in graphical format where more frequent scores were displayed as physically larger.
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnsimultaneous" name="missing" value="0">
+              <input type="radio" id="attnsimultaneous" name="format" value="0">
               <label for="attnsimultaneous">
                 A list of all the scores all displayed at the same time. 
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnexperience" name="missing" value="0">
+              <input type="radio" id="attnexperience" name="format" value="0">
               <label for="attnexperience">
                 A list of all the scores each displayed one at a time. 
               </label>
@@ -499,42 +499,42 @@
             </legend>
 
             <p>
-              <input type="radio" id="wrong1" name="numsamples" value="0">
+              <input type="radio" id="wrong1" name="samples" value="0">
               <label for="wrong1">
                 9
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong2" name="numsamples" value="0">
+              <input type="radio" id="wrong2" name="samples" value="0">
               <label for="wrong2">
                 25
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong3" name="numsamples" value="0">
+              <input type="radio" id="wrong3" name="samples" value="0">
               <label for="wrong3">
                 52
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong4" name="numsamples" value="0">
+              <input type="radio" id="wrong4" name="samples" value="0">
               <label for="wrong4">
                 77
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong5" name="numsamples" value="0">
+              <input type="radio" id="wrong5" name="samples" value="0">
               <label for="wrong5">
                 90
               </label>
             </p>
 
             <p>
-              <input type="radio" id="correct" name="numsamples" value="1">
+              <input type="radio" id="correct" name="samples" value="1">
               <label id="correctlabel" for="correct">
               </label>
             </p>

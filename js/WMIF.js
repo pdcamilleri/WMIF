@@ -21,8 +21,8 @@ function createState() {
       best: -1,
       lower: -1,
       attentionCheck: {
-        missing: -1, //TODO change to format
-        numsamples: -1 // TODO change to samples
+        format: -1,
+        samples: -1
       }
     },
     isSwitched: false,
@@ -603,11 +603,6 @@ function checkInterval() {
 
 // saves the slider choices into the state
 function saveSliderChoices() {
-
-  // TODO 
-  //$("#sliders_1 .slider-box > .outcomeValues") // to only grab out the first sliders stuff
-  //$(".slider-box .ui-slider-handle")[0].innerHTML == "100"
-  //$(".slider-box > .outcomeValues")[0].innerHTML == "1"
 
   for (var i = 0; i < 2; ++i) {
     var sliders = []; 
