@@ -13,6 +13,7 @@ function createState() {
   return {
     products: [createProduct(), createProduct()],
     problems: [],
+    problemNum: 0,
     survey: { 
       choice: -1,
       choiceStrength: -1,
@@ -150,19 +151,18 @@ function enterEndPhase() {
 
   unrandomise();
   sendDataToServer();
-  // TODO
-  // TODO if there are more products to display, then restart the experiment
-  // TODO
-  /*
-     shift state.products
-     shift state.products
-     window.onload()
 
-   */
-
-  $("#randomValueFromChoice").html(randomVal);
-  $("#numSamples").html(randomVal);
-  $("#end").show();
+  if (state.problems.length != 0) {
+    // load next problem
+    loadNextProblemValuesToState();
+    state.phase = Phase.INTRO;
+    resetExperiment();
+  } else {
+    // end of experiment
+    $("#randomValueFromChoice").html(randomVal);
+    $("#numSamples").html(randomVal);
+    $("#end").show();
+  }
 }
 
 function unrandomise() {
@@ -313,7 +313,7 @@ function resetExperiment() {
   $(".container").hide();
   $("#introduction").show();
   $("#experienceDisplay").html("");
-  setupExperiment();
+  setupFormats();
   // Reset the radio buttons.
   $("input:radio").prop("checked", false);
   // reset the "Why you chose this option?" free response.
@@ -345,42 +345,47 @@ function resetChoice() {
 
 }
 
+// called before presenting a new problem to the participant 
+setupFormats = function() {
+
+  // need to wait for config values (for #samples) and input values before creating
+  // information displays
+
+  // TODO...
+  $("#productInformation").children("h3").text(configs['productText'] + " A Information");
+
+  // TODO need to expand for multiple products?
+  for (var i = 0; i < state.products.length; i += 2) {
+    state.products[i].values = state.products[i].values.slice(0, state.products[i].samples);
+    state.products[i + 1].values = state.products[i + 1].values.slice(0, state.products[i + 1].samples);
+  }
+
+  randomiseOptions();
+
+  // TODO - factor this line out by removing references to currentProblem
+  currentProblem = state.products[0]; // should not need this, should be set when entering first product stage
+  // TODO
+
+  createInformationDisplays(state.products[0]);
+  initiateSliders();
+  disableSliderSubmit();
+
+  populateOutcomeValuesInSlider();
+
+  clickToSelectionPhase(); // DO NOT COMMIT
+
+}
+
 window.onload = setupExperiment;
 
 function setupExperiment() {
   //$(".container").show();
   state = createState();
   state.mid = mid;
-  $.when(readConfigFile(), populateInputValues()).done(function() {
-    // need to wait for config values (for #samples) and input values before creating
-    // information displays
-
-    // TODO...
-    $("#productInformation").children("h3").text(configs['productText'] + " A Information");
-
-    // TODO need to expand for multiple products?
-    for (var i = 0; i < state.products.length; i += 2) {
-      state.products[i].values = state.products[i].values.slice(0, state.products[i].samples);
-      state.products[i + 1].values = state.products[i + 1].values.slice(0, state.products[i + 1].samples);
-    }
-
-    randomiseOptions();
-
-    // TODO - factor this line out by removing references to currentProblem
-    currentProblem = state.products[0]; // should not need this, should be set when entering first product stage
-    // TODO
-
-    createInformationDisplays(state.products[0]);
-    initiateSliders();
-    disableSliderSubmit();
-
-    populateOutcomeValuesInSlider();
-
-    clickToSelectionPhase(); // DO NOT COMMIT
-
-  })
-  .fail(function() {
-    d("one of the AJAX calls failed!")
+  $.when(readConfigFile(), populateInputValues())
+    .done(setupFormats)
+    .fail(function() {
+      d("one of the AJAX calls failed!")
   });
 }
 
@@ -644,6 +649,7 @@ function populateInputValues() {
 }
 
 function loadNextProblemValuesToState() {
+  state.problemNum++;
   values = state.problems.shift();
   state.products[0].values = values.splice(0, 100);
   state.products[1].values = values;
@@ -929,7 +935,14 @@ function createDistribution(values) {
   createChart(data);
 }
 
+function clearChartSpace() {
+  $("svg.labels g").remove();
+  $("svg.chart g").remove();
+}
+
 function createChart(data) {
+
+  clearChartSpace();
 
   var SVGwidth = 450,
       labelsWidth = 100,
