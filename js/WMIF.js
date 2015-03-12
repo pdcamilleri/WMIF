@@ -40,10 +40,9 @@ function createProduct() {
 }
 
 var state;
-var currentProblem;// = state.products[0];
+var currentProblem;
 var configs;
 
-// TODO change to disableButton(#buttonid) { ...
 function disableContinueButton() {
   document.getElementById("nextPhase").disabled = true;
   document.getElementById("nextPhase").style.color = 'grey';
@@ -327,8 +326,6 @@ function resetExperiment() {
   $("#intervalForm").find("input").val("");
 
   // TODO https://github.com/pdcamilleri/WMIF/issues/62
-  // Reset the sanity check questions. Or is this only done at the end of the experiment...?
-  // Next two sanity check questions are still filled out from the previous question.
 
   resetChoice();
 
@@ -904,12 +901,14 @@ function createDistribution(values) {
   // get data in the correct format (see above comment) 
   var counts = getFrequencyArray(values);
   var data = [];
-  // add extra 0's if we need them
+
+  // add extra 0's if we need them, as we always want to show first 10 numbers (#68)
   for (var i = counts.length; i <= 10; i++) {
     counts.push(0);
   }
-  for (var i = 0; i < counts.length; i++) {
-    // add extra 0's if we need them
+
+  // dont show number 0 (#68)
+  for (var i = 1; i < counts.length; i++) {
     data.push({name: i.toString(), value: counts[i]});
   }
 
@@ -964,7 +963,7 @@ function createChart(data) {
       .attr("y", barHeight / 2)
       .attr("transform", function(d) { return "translate(" + (barWidth + 15) + ", 0)"; })
       .attr("dy", ".35em")
-      .text(function(d) { return d.value; });
+      .text(function(d) { return "(" + d.value + ")"; });
 
   // TODO table this up like amazon does
   var labels = d3.select(".labels")
@@ -979,7 +978,7 @@ function createChart(data) {
   labelbar.append("text")
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
-      .text(function(d) { return d.name + " stars"; });
+      .text(function(d) { return d.name + " stars:"; });
 
   function type(d) {
     d.value = +d.value; // coerce to number
