@@ -1,12 +1,11 @@
 <?php
-# to connect to the database
-# % mysql -u wmifuser -pwmifpassword wmifdatabase
 
 define("NUM_SLIDERS_OUTCOMES", 10);
 
 require_once("constants.php");
 require_once("database.php");
 require_once("createCSVfile.php");
+require_once("errorlog.php");
 
 function post($key) {
   if (isset($_POST[$key])) {
@@ -27,18 +26,21 @@ function saveFilter($connection, $id, $problemID, $optn, $filter /*$rFilter*/) {
                   $filter['simultaneous']?1:0, $rFilter['simultaneous']?1:0,
                   $filter['experience']?1:0, $rFilter['experience']?1:0
                   );
-  $result = mysqli_query($connection, $insertQuery);
+  return mysqli_query($connection, $insertQuery);
 
 }
 
 function insertArrayIntoDatabase($connection, $id, $problemID, $optn, $dbTableName, $array) {
+  $results = array();
   for ($i = 0; $i < count($array); $i++) {
 
     $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
                     $dbTableName, $id, $problemID, $i, $optn, $array[$i]);
-    $result = mysqli_query($connection, $insertQuery);
-  }
 
+    $result = mysqli_query($connection, $insertQuery);
+    array_push($results, $result);
+  }
+  return $results;
 }
 
 
@@ -64,30 +66,34 @@ function saveAttentionCheck($connection, $id, $problemID, $attnCheck) {
 }
 
 function saveSimultaneousValues($connection, $id, $problemID, $optn, $array) {
-  insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'simultaneous_values', $array);
+  return insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'simultaneous_values', $array);
 }
 
 function saveExperienceValues($connection, $id, $problemID, $optn, $array) {
-  insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'experience_values', $array);
+  return insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'experience_values', $array);
 }
 
 function saveOriginalValues($connection, $id, $problemID, $optn, $array) {
-  insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'original_values', $array);
+  return insertArrayIntoDatabase($connection, $id, $problemID, $optn, 'original_values', $array);
 }
 
 // TODO optn is not needed, correct?
 function saveConfidenceInterval($connection, $id, $problemID, $optn, $lower, $best, $upper) {
-  $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", 'confidence_interval', $id, $problemID, 0, $lower, $best, $upper);
+  $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", 
+                          'confidence_interval', $id, $problemID, 0, $lower, $best, $upper);
   return mysqli_query($connection, $insertQuery);
 }
 
 function saveSliderOutcomes($connection, $id, $problemID, $optn, $idx, $outcomes) {
+  $results = array();
   for ($i = 0; $i < count($outcomes); ++$i) {
-    $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 'slider_outcomes', $id, $problemID, $optn, $i, $outcomes[$i]);
+    $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
+                            'slider_outcomes', $id, $problemID, $optn, $i, $outcomes[$i]);
 
     $result = mysqli_query($connection, $insertQuery);
-    // TODO check result
+    array_push($results, $result);
   }
+  return $results;
 }
 
 $connection = getDatabaseConnection();
@@ -123,15 +129,16 @@ $attnCheck = $survey['attentionCheck'];
 #}
 //echo "$mid && $choice && $choiceStrength && $why && $upper && $lower && $best)\n";
 
-// TODO - different problem IDs for when there are multiple problems
-$problemID = 1;
+$problemID = $survey['problemNum'];
 
 // user already exists in database so get this users ID (not MID, as MID may not be unique)
 // TODO doesnt make sense to get ID from MID if MID isnt unique. It should be unique
 $id = getID($connection, $mid);
 
 
-saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why);
+if(!saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why)) {
+  log_and_exit("save choices failed\n" . print_r($_POST, true));
+}
 
 saveSamples($connection, $id, $problemID, 0, $samples1);
 saveSamples($connection, $id, $problemID, 1, $samples1);
