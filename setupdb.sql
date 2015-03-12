@@ -1,11 +1,9 @@
 use wmifdatabase;
 
--- TODO remove comments and add to documentation page on the github wiki
-
 -- holds all the information relating to the participant of this experiment.
 CREATE TABLE demographics (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- id created internally, no meaning beyond the database
-  mid VARCHAR(30),
+  mid VARCHAR(30), -- TODO this should be unique across the table. enforce?
   male INT,
   age INT,
   education INT,
