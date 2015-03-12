@@ -46,7 +46,7 @@
    <body>
       <div id="noticeboard">
         <!--p> MID is <?php print_r($mid); ?> </p-->
-        <button onclick="resetExperiment();"> Reset Experiment</button>
+        <!--button onclick="resetExperiment();"> Reset Experiment</button-->
       </div>
       <hr/>
 
