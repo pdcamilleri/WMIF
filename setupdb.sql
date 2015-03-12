@@ -86,7 +86,7 @@ CREATE TABLE formats_shown (
   id INT NOT NULL,
   problem_id INT NOT NULL,
   optn INT NOT NULL,
-  switched INT NOT NULL,
+  is_switched INT NOT NULL,
   average_shown INT NOT NULL,
   description_shown INT NOT NULL,
   description_random INT NOT NULL,

@@ -14,7 +14,7 @@ function post($key) {
   return false;
 }
 
-function saveFilter($connection, $id, $problemID, $optn, $filter, $switched /*$rFilter*/) {
+function saveFilter($connection, $id, $problemID, $optn, $filter, $rFilter, $switched) {
   // TODO feels bad/wrong, if anything anywhere changes, so does all this....
   $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", 
                   'formats_shown', $id, $problemID, $optn, $switched?1:0,
@@ -117,8 +117,13 @@ $optn2 = $optns[1];
 $samples1 = $optn1['samples'];
 $samples2 = $optn2['samples'];
 $configs = post('configs');
-$filter1 = $optn1['randomiseFilter'];
-#$filter2 = $optn2['randomiseFilter'];
+
+$filter1 = $optn1['filter'];
+$rFilter1 = $optn1['randomiseFilter'];
+
+$filter2 = $optn2['filter'];
+$rFilter2 = $optn2['randomiseFilter'];
+
 $sliders1 = $optn1['sliders'];
 $sliders2 = $optn2['sliders'];
 $switched = post('isSwitched');
@@ -159,7 +164,8 @@ saveSliderOutcomes($connection, $id, $problemID, 0, $idx, $sliders1);
 saveSliderOutcomes($connection, $id, $problemID, 1, $idx, $sliders2);
 
 // save the formats
-saveFilter($connection, $id, $problemID, 0, $filter1, $switched);
+saveFilter($connection, $id, $problemID, 0, $filter1, $rFilter1, $switched);
+saveFilter($connection, $id, $problemID, 0, $filter2, $rFilter2, $switched);
 
 // Save the answers to the attention check question
 saveAttentionCheck($connection, $id, $problemID, $attnCheck);

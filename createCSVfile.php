@@ -197,6 +197,7 @@ function createFormatsShownString($cxn, $id, $problemId) {
   $str .= "$row[simultaneous_random],";
   $str .= "$row[experience_shown],";
   $str .= "$row[experience_random],";
+  $str .= "$row[is_switched],";
 
   return $str;
 
