@@ -12,6 +12,7 @@ Phase = {
 function createState() {
   return {
     products: [createProduct(), createProduct()],
+    problems: [],
     survey: { 
       choice: -1,
       choiceStrength: -1,
@@ -630,8 +631,9 @@ function populateInputValues() {
     type: "GET",
     url: "getInputData.php",
     success: function(problemValues) {
-      state.products[0].values = problemValues[0];
-      state.products[1].values = problemValues[1];
+      shuffle(problemValues);
+      state.problems = problemValues;
+      loadNextProblemValuesToState();
     },
     dataType: 'json',
     error: function(jqXHR, textStatus, errorThrown) {
@@ -639,6 +641,12 @@ function populateInputValues() {
       d(jqXHR.responseText);
     }
   }); 
+}
+
+function loadNextProblemValuesToState() {
+  values = state.problems.shift();
+  state.products[0].values = values.splice(0, 100);
+  state.products[1].values = values;
 }
 
 // move around some columns
