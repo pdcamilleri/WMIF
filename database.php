@@ -1,6 +1,7 @@
 <?php
 
 require_once("constants.php");
+require_once("errorlog.php");
 
 function getDatabaseConnection() {
   // Setup variables to connect to database
