@@ -154,8 +154,13 @@ function enterEndPhase() {
 
   if (state.problems.length != 0) {
     // load next problem
-    loadNextProblemValuesToState();
+
     state.phase = Phase.INTRO;
+    state.problemNum = state.problemNum + 1;
+    state.products[0].samplesSoFar = 0;
+    state.products[1].samplesSoFar = 0;
+
+    loadNextProblemValuesToState();
     resetExperiment();
   } else {
     // end of experiment
@@ -649,7 +654,6 @@ function populateInputValues() {
 }
 
 function loadNextProblemValuesToState() {
-  state.problemNum++;
   values = state.problems.shift();
   state.products[0].values = values.splice(0, 100);
   state.products[1].values = values;
