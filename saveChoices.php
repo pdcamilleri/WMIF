@@ -30,12 +30,13 @@ function saveFilter($connection, $id, $problemID, $optn, $filter, $rFilter, $swi
 
 }
 
+
 function insertArrayIntoDatabase($connection, $id, $problemID, $optn, $dbTableName, $array) {
   $results = array();
   for ($i = 0; $i < count($array); $i++) {
 
     $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
-                    $dbTableName, $id, $problemID, $i, $optn, $array[$i]);
+                    $dbTableName, $id, $problemID, $optn, $i, $array[$i]);
 
     $result = mysqli_query($connection, $insertQuery);
     array_push($results, $result);
