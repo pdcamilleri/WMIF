@@ -1,15 +1,3 @@
-// debug code to populate the demographics page
-window.onload = function() {
-  $("select").each( // for each question
-    function() { 
-      var randomEl = 1 + Math.floor(
-        Math.random() * ($(this).children().length - 1) // get a random element from 1 - number of elements
-      ); 
-      $(this).children('[value="' + randomEl + '"]').attr("selected","selected"); // set that as the selected element
-    } 
-  )
-}
-
 //Ensure that every question is answered, otherwise alert an error
 function checkAnswers() {
   var questionIds = [
