@@ -96,6 +96,13 @@ function saveSliderOutcomes($connection, $id, $problemID, $optn, $idx, $outcomes
   return $results;
 }
 
+
+//////////
+// MAIN //
+//////////
+
+just_log(print_r($_POST, true));
+
 $connection = getDatabaseConnection();
 
 // get all the post paramaters
