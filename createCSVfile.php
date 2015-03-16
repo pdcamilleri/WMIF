@@ -26,8 +26,8 @@ function createCSV($id) {
   $string = createCSVforId($cxn, $id);
   //$filename = "results" . DIRECTORY_SEPARATOR . $id . "." . $mid . "." . date("Y-m-d.H:i:s") . ".csv";
   $filename = "results" . DIRECTORY_SEPARATOR . $mid . ".txt";
-  file_put_contents($filename, $string) or die ("Unable to write to file: " . $filename);
-  return;
+  file_put_contents($filename, $string, FILE_APPEND) or die ("Unable to write to file: " . $filename);
+  return $string;
 }
 
 function getDemographicHeader() {
@@ -495,7 +495,7 @@ function createCSVforId($cxn, $id) {
 /*
 // to manually generate CSV files
 function main() {
-  createCSV(34);
+  echo createCSV(35);
 }
 main();
 */

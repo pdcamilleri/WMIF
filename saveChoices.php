@@ -143,12 +143,11 @@ $attnCheck = $survey['attentionCheck'];
 #}
 //echo "$mid && $choice && $choiceStrength && $why && $upper && $lower && $best)\n";
 
-$problemID = $survey['problemNum'];
+$problemID = post('problemNum');
 
 // user already exists in database so get this users ID (not MID, as MID may not be unique)
 // TODO doesnt make sense to get ID from MID if MID isnt unique. It should be unique
 $id = getID($connection, $mid);
-
 
 if(!saveChoices($connection, $id, $problemID, $choice, $choiceStrength, $friend, $why)) {
   log_and_exit("save choices failed\n" . print_r($_POST, true));
