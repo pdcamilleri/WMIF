@@ -410,17 +410,17 @@
           
           <p>
             <label for="lowerEstimate">Lower estimate: </label>
-            <input type="number" id="lowerEstimate" name="lowerEstimate" min="1" max="100" step="1" required>
+            <input type="number" id="lowerEstimate" name="lowerEstimate" min="1" max="10" step="1" required>
           </p>
  
           <p>
             <label for="bestEstimate">Best estimate:</label>
-            <input type="number" id="bestEstimate" name="bestEstimate" min="1" max="100" step="1" required>
+            <input type="number" id="bestEstimate" name="bestEstimate" min="1" max="10" step="1" required>
           </p>
  
           <p>
             <label for="upperEstimate">Upper estimate:</label>
-            <input type="number" id="upperEstimate" name="upperEstimate" min="1" max="100" step="1" required>
+            <input type="number" id="upperEstimate" name="upperEstimate" min="1" max="10" step="1" required>
           </p>
           <button class="button" id="submitEstimates">Continue</button>
         </form>
