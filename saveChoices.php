@@ -61,7 +61,7 @@ function saveSamples($connection, $id, $problemID, $optn, $samples1) {
 
 function saveAttentionCheck($connection, $id, $problemID, $attnCheck) {
   $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s');", 
-                      'attention_check', $id, $problemID, $attnCheck['missing'], $attnCheck['numsamples']);
+                      'attention_check', $id, $problemID, $attnCheck['format'], $attnCheck['samples']);
 
   return mysqli_query($connection, $insertQuery);
 }

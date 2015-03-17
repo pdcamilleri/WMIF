@@ -112,8 +112,16 @@ function enterAttentionCheckPhase() {
 
   // set the correct answer based on what was first shown to the user.
   // TODO hack
-  if (state.products[0].filter.description == "1") {
-    $("#attndescription").val('1');
+  if (state.products[0].filter.average== "1") {
+    $("#attnaverage").val('1');
+  } else if (state.products[0].filter.frequency == "1") {
+    $("#attnfrequency").val('1');
+  } else if (state.products[0].filter.distribution == "1") {
+    $("#attndistribution").val('1');
+  } else if (state.products[0].filter.wordcloud == "1") {
+    $("#attnwordcloud").val('1');
+  } else if (state.products[0].filter.simultaneous == "1") {
+    $("#attnsimultaneous").val('1');
   } else if (state.products[0].filter.experience == "1") {
     $("#attnexperience").val('1');
   }
