@@ -306,7 +306,7 @@ function createSimultaneousValuesHeader($cxn, $id, $problemId) {
 
   $str = "";
   while ($row = mysqli_fetch_array($result)) {
-    $str .= "value,";
+    $str .= "simultaneous value,";
   }
 
   $query = sprintf("SELECT * FROM simultaneous_values WHERE id = '%s' AND problem_id = '%s' AND optn = '%s';", $id, $problemId, 1);
@@ -318,7 +318,7 @@ function createSimultaneousValuesHeader($cxn, $id, $problemId) {
   }
 
   while ($row = mysqli_fetch_array($result)) {
-    $str .= "value,";
+    $str .= "simultaneous value,";
   }
 
   return $str;
