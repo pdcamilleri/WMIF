@@ -168,6 +168,12 @@ function enterEndPhase() {
     state.products[0].samplesSoFar = 0;
     state.products[1].samplesSoFar = 0;
 
+    state.products[0].outcomeOrder = [];
+    state.products[1].outcomeOrder = [];
+
+    // TODO can just do this?
+    //state.products = [createProduct(), createProduct()];
+
     loadNextProblemValuesToState();
     resetExperiment();
   } else {
