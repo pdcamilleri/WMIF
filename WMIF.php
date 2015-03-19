@@ -430,62 +430,34 @@
         <form id="attentionForm" >
           <fieldset id="attncheck1">
             <legend>
-              Which of the following appeared at the top of the page for 
-              <span class="productText"></span> 
-              A?
+              What type of products were reviewed throughout this study?
             </legend>
 
-            <!--p>
-              <input type="radio" name="format" id="attnformat" value="0" />
-              <label for="format">A line graph showing review ratings over time</label>
-            </p-->
-
             <p>
-              <input type="radio" id="attndescription" name="format" value="0">
-              <label for="attndescription">
-                A summary of the scores in the format "X% of scores were Y".
+              <input type="radio" id="attn1correct" name="format" value="1">
+              <label for="attn1correct">
+                <span class="productText"></span> 
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnfrequency" name="format" value="0">
-              <label for="attnfrequency">
-                A summary of the scores in the format "X / Y scores were Z".
+              <input type="radio" id="attn1wrong1" name="format" value="2">
+              <label for="attn1wrong1">
+                Computer games
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attnaverage" name="format" value="0">
-              <label for="attnaverage">
-                A summary of the scores in the format "Average score is X".
+              <input type="radio" id="attn1wrong2" name="format" value="3">
+              <label for="attn1wrong2">
+                Laptops
               </label>
             </p>
 
             <p>
-              <input type="radio" id="attndistribution" name="format" value="0">
-              <label for="attndistribution">
-                A summary of the scores in a frequency bar chart.
-              </label>
-            </p>
-
-            <p>
-              <input type="radio" id="attnwordcloud" name="format" value="0">
-              <label for="attnwordcloud">
-                A summary of the scores in graphical format where more frequent scores were displayed as physically larger.
-              </label>
-            </p>
-
-            <p>
-              <input type="radio" id="attnsimultaneous" name="format" value="0">
-              <label for="attnsimultaneous">
-                A list of all the scores all displayed at the same time. 
-              </label>
-            </p>
-
-            <p>
-              <input type="radio" id="attnexperience" name="format" value="0">
-              <label for="attnexperience">
-                A list of all the scores each displayed one at a time. 
+              <input type="radio" id="attn1wrong3" name="format" value="4">
+              <label for="attn1wrong3">
+                Operating systems
               </label>
             </p>
 
@@ -493,9 +465,7 @@
 
           <fieldset id="attncheck2">
             <legend>
-              In the task, how many review scores did you learn about for 
-              <span class="productText"></span> 
-              A?
+              In the task, how many review scores did you learn about for the first product?
             </legend>
 
             <p>
