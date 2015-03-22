@@ -555,7 +555,7 @@ function enableSliderSubmit() {
 function populateOutcomeValuesInSlider() {
   var numSliderSets = state.products.length;
   for (var i = 1; i < numSliderSets + 1; ++i) {
-    var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].reverse();
 
     $("#sliders_" + i).find(".outcomeValues").each(function() {
       $(this).html(values.shift());
@@ -623,12 +623,16 @@ function checkInterval() {
   nextPhase();
 }
 
+// http://stackoverflow.com/a/5386150
+// used in saveSliderChoices
+jQuery.fn.reverse = [].reverse;
+
 // saves the slider choices into the state
 function saveSliderChoices() {
 
   for (var i = 0; i < 2; ++i) {
     var sliders = []; 
-    $("#sliders_" + (i + 1) + " .slider-box .ui-slider-handle").each(function() { 
+    $("#sliders_" + (i + 1) + " .slider-box .ui-slider-handle").reverse().each(function() { 
       sliders.push($(this).html());
     });
     state.products[i].sliders = sliders;
