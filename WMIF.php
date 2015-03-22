@@ -470,35 +470,35 @@
             </legend>
 
             <p>
-              <input type="radio" id="wrong1" name="samples" value="0">
+              <input type="radio" id="wrong1" name="samples" value="9">
               <label for="wrong1">
                 9
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong2" name="samples" value="0">
+              <input type="radio" id="wrong2" name="samples" value="25">
               <label for="wrong2">
                 25
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong3" name="samples" value="0">
+              <input type="radio" id="wrong3" name="samples" value="52">
               <label for="wrong3">
                 52
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong4" name="samples" value="0">
+              <input type="radio" id="wrong4" name="samples" value="77">
               <label for="wrong4">
                 77
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong5" name="samples" value="0">
+              <input type="radio" id="wrong5" name="samples" value="90">
               <label for="wrong5">
                 90
               </label>
