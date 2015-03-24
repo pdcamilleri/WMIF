@@ -157,31 +157,10 @@ function enterEndPhase() {
   var values = state.products[state.survey.choice].values;
   var randomVal = values[Math.floor(Math.random() * values.length)];
 
-  unrandomise();
-  sendDataToServer();
-
-  if (state.problems.length != 0) {
-    // load next problem
-
-    state.phase = Phase.INTRO;
-    state.problemNum = state.problemNum + 1;
-    state.products[0].samplesSoFar = 0;
-    state.products[1].samplesSoFar = 0;
-
-    state.products[0].outcomeOrder = [];
-    state.products[1].outcomeOrder = [];
-
-    // TODO can just do this?
-    //state.products = [createProduct(), createProduct()];
-
-    loadNextProblemValuesToState();
-    resetExperiment();
-  } else {
-    // end of experiment
-    $("#randomValueFromChoice").html(randomVal);
-    $("#numSamples").html(randomVal);
-    $("#end").show();
-  }
+  // end of experiment
+  $("#randomValueFromChoice").html(randomVal);
+  $("#numSamples").html(randomVal);
+  $("#end").show();
 }
 
 function unrandomise() {
@@ -620,7 +599,31 @@ function checkInterval() {
   state.survey.lower = $("#lowerEstimate").val();
   state.survey.best  = $("#bestEstimate").val();
   state.survey.upper = $("#upperEstimate").val();
-  nextPhase();
+
+  // save data for this particular problem
+  unrandomise();
+  sendDataToServer();
+
+  // check if we should reset the experiment
+  if (state.problems.length != 0) {
+    // load next problem
+    state.phase = Phase.INTRO;
+    state.problemNum = state.problemNum + 1;
+    state.products[0].samplesSoFar = 0;
+    state.products[1].samplesSoFar = 0;
+
+    state.products[0].outcomeOrder = [];
+    state.products[1].outcomeOrder = [];
+
+    // TODO can just do this?
+    //state.products = [createProduct(), createProduct()];
+
+    loadNextProblemValuesToState();
+    resetExperiment();
+  } else {
+    // No more problems left, proceed to the next phase
+    nextPhase();
+  }
 }
 
 // http://stackoverflow.com/a/5386150
