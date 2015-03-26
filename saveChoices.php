@@ -60,6 +60,10 @@ function saveSamples($connection, $id, $problemID, $optn, $samples1) {
 }
 
 function saveAttentionCheck($connection, $id, $problemID, $attnCheck) {
+  if ($attnCheck['format'] == -1 || $attnCheck['samples'] == -1) {
+    return;
+  }
+
   $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s');", 
                       'attention_check', $id, $problemID, $attnCheck['format'], $attnCheck['samples']);
 
