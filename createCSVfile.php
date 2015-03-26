@@ -372,10 +372,10 @@ function createFormatsShownHeader() {
   return $str;
 }
 
+// TODO should get 2 rows, one for each option
 function createFormatsShownString($cxn, $id, $problemId) {
   
   $query = sprintf("SELECT * FROM formats_shown WHERE id = '%s' AND problem_id = '%s';", $id, $problemId);
-echo $query;
 
   $result = mysqli_query($cxn, $query);
 
@@ -399,7 +399,6 @@ echo $query;
   $str .= "$row[experience_random],";
   $str .= "$row[is_switched],";
 
-echo $str;
   return $str;
 
 }

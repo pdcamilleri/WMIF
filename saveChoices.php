@@ -91,6 +91,7 @@ function saveConfidenceInterval($connection, $id, $problemID, $optn, $lower, $be
 }
 
 function saveSliderOutcomes($connection, $id, $problemID, $optn, $idx, $outcomes) {
+  // TODO change from 0 - 9 to 1 to 10
   $results = array();
   for ($i = 0; $i < count($outcomes); ++$i) {
     $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s');", 
@@ -177,7 +178,7 @@ saveSliderOutcomes($connection, $id, $problemID, 1, $idx, $sliders2);
 
 // save the formats
 saveFilter($connection, $id, $problemID, 0, $filter1, $rFilter1, $switched);
-saveFilter($connection, $id, $problemID, 0, $filter2, $rFilter2, $switched);
+saveFilter($connection, $id, $problemID, 1, $filter2, $rFilter2, $switched);
 
 // Save the answers to the attention check question
 saveAttentionCheck($connection, $id, $problemID, $attnCheck);
