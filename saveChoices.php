@@ -16,15 +16,16 @@ function post($key) {
 
 function saveFilter($connection, $id, $problemID, $optn, $filter, $rFilter, $switched) {
   // TODO feels bad/wrong, if anything anywhere changes, so does all this....
+  // TODO change the trues to be 1's when reading config file in js/WMIF.js
   $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", 
                   'formats_shown', $id, $problemID, $optn, $switched == "true"?1:0,
-                  $filter['average'] == "true"?1:0, // cant randomis
-                  $filter['description'] == "true"?1:0, $rFilter['description'] == "true"?1:0,
-                  $filter['frequency'] == "true"?1:0, $rFilter['frequency'] == "true"?1:0,
-                  $filter['distribution'] == "true"?1:0, $rFilter['distribution'] == "true"?1:0,
-                  $filter['wordcloud'] == "true"?1:0, // cant randomise
-                  $filter['simultaneous'] == "true"?1:0, $rFilter['simultaneous'] == "true"?1:0,
-                  $filter['experience'] == "true"?1:0, $rFilter['experience'] == "true"?1:0
+                  $filter['average'] == "1"?1:0, // cant randomis
+                  $filter['description'] == "1"?1:0, $rFilter['description'] == "true"?1:0,
+                  $filter['frequency'] == "1"?1:0, $rFilter['frequency'] == "true"?1:0,
+                  $filter['distribution'] == "1"?1:0, $rFilter['distribution'] == "true"?1:0,
+                  $filter['wordcloud'] == "1"?1:0, // cant randomise
+                  $filter['simultaneous'] == "1"?1:0, $rFilter['simultaneous'] == "true"?1:0,
+                  $filter['experience'] == "1"?1:0, $rFilter['experience'] == "true"?1:0
                   );
 
   return mysqli_query($connection, $insertQuery);
