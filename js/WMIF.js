@@ -880,6 +880,10 @@ function enableExperienceButton(num) {
 // at the same time, i.e. simultaneously.
 function createSimultaneous() {
 
+  if (!currentProblem.filter['simultaneous']) {
+    return;
+  }
+
   if (currentProblem.randomiseFilter['simultaneous']) {
     currentProblem.simultaneousValues = shuffle(currentProblem.values.slice(0));
   } else {
