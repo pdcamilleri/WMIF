@@ -280,6 +280,8 @@ function readConfigFile() {
           //state.products[0].filter[prop] = getShowOrHideFunction(prop, config[prop]);
           //state.products[1].filter[prop] = getShowOrHideFunction(prop, config[prop + "2"]);
           // set whether or not to show this particular information format?
+          // TODO why does this not also use the shouldRandomise function?
+          // will need to change saveChoices as well if this is changed
           state.products[0].filter[prop] = config[prop];
           state.products[1].filter[prop] = config[prop + "2"];
 
@@ -390,9 +392,9 @@ function setupExperiment() {
 // switches options 1 and 2 around 50% of the time
 function randomiseOptions() {
   // TODO randomiation turned off, need to fix
-  if (Math.random() > 0.5 && false) {
+  if (Math.random() > 0.5) {
     console.log("Switching!");
-    isSwitched = true;
+    state.isSwitched = true;
     var tmp = state.products[0];
     state.products[0] = state.products[1];
     state.products[1] = tmp;
@@ -614,6 +616,8 @@ function checkInterval() {
 
     state.products[0].outcomeOrder = [];
     state.products[1].outcomeOrder = [];
+
+    state.isSwitched = false;
 
     // TODO can just do this?
     //state.products = [createProduct(), createProduct()];
