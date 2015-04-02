@@ -52,7 +52,7 @@
       <hr/>
 
       <div id="introduction" class="container">
-        <h2 class="page-header"> Problem Instructions </h2>
+        <h2 class="page-header"> Scenario <span id="problemNum">1</span></h2>
         <p>
           shouldnt see this
         </p>
