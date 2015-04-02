@@ -483,37 +483,37 @@
             </legend>
 
             <p>
-              <input type="radio" id="wrong1" name="samples" value="9">
+              <input type="radio" id="wrong1" name="samples" value="20">
               <label for="wrong1">
-                9
+                20
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong2" name="samples" value="25">
+              <input type="radio" id="wrong2" name="samples" value="30">
               <label for="wrong2">
-                25
+                30
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong3" name="samples" value="52">
+              <input type="radio" id="wrong3" name="samples" value="40">
               <label for="wrong3">
-                52
+               40 
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong4" name="samples" value="77">
+              <input type="radio" id="wrong4" name="samples" value="50">
               <label for="wrong4">
-                77
+               50 
               </label>
             </p>
 
             <p>
-              <input type="radio" id="wrong5" name="samples" value="90">
+              <input type="radio" id="wrong5" name="samples" value="60">
               <label for="wrong5">
-                90
+               60 
               </label>
             </p>
 
