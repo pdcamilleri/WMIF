@@ -462,6 +462,19 @@
               </label>
             </p>
 
+            <p>
+              <input type="radio" id="attn1wrong4" name="format" value="5">
+              <label for="attn1wrong4">
+                Movies
+              </label>
+            </p>
+
+            <p>
+              <input type="radio" id="attn1wrong5" name="format" value="6">
+              <label for="attn1wrong5">
+                Tablets
+              </label>
+            </p>
           </fieldset>
 
           <fieldset id="attncheck2">
