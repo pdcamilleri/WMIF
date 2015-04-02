@@ -295,7 +295,7 @@ function readConfigFile() {
         $("#productInformation").children("p").html(config['productInformation']);
         $("#expertiseText").html(config['expertise']);
         $("#introduction").children("p").html(config['problemInstructions']);
-        $("#problemNum").html(state.problemNum + 1);
+        $(".problemNum").html(state.problemNum + 1);
         $("#slidertext").children("p").html(config['slidertext']);
         $("#intervaltext").children("p").html(config['intervaltext']);
         $(".productText").html(config['productText']);
@@ -313,7 +313,7 @@ function shouldRandomise(val) {
 function resetExperiment() {
 
   // TODO should only be in one place, not two
-  $("#problemNum").html(state.problemNum + 1);
+  $(".problemNum").html(state.problemNum + 1);
 
   $(".container").hide();
   $("#introduction").show();

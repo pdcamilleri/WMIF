@@ -52,11 +52,11 @@
       <hr/>
 
       <div id="introduction" class="container">
-        <h2 class="page-header"> Scenario <span id="problemNum">1</span></h2>
+        <h2 class="page-header"> Scenario <span class="problemNum">1</span></h2>
         <p>
           shouldnt see this
         </p>
-        <button class="button" onclick="nextPhase()">Start Experiment</button>
+        <button class="button" onclick="nextPhase()">Start Scenario <span class="problemNum">1</span></button>
       </div>
 
       <div id="information" class="container" hidden>
