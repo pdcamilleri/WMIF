@@ -141,11 +141,11 @@
           </p>
           <button id="product1" class="button" value="1" onclick="recordChoice(0)">
             <span class="productText"></span>
-            A
+            <span class="productLetterA"></span>
           </button>
           <button id="product2" class="button" value="2" onclick="recordChoice(1)">
             <span class="productText"></span> 
-            B
+            <span class="productLetterB"></span>
           </button>
         </div>
 
@@ -227,7 +227,7 @@
 
               <label> 
                 <span class="productText"></span> 
-                A
+                <span class="productLetterA"></span>
               </label>
 
               <div class="sliders">
@@ -315,7 +315,7 @@
 
               <label> 
                 <span class="productText"></span> 
-                B
+                <span class="productLetterB"></span>
               </label>
 
               <div class="sliders">

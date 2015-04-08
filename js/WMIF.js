@@ -63,6 +63,10 @@ function enterFirstProductPhase() {
     enableContinueButton();
   }
 
+  // TODO
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + 1);
+  $("#nextPhase").html("See " + configs['productText'] + " " + ch);
+
   $("#introduction").hide();
   $("#information").show();
 }
@@ -78,7 +82,9 @@ function enterSecondProductPhase() {
   }
 
   // TODO better place for this?
-  $("#productInformation").children("h3").text(configs['productText'] + " B Information");
+  $("#nextPhase").html("Continue");
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + 1);
+  $("#productInformation").children("h3").text(configs['productText'] + " " + ch + " Information");
   createInformationDisplays(state.products[1]);
   applyDisplayFilter(currentProblem.filter);
   // TODO thought - maybe stick this in the problem object?
@@ -89,11 +95,25 @@ function enterSecondProductPhase() {
 
 function enterSelectionPhase() {
   $("#information").hide();
+
+  // TODO repeated
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2);
+  $(".productLetterA").html(ch);
+  ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + 1);
+  $(".productLetterB").html(ch);
+
   $("#selection").show();
 }
 
 function enterSliderPhase() {
   $("#selection").hide();
+  
+  // TODO
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2);
+  $(".productLetterA").html(ch);
+  ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + 1);
+  $(".productLetterB").html(ch);
+
   $("#slider").show();
 }
 
@@ -357,7 +377,8 @@ setupFormats = function() {
   // information displays
 
   // TODO...
-  $("#productInformation").children("h3").text(configs['productText'] + " A Information");
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2);
+  $("#productInformation").children("h3").text(configs['productText'] + " " + ch + " Information");
 
   // TODO need to expand for multiple products?
   for (var i = 0; i < state.products.length; i += 2) {
@@ -447,12 +468,15 @@ function createInformationDisplays(problem) {
 function recordChoice(val) {
   state.survey.choice = val;
 
+  var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + val);
+
   $("#choiceDisplay").html("You chose: <br/> <h3 style='font-weight: 700;'>" + configs['productText'] +
-      " " + String.fromCharCode(65 + val) + "</h3>");
+      " " + ch + "</h3>");
 
   $("#choiceButtons").hide();
 
   // only enable the radio buttons related to this product
+  $(".product1, .product2").attr("disabled", true);
   $(".product" + (val + 1)).attr("disabled", false);
 
   $("#choiceForm").show();
