@@ -319,6 +319,8 @@ function readConfigFile() {
         $("#slidertext").children("p").html(config['slidertext']);
         $("#intervaltext").children("p").html(config['intervaltext']);
         $(".productText").html(config['productText']);
+        $("#completionText").children("p").html(config['completionText']);
+        $("#completionCode").html(config['completionCode']);
 
       }, 
       'json'

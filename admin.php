@@ -61,6 +61,14 @@
         <input id="productText" type="text" name="productText">
         </textarea>
       </p>
+
+      <p>
+        <label for="completionCode">Completion code shown to user:</label>
+        <br/>
+        <input id="completionCode" type="text" name="completionCode" rows="10">
+        </textarea>
+      </p>
+
     </form>
 
     <div id="problem1" class="col-md-6">

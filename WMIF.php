@@ -540,12 +540,24 @@
       </div>
 
       <div id="end" class="container" hidden>
-        <p>
+        <h3 class="page-header">Study Complete!</h3>
+        <div id="completionText">
+          <p>
+          </p>
+        </div>
+        <div>
+          In order to complete this HIT you must submit a completition code back into the AMT website. 
+          Your completion code is <strong><span id="completionCode"><span></strong>
+        </div>
+
+        <p hidden>
           Thank you for completing this task. 
+          <div hidden>
           Note, the next review score for the product that you chose was 
           <span id="randomValueFromChoice"></span>.
+          </div>
         </p>
-        <p>
+        <p hidden>
           In order to complete this HIT you must submit a completition code back into the AMT website. 
           Your completion code is <strong>WIMF1_<span id="numSamples"><span></strong>
         </p>
