@@ -82,7 +82,7 @@ function enterSecondProductPhase() {
   }
 
   // TODO better place for this?
-  $("#nextPhase").html("Continue");
+  $("#nextPhase").html("Make a decision");
   var ch = String.fromCharCode('A'.charCodeAt(0) + state.problemNum * 2 + 1);
   $("#productInformation").children("h3").text(configs['productText'] + " " + ch + " Information");
   createInformationDisplays(state.products[1]);
