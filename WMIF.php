@@ -159,9 +159,17 @@
             </p>
 
             <div class="labels"> 
-              <label class="alignleft">Strongly prefer product 1</label>
+              <label class="alignleft">
+                Strongly prefer 
+                <span class="productText"></span> 
+                <span class="productLetterA"></span>
+              </label>
               <label class="aligncenter">Neutral</label>
-              <label class="alignright">Strongly prefer product 2</label>
+              <label class="alignright">
+                Strongly prefer
+                <span class="productText"></span> 
+                <span class="productLetterB"></span>
+              </label>
             </div>
 
             <div class="radioButtons"> 
@@ -179,7 +187,7 @@
 
           <div id="choiceWhy" class="question" hidden>
             <label class="question-text" for="why">
-              Please explain why you choose this option?
+              In the box below, please explain why you choose this option.
             </label>
             <br/>
             <textarea id="why" name="why" rows="5" cols="100"></textarea>
