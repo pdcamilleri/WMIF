@@ -86,7 +86,7 @@ function saveOriginalValues($connection, $id, $problemID, $optn, $array) {
 // TODO optn is not needed, correct?
 function saveConfidenceInterval($connection, $id, $problemID, $optn, $lower, $best, $upper) {
   $insertQuery = sprintf("INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", 
-                          'confidence_interval', $id, $problemID, 0, $lower, $best, $upper);
+                          'confidence_interval', $id, $problemID, $optn, $lower, $best, $upper);
   return mysqli_query($connection, $insertQuery);
 }
 
@@ -120,9 +120,6 @@ $choice = $survey['choice'];
 $choiceStrength = $survey['choiceStrength'];
 $friend = $survey['friend'];
 $why = $survey['why'];
-$upper = $survey['upper'];
-$best = $survey['best'];
-$lower = $survey['lower'];
 
 
 $optns = post('products');
@@ -130,6 +127,15 @@ $optn1 = $optns[0];
 $optn2 = $optns[1];
 $samples1 = $optn1['samples'];
 $samples2 = $optn2['samples'];
+
+$uppera = $optn1['upper'];
+$besta = $optn1['best'];
+$lowera = $optn1['lower'];
+
+$upperb = $optn2['upper'];
+$bestb = $optn2['best'];
+$lowerb = $optn2['lower'];
+
 $configs = post('configs');
 
 $filter1 = $optn1['filter'];
@@ -171,7 +177,8 @@ saveExperienceValues($connection, $id, $problemID, 1, $optn2['outcomeOrder']);
 saveOriginalValues($connection, $id, $problemID, 0, $optn1['values']);
 saveOriginalValues($connection, $id, $problemID, 1, $optn2['values']);
 
-saveConfidenceInterval($connection, $id, $problemID, 0, $lower, $best, $upper);
+saveConfidenceInterval($connection, $id, $problemID, 0, $lowera, $besta, $uppera);
+saveConfidenceInterval($connection, $id, $problemID, 1, $lowerb, $bestb, $upperb);
 
 saveSliderOutcomes($connection, $id, $problemID, 0, $idx, $sliders1);
 saveSliderOutcomes($connection, $id, $problemID, 1, $idx, $sliders2);

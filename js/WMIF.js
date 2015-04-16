@@ -19,9 +19,6 @@ function createState() {
       choiceStrength: -1,
       friend: -1,
       why: "-",
-      upper: -1,
-      best: -1,
-      lower: -1,
       attentionCheck: {
         format: -1,
         samples: -1
@@ -38,6 +35,9 @@ function createProduct() {
     samplesSoFar: 0,
     outcomeOrder: [],
     experienceValues: [],
+    upper: -1,
+    best: -1,
+    lower: -1
   };
 }
 
@@ -629,9 +629,13 @@ function checkChoices() {
 }
 
 function checkInterval() {
-  state.survey.lower = $("#lowerEstimate").val();
-  state.survey.best  = $("#bestEstimate").val();
-  state.survey.upper = $("#upperEstimate").val();
+  state.products[0].lower = $("#lowerEstimateA").val();
+  state.products[0].best  = $("#bestEstimateA").val();
+  state.products[0].upper = $("#upperEstimateA").val();
+
+  state.products[1].lower = $("#lowerEstimateB").val();
+  state.products[1].best  = $("#bestEstimateB").val();
+  state.products[1].upper = $("#upperEstimateB").val();
 
   // save data for this particular problem
   unrandomise();

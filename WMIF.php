@@ -416,20 +416,45 @@
           <div id="intervaltext" class="question-text">
             <p></p>
           </div>
+
+          <h3>
+            <span class="productText"></span> 
+            <span class="productLetterA"></span>
+          </h3>
           
           <p>
-            <label for="lowerEstimate">Lower estimate: </label>
-            <input type="number" id="lowerEstimate" name="lowerEstimate" min="1" max="10" step="1" required>
+            <label for="lowerEstimateA">Lower estimate: </label>
+            <input type="number" id="lowerEstimateA" name="lowerEstimateA" min="1" max="10" step="1" required>
           </p>
  
           <p>
-            <label for="bestEstimate">Best estimate:</label>
-            <input type="number" id="bestEstimate" name="bestEstimate" min="1" max="10" step="1" required>
+            <label for="bestEstimateA">Best estimate:</label>
+            <input type="number" id="bestEstimateA" name="bestEstimateA" min="1" max="10" step="1" required>
           </p>
  
           <p>
-            <label for="upperEstimate">Upper estimate:</label>
-            <input type="number" id="upperEstimate" name="upperEstimate" min="1" max="10" step="1" required>
+            <label for="upperEstimateA">Upper estimate:</label>
+            <input type="number" id="upperEstimateA" name="upperEstimateA" min="1" max="10" step="1" required>
+          </p>
+
+          <h3>
+            <span class="productText"></span> 
+            <span class="productLetterB"></span>
+          </h3>
+          
+          <p>
+            <label for="lowerEstimateB">Lower estimate: </label>
+            <input type="number" id="lowerEstimateB" name="lowerEstimateB" min="1" max="10" step="1" required>
+          </p>
+ 
+          <p>
+            <label for="bestEstimateB">Best estimate:</label>
+            <input type="number" id="bestEstimateB" name="bestEstimateB" min="1" max="10" step="1" required>
+          </p>
+ 
+          <p>
+            <label for="upperEstimateB">Upper estimate:</label>
+            <input type="number" id="upperEstimateB" name="upperEstimateB" min="1" max="10" step="1" required>
           </p>
           <button class="button" id="submitEstimates">Continue</button>
         </form>
